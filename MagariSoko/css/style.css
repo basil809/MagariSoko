@@ -1,0 +1,197 @@
+/* Sidebar Styles */
+.custom-sidebar {
+    background-color: #111; /* Dark background color */
+    color: #fff; /* Light text color */
+    padding: 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px; /* Sidebar width */
+    overflow-y: auto;
+    transform: translateX(-100%); /* Start hidden off-screen */
+    transition: transform 0.3s ease;
+    z-index: 999; /* Ensure the sidebar is above other content */
+}
+
+/* Close button styles */
+.custom-sidebar .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.custom-sidebar a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.custom-sidebar a:hover {
+    color: white;
+    text-decoration: none;
+    background-color: #575757; /* Darker background on hover */
+}
+
+.custom-sidebar .car-make {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.custom-sidebar .car-make img {
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Sidebar open class */
+.custom-sidebar.open {
+    transform: translateX(0); /* Show the sidebar */
+}
+
+/* Hide car makes section by default */
+.hidden {
+    display: none;
+}
+
+/* Custom Navbar Styles */
+.custom-navbar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: fixed; /* Fix the navbar to the top */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure it stays above other content */
+    background-color: #f8f9fa; /* Background color */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional: Add shadow for better visibility */
+}
+
+.custom-navbar .navbar-top {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    border: 1px solid #111;
+    height: 60px; /* Adjust height as needed */
+    background-color: #f8f9fa; /* Adjust background color as needed */
+}
+
+.custom-navbar .navbar-top span{
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+}
+.custom-navbar .navbar-top .logo {
+    display: flex;
+    align-items: center;
+}
+
+.custom-navbar .navbar-top .logo img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.custom-navbar .navbar-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #111;
+    padding: 10px;
+    background-color: #f8f9fa;
+}
+
+.custom-navbar .navbar-bottom #menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.custom-navbar .menu_2 {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.custom-navbar .menu_2 .list {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.custom-navbar .menu_2 .list li {
+    margin-left: 20px;
+}
+
+.custom-navbar .menu_2 .list li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+}
+
+.custom-navbar .menu_2 .list a:hover{
+    background-color: #989696;
+    border-radius: 5px;
+}
+.custom-navbar .menu_2 .list li a i {
+    margin-right: 5px;
+}
+
+/* Ensure page content does not go behind the fixed navbar */
+body {
+    padding-top: 120px; /* Adjust this value based on the height of your navbar */
+}
+
+/* Search Bar Section */
+.search-bar-section {
+    padding: 50px 0;
+    background-color: #f0f0f0;
+    
+}
+
+.search-bar-section .form-control {
+    height: 50px;
+    font-size: 18px;
+    border-radius: 45px;
+}
+
+/* Trending Sales Section */
+.trending_sales {
+    padding: 50px 0;
+    background-color: #f8f8f8;
+}
+
+.trending_sales .header {
+    margin-bottom: 30px;
+}
+
+.trending_sales .card {
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.trending_sales .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.trending_sales .card-body {
+    padding: 20px;
+}
+
+.trending_sales .card-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.trending_sales .card-text {
+    margin-bottom: 10px;
+}
