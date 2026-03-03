@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/MagariSoko_icon.jfif" type="image/gif">
+
+    <!-- Site Meta Tags -->
+    <title>Join Us | MagariSoko</title>
+    
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!--link rel="stylesheet" href="css/responsive.css"-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!--icon display style-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        .img_logo {
+        display: flex;
+        justify-content: flex-end; /* Align items to the right */
+        align-items: center; /* Center vertically */
+        height: 100%; /* Ensure the container takes full height */
+        }
+
+        .img_logo img {
+            max-width: 250px; /* Adjust the size as needed */
+            height: 150px; /* Maintain aspect ratio */
+        }
+        .join_note{
+            padding-left: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-right: 10px;
+        }
+        .h2{
+            font-weight: bold;
+        }
+        .half-underline {
+            display: inline-block;
+            position: relative;
+        }
+
+    .half-underline::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px; /* Adjust based on desired space between text and underline */
+        width: 50%; /* Change to desired length of underline */
+        height: 2px; /* Adjust thickness of the underline */
+        background-color: currentColor; /* Use text color for underline */
+    }
+    .bulletin{
+        padding: 10px 20px;
+    }
+    .signup_btn{
+        height: 50px;
+        width: 150px;
+        color: #9a0000;
+        border: none;
+        border-radius: 5px;
+        background-color: black;
+    }
+    .signup_btn:hover{
+        color: black;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background-color: #9a0000;
+    }
+    .dealer_lgnBtn button{
+        height: 50px;
+        width: 150px;
+        color: #9a0000;
+        border: none;
+        border-radius: 5px;
+        background-color: black;
+    }
+    .dealer_lgnBtn button:hover{
+        color: black;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background-color: green;
+    }
+/* Modal Styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            padding: 20px;
+
+            .submit_btn{
+                padding: 20px 0 0;
+            }
+            button {
+                background-color: white;
+                font-size: 20px;
+                color: black;
+                border: 2px solid green;
+                padding: 10px;
+                border-radius: 45px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: green;
+                font-weight: bold;
+            }
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+        }
+
+        .h4{
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        label, input, select, button{
+            display: block;
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        label{
+            font-weight: bold;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        /* Loading spinner styles */
+        #loadingSpinner {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        }
+
+        #loadingSpinner .spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 16px solid #030303;
+            border-radius: 50%;
+            border-top: 16px solid #f30404;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #messageModal h1{
+            text-align: center;
+        }
+        #messageModal p{
+            text-align: center;
+        }
+        #dealerLoginModal h2{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="custom-navbar">
+        <div class="navbar-top">
+            <a href="images/magarisoko_2.jfif" class="logo">
+                <img src="images/magarisoko_2.jfif" alt="MagariSoko Logo">
+                <span>MagariSoko</span>
+            </a>
+        </div>
+        <div class="navbar-bottom">
+            <div id="menu-icon" onclick="toggleSidebar()">☰</div>
+            <div id="sidebar" class="custom-sidebar">
+                <div class="close-btn" onclick="toggleSidebar()">×</div>
+                <a href="index.html">Home</a>
+                <a href="trending.html">Flash Sales</a>
+                <a href="hire.html">Car Hire</a>
+                <a href="sell.html">Sell my car</a>
+                <a href="javascript:void(0)" onclick="toggleCarMakes()">Car Makes:</a>
+                <div id="car-makes" class="hidden">
+                    <a href="toyota.html" class="car-make"><img src="images/toyota_logo.png" alt="Toyota Logo">Toyota</a>
+                    <a href="nissan.html" class="car-make"><img src="images/nissan-logo-2013-700x700.png" alt="Nissan Logo">Nissan</a>
+                    <a href="BMW.html" class="car-make"><img src="images/bmw_logo.png" alt="BMW Logo">BMW</a>
+                    <a href="#" class="car-make"><img src="images/Subaru Logo Stencil.jfif" alt="Subaru Logo">Subaru</a>
+                    <a href="#" class="car-make"><img src="images/Chevrolet-logo.png" alt="Chevrolet Logo">Chevrolet</a>
+                    <a href="#" class="car-make"><img src="images/mercedes_logo.jfif" alt="Mercedes Logo">Mercedes Benz</a>
+                    <a href="#" class="car-make"><img src="images/mazda logo.png" alt="Mazda Logo">Mazda</a>
+                    <a href="#" class="car-make"><img src="images/Mitsubishi Logo.jfif" alt="Mitsubishi Logo">Mitsubishi</a>
+                    <a href="#" class="car-make"><img src="images/Suzuki-symbol-640x480.jpg" alt="Suzuki Logo">Suzuki</a>
+                    <a href="#" class="car-make"><img src="images/Lexus-logo.jpg" alt="Lexus Logo">Lexus</a>
+                    <a href="#" class="car-make"><img src="images/Volkswagen-logo.jpg" alt="Volkswagen Logo">Volkswagen</a>
+                    <a href="#" class="car-make"><img src="images/Audi Logo.jfif" alt="Audi Logo">Audi</a>
+                    <a href="#" class="car-make"><img src="images/Land-Rover-logo.jpg" alt="Land Rover Logo">Land Rover</a>
+                    <a href="#" class="car-make"><img src="images/honda-logo.png" alt="Honda Logo">Honda</a>
+                    <a href="#" class="car-make"><img src="images/ford-logo.png" alt="Ford Logo">Ford</a>
+                    <a href="#" class="car-make"><img src="images/hyundai-logo-2011-download.png" alt="Hyundai Logo">Hyundai</a>
+                    <a href="#" class="car-make"><img src="images/Renault-logo.jpg" alt="Renault Logo">Renault</a>
+                    <a href="#" class="car-make"><img src="images/Daihatsu-logo.png" alt="Daihatsu Logo"></a>
+                    <a href="#" class="car-make"><img src="images/jeep-logo.png" alt="Jeep Logo">Jeep</a>
+                    <a href="#" class="car-make"><img src="images/porsche-logo.png" alt="Porsche Logo">Porsche</a>
+                    <a href="#" class="car-make"><img src="images/Jaguar Logo.jfif" alt="Jaguar Logo">Jaguar</a>
+                    <a href="#" class="car-make"><img src="images/Peugeot-logo.jpg" alt="Peugeot Logo">Peugeot</a>
+                    <a href="#" class="car-make"><img src="images/Volvo-logo.jpg" alt="Volvo Logo">Volvo</a>
+                    <a href="#" class="car-make"><img src="images/Isuzu-logo.jpg" alt="Isuzu Logo"></a>
+                    <a href="#" class="car-make"><img src="images/Mobius logo.jfif" alt="Mobius Logo">Mobius</a>
+                    <a href="#" class="car-make"><img src="images/bentley-logo-2002-download.png" alt="Bentley Logo">Bentley</a>
+                    <a href="#" class="car-make"><img src="images/Assistência Técnica Yamaha.jfif" alt="Yamaha Logo">Yamaha</a>
+                </div>
+            </div>
+            <div class="menu_2">
+                <ul class="list">
+                    <li><a href="index.html"><i class="material-icons">home</i> Home</a></li>
+                    <li><a href="#"><i class="material-icons">handshake</i> Join Us</a></li>
+                    <li><a href="about_us.html"><i class="material-icons">group</i> About Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="join_section">
+        <div class="join_note">
+            <h2 class="half-underline">JOIN US</h2>
+            <p>
+                Welcome to Magarisoko, the ultimate destination for car enthusiasts and dealers alike! We invite you to join our growing community of trusted dealers and showcase your inventory to a wider audience. 
+                
+                At Magarisoko, we offer a user-friendly platform that makes it easy to list and manage your vehicles, connect with potential buyers, and grow your business. 
+                
+                Join us today and take advantage of our powerful tools and features designed to help you succeed in the competitive automotive market.<br><br>
+            </p>
+            <h2 class="half-underline">MEET OUR TRUSTED DEALERS</h2><br><br>
+                At Magarisoko, we believe that buying a car should be an exciting and enjoyable experience.
+
+                That's why we partner with a select group of esteemed dealers who share our commitment to quality, integrity, and customer satisfaction.<br><br>
+
+                <strong>Our Dealers</strong> are more than just salespeople—they are dedicated automotive professionals who bring a wealth of experience and a passion for cars.<br>
+
+                Each dealer is meticulously vetted to ensure they uphold our high standards of excellence.
+
+                Here’s what you can expect when you work with our dealers:<br>
+                <div class="bulletin">
+                    <strong>•	Expert Knowledge</strong>
+                <p>
+                    Our dealers are experts in their field, with deep knowledge of the latest models, features, and industry trends. 
+                    
+                    They are equipped to answer all your questions, provide valuable insights, and help you make an informed decision.
+                </p>
+                <strong>•	Exceptional Customer Service</strong>
+                <p>
+                    Customer satisfaction is at the heart of everything we do.
+                    
+                    Our dealers are committed to delivering a personalized experience, from understanding your needs to guiding you through the buying process with transparency and care.
+                </p>
+                <strong>•	Quality Assurance</strong>
+                <p>
+                    We partner with dealers who are dedicated to maintaining high standards of quality.
+                    
+                    Each vehicle is thoroughly inspected and comes with a comprehensive history report, ensuring you drive away with peace of mind.
+                </p>
+                <strong>•	Flexible Financing Options</strong>
+                <p>
+                    Understanding that every buyer’s needs are unique, our dealers offer a range of flexible financing solutions.
+                    
+                    They work closely with you to find the best financing plan that fits your budget and lifestyle.
+                </p>
+                <strong>•	After-Sales Support</strong>
+                <p>
+                    ur commitment to you doesn’t end with the sale.
+                    
+                    Our dealers provide ongoing support, including maintenance and repair services, to ensure your vehicle continues to perform at its best for years to come.
+                </p>
+                <strong>•	A Reputation for Excellence</strong>
+                <p>
+                    Each dealer in our network has a proven track record of excellence and a reputation for delivering outstanding value. 
+                    
+                    We take pride in our dealers’ ability to build long-lasting relationships with customers based on trust and reliability.
+                </p>
+                <br></br>
+                <p>
+                    Explore our diverse selection of cars and experience the difference with our trusted dealers. We’re here to help you find the perfect vehicle and make your car-buying journey as smooth and enjoyable as possible.
+
+                    For more information or to get in touch with one of our dealers, <a href="tel:+254742743059">contact us today!</a>
+                </p>
+                <br><br>
+                <div class="dealer_signup">
+                    <h3>Join our Dealers team</h3>
+                    <br>
+                    <p>
+                        Are you a car dealer looking to expand your reach and connect with more customers?
+                        
+                        Sign up below to join our dealer team and experience the benefits of partnering with MagariSoko!
+                        <div class="sign_btn">
+                            <button id="signup2_btn" class="signup_btn">Sign Up</button>
+                        </div>
+                        <div id="sign_modal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h4 style="text-align: center; margin: 20px 0; font-weight: bold;">Dealer Sign-Up</h4>
+                                <form id="dealerForm" action="/signD" method="post" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="name">Dealer's Name:</label>
+                                            <input type="text" id="Username" name="username" placeholder="BASIL OTIENO ONYANGO" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="phone_number">Phone Number:</label>
+                                            <input type="text" id="phone_number" name="phone_number" placeholder="0712345678" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="email">E-mail:</label>
+                                            <input type="email" id="email" name="email" placeholder="magarisoko@gmail.com" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="id_no">ID Number:</label>
+                                            <input type="text" id="id_no" name="id_no" placeholder="12345678" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="address">Address:</label>
+                                            <input type="text" id="address" name="address" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="IDPhotos">Upload ID:</label>
+                                            <input type="file" id="IDPhotos" name="images" accept="image/*" multiple required>
+                                        </div>
+                                    </div>
+                                    <div class="submit_btn">
+                                        <button type="submit">Submit</button>
+                                    </div>
+                                </form>                                
+                            </div>
+                        </div>
+                        <div class="dealer_dash">
+                            <h6>Already registered as a dealer?</h6>
+                            <p>
+                                Visit your dealer dashboard to read client messages and manage your vehicles<br>
+                                <div class="dealer_lgnBtn">
+                                    <button id="d_login_btn" class="d_login_btn">Login</button>
+                                </div>
+                                <!-- Modal -->
+                                <div id="dealerLoginModal" class="modal">
+                                    <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                        <h2>Dealer Login</h2>
+                                        <form id="LoginForm" action="/dealer-login" method="POST">
+                                            <label for="email">E-mail:</label>
+                                            <input type="text" name="email" placeholder="Email" required><br>
+
+                                            <label for="id_no">ID Number:</label>
+                                            <input type="text" name="id_no" placeholder="ID Number" required>
+                                            <button type="submit">Login</button>
+                                        </form>                                        
+                                    </div>
+                                    <div id="errorMessageModal" class="modal">
+                                        <div class="modal-content">
+                                            <span class="close">&times;</span>
+                                            <p id="errorMessage"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </p>
+                        </div>
+                        
+                    </p>
+                    <!-- Loading spinner -->
+                    <div id="loadingSpinner">
+                        <div class="spinner"></div>
+                    </div>
+                    <!-- Message Modal -->
+                    <div id="messageModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close" id="closeMessageModal">&times;</span>
+                            <h1>Return Message</h1>
+                            <p id="modalMessage"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer Section -->
+    <!-- Footer Section -->
+    <footer class="footer_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 footer-col">
+                    <!-- Contact Us section -->
+                    <div class="footer_content" style="display: flex; flex-direction: column;">
+                        <h4>Contact Us</h4>
+                        <div class="contact_link_box">
+                            <a href="https://maps.app.goo.gl/X5jKPCnbjW9TkLET7" target="_blank"><i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                <span>Location</span>
+                            </a>
+                            <a href="tel:+254742743059"><i class="fas fa-phone" aria-hidden="true"></i>
+                                <span>Call +254 742 743059</span>
+                            </a><br>
+                            <a href="mailto:baschelle5@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i>
+                                <span style="margin-left: 5px;">baschelle5@gmail.com</span>
+                            </a>        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-col">
+                    <!-- Footer Detail section -->
+                    <div class="footer_detail">
+                        <a href="index.html" class="footer-logo">
+                            MagariSoko
+                        </a>
+                        <em>"Quality Cars, Unbeatable Prices"</em>
+                        <div class="footer_social">
+                            <a href="https://web.facebook.com/people/Basil/100023719690145/" target="_blank"><img src="images/social_logos/facebook_logo_icon.png" alt="Facebook"></a>
+                            <a href="https://wa.me/+254742743059" target="_blank"><img src="images/social_logos/WhatsApp_Logo.png" alt="WhatsApp"></a>
+                            <a href="https://twitter.com/baschelle5" target="_blank"><img src="images/social_logos/x_logo.jpeg" alt="Twitter"></a>
+                            <a href="https://www.linkedin.com/in/basil-onyango-61a081250/" target="_blank"><img src="images/social_logos/linkedin logo_icon.png" alt="linkedIn"></a>
+                            <a href="https://www.youtube.com/@basilonyango5160" target="_blank"><img src="images/social_logos/youtube_logo.png" alt="Youtube"></a>
+                            <a href="https://www.instagram.com/_.blu.berry.__/" target="_blank"><img src="images/social_logos/instagram_logo_icon.png" alt="Instragram"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-col mb-4">
+                    <!-- MagariSoko Icon section -->
+                    <div class="MagariSoko_icon">
+                        <div class="img_logo">
+                            <img src="images/magarisoko_2.jfif" alt="MagariSoko Logo"> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 footer-col">
+                    <!-- Footer Info section -->
+                    <div class="footer-info">
+                        <p>&copy; <span id="displayYear"></span> All Rights Reserved By
+                            <a href="index.html">MagariSoko</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        // Function to check if the user is logged in
+        async function checkLoginStatus() {
+            try {
+                const response = await fetch('/check-login-status');
+                const data = await response.json();
+                return data.loggedIn;
+            } catch (error) {
+                console.error('Error checking login status:', error);
+                return false;
+            }
+        }
+
+// Get the sign-up and dealer login buttons, and modals
+var signupBtn = document.getElementById("signup2_btn");
+var signupModal = document.getElementById("sign_modal");
+
+var dealerLoginBtn = document.getElementById("d_login_btn");
+var dealerLoginModal = document.getElementById("dealerLoginModal");
+
+// Event listener for the sign-up button
+signupBtn.onclick = async function() {
+    const isLoggedIn = await checkLoginStatus();
+
+    if (isLoggedIn) {
+        // If the user is logged in, show the sign-up modal
+        signupModal.style.display = "block";
+    } else {
+        // If the user is not logged in, show an alert and redirect to the login page
+        alert("You need to log in first. You will be redirected to the login page.");
+        window.location.href = "/index.html"; // will redirect the user to home page so that he can login
+    }
+}
+
+// Event listener for the dealer login button
+dealerLoginBtn.onclick = async function() {
+    const isLoggedIn = await checkLoginStatus();
+
+    if (isLoggedIn) {
+        // If the user is logged in, show the dealer login modal
+        dealerLoginModal.style.display = "block";
+    } else {
+        // If the user is not logged in, show an alert and redirect to the login page
+        alert("You need to log in first. You will be redirected to the login page.");
+        window.location.href = "/index.html"; // Adjust this to your actual login page URL
+    }
+}
+
+// Close the modals when the close buttons are clicked
+var signupClose = document.querySelector("#sign_modal .close");
+signupClose.onclick = function() {
+    signupModal.style.display = "none";
+}
+
+var dealerLoginClose = document.querySelector("#dealerLoginModal .close");
+dealerLoginClose.onclick = function() {
+    dealerLoginModal.style.display = "none";
+}
+
+// Close the modals if the user clicks outside of them
+window.onclick = function(event) {
+    if (event.target == signupModal) {
+        signupModal.style.display = "none";
+    } else if (event.target == dealerLoginModal) {
+        dealerLoginModal.style.display = "none";
+    } else if (event.target == messageModal) {
+        messageModal.style.display = "none";
+    }
+}
+
+// Function to show the loading spinner
+function showLoadingSpinner() {
+    document.getElementById('loadingSpinner').style.display = 'block';
+}
+
+// Function to hide the loading spinner
+function hideLoadingSpinner() {
+    document.getElementById('loadingSpinner').style.display = 'none';
+}
+
+// Get the dealer sign-up form
+var dealerForm = document.getElementById('dealerForm');
+
+// Get the modal elements
+var messageModal = document.getElementById('messageModal');
+var modalMessage = document.getElementById('modalMessage');
+var closeMessageModal = document.getElementById('closeMessageModal');
+
+// Function to show the modal with a message
+function showMessageModal(message, success) {
+    modalMessage.innerHTML = message;
+    modalMessage.style.color = success ? 'green' : 'red';
+    messageModal.style.display = 'block';
+}
+
+// Function to hide the modal
+closeMessageModal.onclick = function() {
+    messageModal.style.display = 'none';
+}
+
+// Event listener for the dealer sign-up form submission
+dealerForm.onsubmit = function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Show the loading spinner
+    showLoadingSpinner();
+
+    // AJAX request (example using Fetch API)
+    fetch(dealerForm.action, {
+        method: 'POST',
+        body: new FormData(dealerForm)
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Hide the loading spinner
+        hideLoadingSpinner();
+
+        // Display the modal with the message
+        showMessageModal(data.message, data.success);
+
+        // Optionally, reset the form if the sign-up was successful
+        if (data.success) {
+            dealerForm.reset();
+        }
+    })
+    .catch(error => {
+        console.error('Error during form submission:', error);
+
+        // Hide the loading spinner
+        hideLoadingSpinner();
+
+        // Display an error message in the modal
+        showMessageModal('An error occurred. Please try again.', false);
+    });
+};
+
+    </script>
+
+
+</body>
+</html>

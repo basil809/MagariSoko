@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/MagariSoko_icon.jfif" type="image/gif">
+
+    <!-- Site Meta Tags -->
+    <title>vehicle-details| MagariSoko</title>
+    
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!--link rel="stylesheet" href="css/responsive.css"-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!--icon display style-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="vehicle-name">Vehicle Name</h1>
+        <div id="vehicle-details" class="row mt-4">
+            <!-- Vehicle details will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carData = [
+            { id: 1, name: "Toyota Supra", price: "Ksh. 2,000,000", status: "Available", dealer: "John Doe", phone: "0712 345 678", kilometers: "10,000 km", year: "2024", fuelType: "Petrol", transmission: "Automatic", engine: "2000 cc", color: "White", interior:'-', images: ['images/sale_images/car_1.jpg', 'images/sale_images/Supra_frontview.jfif', 'images/sale_images/supra_engine.jfif', 'images/sale_images/supra_backview.jfif'] },
+                { id: 2, name: "Nissan GTR", price: "Ksh. 3,000,000", status: "Available", dealer: "Jane Smith", phone: "0712 345 679", kilometers: "15,000 km", year: "2023", fuelType: "Petrol", transmission: "Manual", engine: "3800 cc", color: "Black", interior:'-', images: ['images/sale_images/gtr_frontview.jpg', 'images/sale_images/gtr_backview.jpg', 'images/sale_images/gtr_key.jpg'] },
+                { id: 3, name: "Toyota E100", price: "Ksh. 220,000", status: "Sold", dealer: "Mike Johnson", phone: "0712 345 680", kilometers: "80,000 km", year: "1995", fuelType: "Petrol", transmission: "Manual", engine: "1500 cc", color: "white", interior:'Black', images: ['images/sale_images/Toyota Corolla _frnt.jfif', 'images/sale_images/Toyota Corolla 1994.jfif', 'images/sale_images/Toyota_corolla_95_int.jfif'] },
+                { id: 4, name: "Toyota VX Limited", price: "Ksh. 2,220,000", status: "Available", dealer: "Basil Onyango", phone: "0742743059", kilometers: "100,000", year: "2002", fuelType: "Petrol", transmission: "Automatic", engine: "2000 cc", color: "White/Grey", interior:'Black', images: ['images/sale_images/carousel_2.0.jpg','images/sale_images/sale_images/Toyota_Land_Cruiser_VX_VJA300W_interior_side.jpg','images/sale_images/vx_land_cruiser_interior.jpeg'] },
+                { id: 5, name: "Toyota Corolla", price: "Ksh. 2,000,000", status: "Available", dealer: "Basil Onyango", phone: "0742743059", kilometers: "0", year: "2024", fuelType: "Petrol", transmission: "Automatic", engine: "2000 cc", color: "White", interior:'Black', images: ['images/sale_images/car_3.jpg','images/sale_images/corolla_new_engine.jpg','images/sale_images/corolla_steering_speedometer.jpg'] },
+                { id: 6, name: "Toyota probox", price: "Ksh. 450,000", status: "Available", dealer: "Basil Onyango", phone: "0742743059", kilometers: "0", year: "2016", fuelType: "Petrol", transmission: "Automatic", engine: "2000 cc", color: "White", interior:'Black', images: ['images/sale_images/probox_img_1.jpeg','images/sale_images/probox_img_2int.jpeg','images/sale_images/probox_img_3side.jpeg','images/sale_images/probox_img_4bottom.jpeg'] },
+                { id: 7, name: "Toyota Harrier", price: "Ksh. 3,449,999", status: "Available", dealer: "Basil Onyango", phone: "0742743059", kilometers: "52,000", year: "2016", fuelType: "Petrol", transmission: "Automatic", engine: "2000 cc", color: "Black", interior:'Black', images: ['images/sale_images/Harrier_KDM_frontview.jpeg','images/sale_images/Harrier_front_right_view.jpeg','images/sale_images/Harrier_front_left_view.jpeg','images/sale_images/Toyota_harrier_kdm_backview.jpeg','images/sale_images/Harrier_backright_view.jpeg','images/sale_images/Harrier_backright_view.jpeg','images/sale_images/harrier_speedometer.jpeg'] },
+                { id: 8, name: "BMW X3 XDrive 20d M-SPORT", price: "Ksh. 4,499,999", status: "Available", dealer: "Franklin Okoth", phone: "0742743059", kilometers: "61,000", year: "2017", fuelType: "Diesel", transmission: "Automatic", engine: " 2000cc", color: "Black", interior:'Black', images: ['images/sale_images/BIMA_frontview_center.jpeg','images/sale_images/BIMA_frontview_right.jpeg','images/sale_images/BIMA_frontview_left.jpeg','images/sale_images/BMW_Intr.jpg','images/sale_images/BMW_inf_sideview.jpeg','images/sale_images/BIMA_speedometer.jpeg','images/sale_images/BMW_ex_backview.jpeg','images/sale_images/BIMA_boot.jpeg'] },
+                { id: 9, name: "Toyota Rav 4", price: "Ksh. 3,250,000", status: "Available", dealer: "Gideon Kimani", phone: "0742743059", kilometers: "32,000", year: "2017", fuelType: "petrol", transmission: "Automatic", engine: " 1500cc", color: "Black", interior:'Black', images: ['images/sale_images/Toyota_Rav4_frontview.jpeg','images/sale_images/Rav_in_sideview.jpeg','images/sale_images/Rav4_in_backview.jpeg','images/sale_images/Rav4_ex_sideview.jpeg','images/sale_images/Rav_backseats_view.jpeg','images/sale_images/Rav4_in_backview.jpeg','images/sale_images/rav_ex_backview2.jpeg','images/sale_images/Rav4_ex_sideview.jpeg'] },
+            ];
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const vehicleId = parseInt(urlParams.get('id'), 10);
+            const vehicle = carData.find(car => car.id === vehicleId);
+
+            if (vehicle) {
+                document.getElementById('vehicle-name').textContent = vehicle.name;
+
+                const detailsContainer = document.getElementById('vehicle-details');
+
+                const imgCol = document.createElement('div');
+                imgCol.className = 'col-md-6';
+                const img = document.createElement('img');
+                img.src = vehicle.images[0];
+                img.alt = vehicle.name;
+                img.className = 'img-fluid';
+                imgCol.appendChild(img);
+
+                const infoCol = document.createElement('div');
+                infoCol.className = 'col-md-6';
+
+                const details = `
+                    <p><strong>Price:</strong> ${vehicle.price}</p>
+                    <p><strong>Status:</strong> ${vehicle.status}</p>
+                    <p><strong>Dealer:</strong> ${vehicle.dealer}</p>
+                    <p><strong>Phone:</strong> ${vehicle.phone}</p>
+                    <p><strong>Kilometers:</strong> ${vehicle.kilometers}</p>
+                    <p><strong>Year:</strong> ${vehicle.year}</p>
+                    <p><strong>Fuel Type:</strong> ${vehicle.fuelType}</p>
+                    <p><strong>Transmission:</strong> ${vehicle.transmission}</p>
+                    <p><strong>Engine:</strong> ${vehicle.engine}</p>
+                    <p><strong>Color:</strong> ${vehicle.color}</p>
+                    <p><strong>Interior:</strong> ${vehicle.interior}</p>
+                `;
+
+                infoCol.innerHTML = details;
+
+                detailsContainer.appendChild(imgCol);
+                detailsContainer.appendChild(infoCol);
+            } else {
+                document.getElementById('vehicle-name').textContent = "Vehicle not found";
+            }
+        });
+    </script>
+</body>
+</html>

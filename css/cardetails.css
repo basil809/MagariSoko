@@ -1,0 +1,103 @@
+ /* Styles for the layout */
+ .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.left-section {
+    flex: 2;
+}
+
+.right-section {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+
+
+.thumbnail-gallery {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.thumbnail-gallery img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+h1, h2 {
+    margin-bottom: 10px;
+}
+
+.details-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.details-list li {
+    margin-bottom: 5px;
+}
+
+.contact-dealer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-dealer .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-phone {
+    background-color: #28a745;
+}
+
+.btn-message {
+    background-color: #007bff;
+}
+
+.btn-whatsapp {
+    background-color: #25d366;
+}
+
+.btn-phone:hover,
+.btn-message:hover,
+.btn-whatsapp:hover {
+    opacity: 0.9;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f4f4f4;
+}

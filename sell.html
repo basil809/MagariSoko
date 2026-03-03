@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/MagariSoko_icon.jfif" type="image/gif">
+
+    <!-- Site Meta Tags -->
+    <title>Sell | MagariSoko</title>
+    
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!--link rel="stylesheet" href="css/responsive.css"-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonsts.gstatic.com" crossorigin>
+    <!--icon display style-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        :root{
+            --bg: #fff;
+        }
+        body {
+            background-image: url('images/MagariSoko_icon.jfif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: white;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            padding-bottom: 20px;
+            border-radius: 10px;
+            width: 50%;
+            margin: 0 auto;
+            
+        }
+
+        label, input, select, button{
+            display: block;
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        textarea{
+            display: block;
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: white;
+            font-size: 20px;
+            color: black;
+            border: 2px solid green;
+            padding: 10px;
+            border-radius: 45px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: green;
+            font-weight: bold;
+        }
+        .img_logo {
+            display: flex;
+            justify-content: flex-end; /* Align items to the right */
+            align-items: center; /* Center vertically */
+            height: 100%; /* Ensure the container takes full height */
+        }
+
+        .img_logo img {
+            max-width: 250px; /* Adjust the size as needed */
+            height: 150px; /* Maintain aspect ratio */
+        }
+        .notification-section {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .notification-section .container{
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .notification--info {
+            --bg: #F0FBFE;
+            --primary: #0EA1E7;
+        }
+
+        .notification--finalised {
+            --bg: #F7F6FB;
+            --primary: #9077DF;
+        }
+
+        .notification--failure {
+            --bg: #FFF1F6;
+            --primary: #C43060;
+        }
+        .nofication--warning{
+            --bg: #FFF9EB;
+            --primary: #d6a024;
+        }
+        .notification--success {
+            --bg: #ECFBF2;
+            --primary: #335D48;
+        }
+        .notification{
+            min-width: 22rem;
+            background: var(--bg);
+            color: var(--primary);
+            border-left: 0.25rem solid var(--primary);
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            pointer-events: auto;
+            position: relative;
+            transform: translateX(400px);
+            opacity: 0;
+            visibility: hidden;
+            animation: none;
+        }
+        .notification.show {
+            visibility: visible;
+            animation: slide-in 0.3s ease-out forwards;
+        }
+        .notification__icon{
+            height: 1.625rem;
+            width: 1.625rem;
+            margin-right: 0.45rem;
+        }
+        .notification__body{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 1rem 0.5rem;
+        }
+        .notification__progress {
+            position: absolute;
+            left: 0.25rem;
+            bottom: 0.25rem;
+            width: calc(100% - 0.5rem);
+            height: 0.2rem;
+            transform: scaleX(0);
+            transform-origin: left;
+            background: linear-gradient(
+                to right,
+                var(--bg),
+                var(--primary)
+            );
+            border-radius: 5px;
+            animation: none;
+        }
+        .notification.show .notification__progress {
+            animation: progress 3s linear forwards;
+        }
+        @keyframes slide-in {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes progress {
+            to {
+                transform: scaleX(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="custom-navbar">
+        <div class="navbar-top">
+            <a href="index.html" class="logo">
+                <img src="images/magarisoko_2.jfif" alt="MagariSoko Logo">
+                <span>MagariSoko</span>
+            </a>
+        </div>
+        <div class="navbar-bottom">
+            <div id="menu-icon" onclick="toggleSidebar()">☰</div>
+            <div id="sidebar" class="custom-sidebar">
+                <div class="close-btn" onclick="toggleSidebar()">×</div>
+                <a href="index.html">Home</a>
+                <a href="trending.html">Flash Sales</a>
+                <a href="hire.html">Car Hire</a>
+                <a href="sell.html">Sell my car</a>
+                <a href="javascript:void(0)" onclick="toggleCarMakes()">Car Makes:</a>
+                <div id="car-makes" class="hidden">
+                    <a href="toyota.html" class="car-make"><img src="images/toyota_logo.png" alt="Toyota Logo">Toyota</a>
+                    <a href="nissan.html" class="car-make"><img src="images/nissan-logo-2013-700x700.png" alt="Nissan Logo">Nissan</a>
+                    <a href="BMW.html" class="car-make"><img src="images/bmw_logo.png" alt="BMW Logo">BMW</a>
+                    <a href="#" class="car-make"><img src="images/Subaru Logo Stencil.jfif" alt="Subaru Logo">Subaru</a>
+                    <a href="#" class="car-make"><img src="images/Chevrolet-logo.png" alt="Chevrolet Logo">Chevrolet</a>
+                    <a href="#" class="car-make"><img src="images/mercedes_logo.jfif" alt="Mercedes Logo">Mercedes Benz</a>
+                    <a href="#" class="car-make"><img src="images/mazda logo.png" alt="Mazda Logo">Mazda</a>
+                    <a href="#" class="car-make"><img src="images/Mitsubishi Logo.jfif" alt="Mitsubishi Logo">Mitsubishi</a>
+                    <a href="#" class="car-make"><img src="images/Suzuki-symbol-640x480.jpg" alt="Suzuki Logo">Suzuki</a>
+                    <a href="#" class="car-make"><img src="images/Lexus-logo.jpg" alt="Lexus Logo">Lexus</a>
+                    <a href="#" class="car-make"><img src="images/Volkswagen-logo.jpg" alt="Volkswagen Logo">Volkswagen</a>
+                    <a href="#" class="car-make"><img src="images/Audi Logo.jfif" alt="Audi Logo">Audi</a>
+                    <a href="#" class="car-make"><img src="images/Land-Rover-logo.jpg" alt="Land Rover Logo">Land Rover</a>
+                    <a href="#" class="car-make"><img src="images/honda-logo.png" alt="Honda Logo">Honda</a>
+                    <a href="#" class="car-make"><img src="images/ford-logo.png" alt="Ford Logo">Ford</a>
+                    <a href="#" class="car-make"><img src="images/hyundai-logo-2011-download.png" alt="Hyundai Logo">Hyundai</a>
+                    <a href="#" class="car-make"><img src="images/Renault-logo.jpg" alt="Renault Logo">Renault</a>
+                    <a href="#" class="car-make"><img src="images/Daihatsu-logo.png" alt="Daihatsu Logo"></a>
+                    <a href="#" class="car-make"><img src="images/jeep-logo.png" alt="Jeep Logo">Jeep</a>
+                    <a href="#" class="car-make"><img src="images/porsche-logo.png" alt="Porsche Logo">Porsche</a>
+                    <a href="#" class="car-make"><img src="images/Jaguar Logo.jfif" alt="Jaguar Logo">Jaguar</a>
+                    <a href="#" class="car-make"><img src="images/Peugeot-logo.jpg" alt="Peugeot Logo">Peugeot</a>
+                    <a href="#" class="car-make"><img src="images/Volvo-logo.jpg" alt="Volvo Logo">Volvo</a>
+                    <a href="#" class="car-make"><img src="images/Isuzu-logo.jpg" alt="Isuzu Logo"></a>
+                    <a href="#" class="car-make"><img src="images/Mobius logo.jfif" alt="Mobius Logo">Mobius</a>
+                    <a href="#" class="car-make"><img src="images/bentley-logo-2002-download.png" alt="Bentley Logo">Bentley</a>
+                    <a href="#" class="car-make"><img src="images/Assistência Técnica Yamaha.jfif" alt="Yamaha Logo">Yamaha</a>
+                </div>
+            </div>
+            <div class="menu_2">
+                <ul class="list">
+                    <li><a href="index.html"><i class="material-icons">home</i> Home</a></li>
+                    <li><a href="join_us.html"><i class="material-icons">handshake</i> Join Us</a></li>
+                    <li><a href="about_us.html"><i class="material-icons">group</i> About Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="notification-section">
+        <div class="container">
+            <div class="notification notification--success">
+                <div class="notification__body">
+                    <img src="images/user_icon/[CITYPNG.COM]HD Round Green Tick Mark Symbol Icon PNG - 3000x3000.png" 
+                    alt="success"
+                    class="notification__icon"
+                    >
+                    Your vehicle has been posted successfully! &#128640
+                </div>
+                <div class="notification__progress"></div>
+            </div>
+            <div class="notification notification--failure">
+                <div class="notification__body">
+                    <img src="images/user_icon/[CITYPNG.COM]Red Round Close X Logo Icon Transparent Background - 1000x1000.png" 
+                    alt="failed"
+                    class="notification__icon"
+                    >
+                    Posting failed something went wrong! &#128640
+                </div>
+                <div class="notification__progress"></div>
+            </div>
+        </div>
+    </div>
+    <section class="content_section">
+        <h1>Sell Your Car</h1>
+        <form id="sell-form" action="/api/vehicles" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="vehiclePhotos">Upload Photos:</label>
+                    <input type="file" id="vehiclePhotos" name="dealer_vehicle_image" accept="image/*" multiple required>
+                </div>
+                <div class="col-md-4">
+                    <label for="car-make">Car-make:</label>
+                    <select id="car-make" name="vehicle_make" required>
+                        <!-- Add more options as needed -->
+                        <option value="Toyota">Toyota</option>
+                        <option value="Nissan">Nissan</option>
+                        <option value="BMW">BMW</option>
+                        <option value="Subaru">Subaru</option>
+                        <option value="Chevrolet">Chevrolet</option>
+                        <option value="Mercedes">Mercedes</option>
+                        <option value="Mazda">Mazda</option>
+                        <option value="Mitsubishi">Mitsubishi</option>
+                        <option value="Suzuki">Suzuki</option>
+                        <option value="Lexus">Lexus</option>
+                        <option value="Volkswagen">Volkswagen</option>
+                        <option value="Audi">Audi</option>
+                        <option value="Land Rover">Land Rover</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Ford">Ford</option>
+                        <option value="Hyundai">Hyundai</option>
+                        <option value="Renault">Renault</option>
+                        <option value="Daihatsu">Daihatsu</option>
+                        <option value="Jeep">Jeep</option>
+                        <option value="Porsche">Porsche</option>
+                        <option value="Jaguar">Jaguar</option>
+                        <option value="Peugeot">Peugeot</option>
+                        <option value="Volvo">Volvo</option>
+                        <option value="Isuzu">Isuzu</option>
+                        <option value="Mobius">Mobius</option>
+                        <option value="Bentley">Bentley</option>
+                        <option value="Yamaha">Yamaha</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="car-model">Car-model:</label>
+                    <input type="text" id="car-model" name="vehicle_model" placeholder="Enter car model" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="price">Price:</label>
+                    <input type="text" id="price" name="vehicle_price" placeholder="Enter the price" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="status">Status:</label>
+                    <select id="status" name="status" required>
+                        <option value="Available">Available</option>
+                        <option value="Sold">Sold</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="fuel">Type of Fuel:</label>
+                    <select id="fuel" name="type_of_fuel" required>
+                        <option value="Petrol">Petrol</option>
+                        <option value="Diesel">Diesel</option>
+                        <option value="Electric">Electric</option>
+                        <option value="Hybrid">Hybrid</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="engine">Engine capacity (cc):</label>
+                    <input type="text" id="engine_capacity" name="engine_capacity" placeholder="Enter engine capacity" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="interior">Interior color:</label>
+                    <input type="text" id="Interior" name="Interior" placeholder="black" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="color" id="color">Color:</label>
+                    <input type="text" id="color" name="color" placeholder="white" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="dealer_name">Dealer Name:</label>
+                    <input type="text" id="dealer_name" name="dealer_name" placeholder="John Smith" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="year">Year of Make:</label>
+                    <input type="text" id="vehicle_year" name="vehicle_year" placeholder="2019" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="Kilometers">Kilometers:</label>
+                    <input type="text" id="Kilometers" name="kilometers" placeholder="Enter kilometers" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="transmission">Transmission:</label>
+                    <select id="transmission" name="transmission" required>
+                        <option value="Automatic">Automatic</option>
+                        <option value="Manual">Manual</option>
+                        <option value="CVT">Continuously Variable Transmission</option>
+                        <option value="AMT">Automated Manual Transmission </option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                <label for="email">Email:</label>
+                <input type="email" id="dealer_email" name="dealer_email" placeholder="johnDoe@gmail.com">
+            </div>
+                <div class="col-md-4">
+                    <label for="phone_number">Phone Number:</label>
+                    <input type="text" id="phone_number" name="phone_number" placeholder="0742743059" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="dealer_id">ID Number:</label>
+                    <input type="text" id="dealer_id" name="dealer_id" placeholder="22****02" required>
+                </div>
+            </div>
+            <div class="description">
+                <label for="description">Description:</label>
+                <textarea id="description" name="vehicle_description" rows="8" placeholder="Enter description" required></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <!-- Subscription Modal -->
+        <div class="modal fade" id="subscriptionModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content" style="padding: 20px; border-radius: 10px;">
+
+                <h3 class="text-center mb-3">Choose Your Subscription Plan</h3>
+
+                <div class="row text-center">
+
+                    <!-- Basic Plan -->
+                    <div class="col-md-4">
+                        <div class="card p-3">
+                            <h4>Basic</h4>
+                            <p>Ksh 500 / 7 days</p>
+                            <button class="btn btn-primary subscribe-btn" data-plan="basic">Subscribe</button>
+                        </div>
+                    </div>
+
+                    <!-- Standard Plan -->
+                    <div class="col-md-4">
+                        <div class="card p-3">
+                            <h4>Standard</h4>
+                            <p>Ksh 800 / 30 days</p>
+                            <button class="btn btn-success subscribe-btn" data-plan="standard">Subscribe</button>
+                        </div>
+                    </div>
+
+                    <!-- Premium -->
+                    <div class="col-md-4">
+                        <div class="card p-3">
+                            <h4>Premium</h4>
+                            <p>Ksh 2500 / 60 days</p>
+                            <button class="btn btn-warning subscribe-btn" data-plan="premium">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instruction Modal -->
+        <div class="modal fade" id="instructionModal" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="padding:20px; border-radius:10px;">
+              <h4 class="text-center">How to Pay via M-Pesa</h4>
+              <ol>
+                <li><strong>Copy the till number:</strong> <span id="tillNumber">124676</span> <button id="copyTill" class="btn btn-sm btn-outline-secondary" style="width: 40px; height: 30px; border-radius: 5px;"><i class="fa fa-copy"></i></button></li>
+                <li>Open your M-Pesa app or toolkit</li>
+                <li>Select <em>Buy Goods &amp; Services</em></li>
+                <li>Paste the copied till number</li>
+                <li>Enter the amount for the chosen plan</li>
+                <li>Enter your M-Pesa PIN and send payment</li>
+                <li>Copy the Mpesa Code and click Next</li>
+              </ol>
+              <div class="text-center">
+                <button id="instructionNext" class="btn btn-primary">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manual Payment Modal -->
+        <div class="modal fade" id="manualPaymentModal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content" style="padding:20px; border-radius:10px;">
+              <h4 class="text-center">Enter Payment Details</h4>
+              <form id="manualPaymentForm" style="width: 100%;">
+                <div class="form-group">
+                  <label for="manualName">Name</label>
+                  <input type="text" id="manualName" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="manualPhone">Phone Number used for payment</label>
+                  <input type="text" id="manualPhone" name="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="manualPlan">Plan paid for</label>
+                  <select id="manualPlan" name="plan" class="form-control" required>
+                    <option value="basic">Basic</option>
+                    <option value="standard">Standard</option>
+                    <option value="premium">Premium</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="manualCode">M-Pesa Code</label>
+                  <input type="text" id="manualCode" name="mpesaCode" class="form-control" required>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-success">Submit Payment Details</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+    </section>
+    <div id="popup" style="display:flex; background-color: aliceblue; color: black;"></div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        let isSubscribed = false;
+
+        // Display custom notification
+        function displayNotification(type) {
+            const notificationSection = document.querySelector('.notification-section');
+            const notificationElement = notificationSection.querySelector('.notification--' + type);
+            
+            if (notificationElement) {
+                // Remove the show class if it exists
+                notificationElement.classList.remove('show');
+                
+                // Trigger reflow to restart animation
+                void notificationElement.offsetWidth;
+                
+                // Add the show class
+                notificationElement.classList.add('show');
+                
+                // Auto-hide after 3.3 seconds (3s progress animation + 0.3s buffer)
+                setTimeout(() => {
+                    notificationElement.classList.remove('show');
+                }, 3300);
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('sell-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const isLoggedIn = await checkLoginStatus();
+            if (!isLoggedIn) {
+                alert('You must be logged in to submit this form.');
+                return;
+            }
+
+            const hasSubscription = await checkSubscriptionStatus();
+            if (!hasSubscription) {
+                // Ask for notification permission when presenting payment modal
+                if ('Notification' in window && Notification.permission !== 'granted') {
+                    try { await Notification.requestPermission(); } catch (e) {}
+                }
+
+                $('#subscriptionModal').modal('show');
+                return;
+            }
+
+            await submitVehicleForm(event.target);
+        });
+
+        // Submit vehicle form
+        async function submitVehicleForm(form) {
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('/api/vehicles', {
+                    method: 'POST',
+                    credentials: 'include',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    displayNotification('success');
+                    form.reset();
+                } else {
+                    displayNotification('failure');
+                }
+            } catch (err) {
+                console.error('Form submission error:', err);
+                displayNotification('failure');
+            }
+        }
+
+        // Check login
+        async function checkLoginStatus() {
+            const res = await fetch('/check-login-status');
+            if (!res.ok){
+                console.error('checking Login status failed', res.status);
+                return false;
+            }
+            const data = await res.json();
+            return data.loggedIn;
+        }
+
+        // Check subscription
+        async function checkSubscriptionStatus() {
+            const res = await fetch('/api/check-subscription', { credentials: 'include' });
+
+            if (!res.ok){
+                console.error('Subscription check failed', res.status);
+                return false;
+            }
+
+            const data = await res.json();
+            isSubscribed = data.subscribed;
+            return isSubscribed;
+        }
+
+        // Show browser notification (falls back to alert)
+        function showNotification(title, body) {
+            if ('Notification' in window && Notification.permission === 'granted') {
+                try {
+                    new Notification(title, { body });
+                    return;
+                } catch (e) {
+                    console.error('Notification error', e);
+                }
+            }
+            alert(title + '\n' + body);
+        }
+
+        // Subscribe button now shows instructions and manual-payment flow
+        let selectedPlan = null;
+        document.querySelectorAll('.subscribe-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedPlan = btn.dataset.plan;
+                $('#subscriptionModal').modal('hide');
+                $('#instructionModal').modal('show');
+            });
+        });
+
+        // copy till number when user clicks icon
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'copyTill' || e.target.closest('#copyTill')) {
+                navigator.clipboard.writeText('124676')
+                    .then(() => alert('Till number copied'))
+                    .catch(err => console.error('Clipboard error', err));
+            }
+        });
+
+        // when user finishes instructions
+        document.getElementById('instructionNext').addEventListener('click', () => {
+            $('#instructionModal').modal('hide');
+            // pre-select plan in manual form
+            if (selectedPlan) document.getElementById('manualPlan').value = selectedPlan;
+            $('#manualPaymentModal').modal('show');
+        });
+
+        // handle manual payment form submission
+        document.getElementById('manualPaymentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            // gather vehicle form plus manual details
+            const form = document.getElementById('sell-form');
+            const formData = new FormData(form);
+
+            const manual = new FormData(e.target);
+            // copy manual entries into main formData
+            formData.append('plan', manual.get('plan'));
+            formData.append('phone', manual.get('phone'));
+            formData.append('mpesaCode', manual.get('mpesaCode'));
+
+            try {
+                const res = await fetch('/api/mpesa/manual', {
+                    method: 'POST',
+                    credentials: 'include',
+                    body: formData
+                });
+                const data = await res.json();
+                if (data.success) {
+                    alert('Payment details recorded. Please wait for admin approval.');
+                    $('#manualPaymentModal').modal('hide');
+                    // start polling just like STK flow so vehicle submits automatically once admin approves
+                    waitForPayment();
+                    // optionally clear forms
+                    // form.reset();
+                } else {
+                    alert(data.message || 'Failed to record payment details');
+                }
+            } catch (err) {
+                console.error('Manual subscribe error', err);
+                alert('Error recording payment');
+            }
+        });
+
+        // Poll payment status
+        function waitForPayment() {
+            let pollCount = 0;
+            const maxPolls = 60; // Poll for up to 5 minutes (60 * 5 seconds)
+            
+            const interval = setInterval(async () => {
+                pollCount++;
+                console.log(`Checking subscription status... (attempt ${pollCount})`);
+                
+                try {
+                    const subscribed = await checkSubscriptionStatus();
+                    
+                    if (subscribed) {
+                        clearInterval(interval);
+                        $('#subscriptionModal').modal('hide');
+
+                        // Notify the user that subscription succeeded
+                        showNotification('Subscription successful', 'Your subscription is active — your vehicle will now be posted.');
+
+                        // Re-submit the form programmatically so the server can save the vehicle
+                        document.getElementById('sell-form')
+                            .dispatchEvent(new Event('submit'));
+                    }
+                } catch (err) {
+                    console.error('Error checking subscription:', err);
+                }
+                
+                // Stop polling after max attempts
+                if (pollCount >= maxPolls) {
+                    clearInterval(interval);
+                    console.warn('Payment verification timeout');
+                    showNotification('Payment verification', 'Payment verification timed out. Please refresh the page to check your subscription status.');
+                }
+            }, 5000);
+        }
+    </script>
+
+
+</body>
+</html>

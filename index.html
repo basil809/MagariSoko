@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/MagariSoko_icon.jfif" type="image/gif">
+
+    <!-- Site Meta Tags -->
+    <title>Home | MagariSoko</title>
+    
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!--link rel="stylesheet" href="css/responsive.css"-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!--icon display style-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body{
+            overflow-x: hidden;
+        }
+        body * {
+            max-width: 100%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .img_logo {
+            display: flex;
+            align-items: center; /* Center vertically */
+            height: 100%; /* Ensure the container takes full height */
+        }
+
+        .img_logo img {
+            max-width: 250px; /* Adjust the size as needed */
+            height: 150px; /* Maintain aspect ratio */
+        }
+
+        /*style for the login button*/
+        .login_btn {
+            margin-left: auto;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Default styles */
+        .user-icon {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+        }
+
+        .user-name {
+            color: black;
+            background-color: white;
+            padding-left: 5px;
+            font-size: 16px;
+        }
+
+        .user-dropdown-wrapper {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 120px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            border-radius: 5px;
+            padding: 8px 0;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Responsive for small screens */
+        @media screen and (max-width: 600px) {
+            .dropdown-menu {
+                left: auto;
+                right: 0;
+                min-width: 140px;
+            }
+
+            .user-name {
+                display: none; /* Hide username on small screens */
+            }
+
+            .user-dropdown-wrapper {
+                width: 100%;
+            }
+
+            .dropdown-menu a {
+                padding: 12px 16px;
+            }
+            #search-form {
+                width: 100%;
+                padding-left: 20px;
+            }
+        }
+
+        #userMenu .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            border-radius: 4px;
+            padding: 10px;
+            z-index: 999;
+        }
+
+        #userMenu:hover .dropdown-content {
+            display: block;
+        }
+
+        #userMenu .dropdown-content a {
+            display: block;
+            padding: 6px 12px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        #userMenu .dropdown-content a:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Responsive design for small screens */
+        @media (max-width: 600px) {
+            #userMenu {
+                gap: 5px;
+                padding: 4px;
+                height: 10px;
+            }
+
+            #userMenu img {
+                width: 28px;
+                height: 28px;
+            }
+
+            #userMenu .username{
+                display: none; /* Hide username on small screens */
+            }
+
+            #userMenu .dropdown-content {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            #userMenu .dropdown-content a {
+                padding: 5px 10px;
+            }
+            
+            .mid_divider{
+                display: none; /* Hide the divider on small screens */
+            }
+        }
+
+        .loginBtn {
+            background-color: black;
+            color: #fff;
+            border-radius: 5px;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        /*style for the modal*/
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 15%;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 60px;
+            .submit_btn{
+                padding: 20px 0 0;
+            }
+            button {
+                background-color: white;
+                font-size: 20px;
+                color: black;
+                border: 2px solid green;
+                padding: 10px;
+                border-radius: 45px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: green;
+                font-weight: bold;
+            }
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; 
+        }
+        .h4{
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        label, input, select{
+            display: block;
+            width: 80%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .mid_divider{
+            border-left: 1px solid #d7d7d7;
+            height: 80%;
+            left: 95%;
+            position: absolute;
+            top: 0;
+        }
+
+        .g_id_signin {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+    }
+        /*style for the dealer cards obtained from the backend*/
+        .dealers-section {
+            border: 2px solid black;
+            border-radius: 15px;
+            display: block;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+        #dealer-section{
+            border: 2px solid black;
+            border-radius: 15px;
+        }
+
+        #dealer_posts .col-md-3{
+            margin: 10px;
+            width: 100px;
+        }
+
+        h2 {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+            margin: 10px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card:hover {
+            border: 2px solid black;
+        }
+
+        .card img {
+            object-fit: cover;
+            height: 150px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .card-image img{
+            object-fit: cover;
+            height: 150px;
+            width: 100%;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .card-body h3 {
+            font-size: 20px;
+            padding-left: 10px;
+            font-weight: bold;
+            margin: 0px 0;
+        }
+
+        .card-body p {
+            padding-left: 10px;
+        }
+
+        #userMenu{
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        #search-form {
+        display: flex;
+        align-items: center;
+        }
+
+        #search-input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid black;
+            border-right: none;
+            border-radius: 5px 0 0 5px;
+            box-sizing: border-box;
+            margin-top: 8px;
+        }
+        #search-form button{
+            padding-bottom: 10px;
+        }
+        button[type="submit"] {
+            padding: 10px 30px;
+            border: 1px solid #ccc;
+            border-radius: 0 4px 4px 0;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            height: 100%;
+        }
+
+        button[type="submit"]:hover {
+            background-color: black;
+        }
+        /* code for the admin login modal*/
+        /* Modal Styling */
+        .adminModal.modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stays in place regardless of scrolling */
+            z-index: 1000; /* Higher than any other content */
+            top: 0;
+            left: 0;
+            width: 100vw; /* Full width of the viewport */
+            height: 100vh; /* Full height of the viewport */
+            background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+            }
+
+        .adminModal .modal-content {
+            background-color: #fff;
+            margin: 10% auto; /* Center vertically with a gap at the top */
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%; /* Adjust width as needed */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative; /* Required for internal positioning */
+        }
+
+        .adminModal.close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .adminModal .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .adminModal form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .adminModal form label {
+            margin-top: 10px;
+        }
+
+        .adminModal form input {
+            margin-top: 5px;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        .adminModal form button {
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    /* styling for the admin login button*/
+    .adminlogin{
+        align-content: flex-end;
+    }
+
+    </style>
+</head>
+<body>
+    <nav class="custom-navbar">
+        <div class="navbar-top container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-auto img_logo">
+                    <a href="images/magarisoko_2.jfif" class="logo">
+                        <img src="images/magarisoko_2.jfif" alt="MagariSoko Logo">
+                        <span>MagariSoko</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-auto login_btn">
+                <button id="loginBtn" class="loginBtn">
+                    Login | Register
+                </button>
+                <div id="userMenu" style="display: none;">
+                    <img src="images/user_image_icon.png" alt="User Icon">
+                    <div class="username">
+                        <!-- Display username if needed -->
+                    </div>
+                    <div class="dropdown-content">
+                        <a href="/dashboard">Dashboard</a>
+                        <a href="#" id="logoutBtn">Logout</a>
+                    </div>
+                </div>           
+                <div id="loginModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <div id="modalBody">
+                            <!-- Modal Body for Login/Sign Up Forms -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="navbar-bottom">
+                    <div id="menu-icon" onclick="toggleSidebar()">☰</div>
+                    <div id="sidebar" class="custom-sidebar">
+                        <div class="close-btn" onclick="toggleSidebar()">×</div>
+                        <div class="sidebar_img_logo">
+                            <a href="#" class="logo">
+                                <img src="images/magarisoko_2.jfif" alt="MagariSoko Logo" style="width: 50px; height: 50px;">
+                                <span>MagariSoko</span>
+                            </a>
+                        </div>
+                        <hr style="background-color: #fefefe;">
+                        <a href="#">Home</a>
+                        <a href="trending.html">Flash Sales</a>
+                        <a href="hire.html">Car Hire</a>
+                        <a href="sell.html">Sell my car</a>
+                        <a href="javascript:void(0)" onclick="toggleCarMakes()">Car Makes:</a>
+                        <div id="car-makes" class="hidden">
+                            <a href="toyota.html" class="car-make"><img src="images/toyota_logo.png" alt="Toyota Logo">Toyota</a>
+                            <a href="nissan.html" class="car-make"><img src="images/nissan-logo-2013-700x700.png" alt="Nissan Logo">Nissan</a>
+                            <a href="BMW.html" class="car-make"><img src="images/bmw_logo.png" alt="BMW Logo">BMW</a>
+                            <a href="subaru.html" class="car-make"><img src="images/Subaru Logo Stencil.jfif" alt="Subaru Logo">Subaru</a>
+                            <a href="#" class="car-make"><img src="images/Chevrolet-logo.png" alt="Chevrolet Logo">Chevrolet</a>
+                            <a href="mercedes.html" class="car-make"><img src="images/mercedes_logo.jfif" alt="Mercedes Logo">Mercedes Benz</a>
+                            <a href="mazda.html" class="car-make"><img src="images/mazda logo.png" alt="Mazda Logo">Mazda</a>
+                            <a href="#" class="car-make"><img src="images/Mitsubishi Logo.jfif" alt="Mitsubishi Logo">Mitsubishi</a>
+                            <a href="#" class="car-make"><img src="images/Suzuki-symbol-640x480.jpg" alt="Suzuki Logo">Suzuki</a>
+                            <a href="#" class="car-make"><img src="images/Lexus-logo.jpg" alt="Lexus Logo">Lexus</a>
+                            <a href="#" class="car-make"><img src="images/Volkswagen-logo.jpg" alt="Volkswagen Logo">Volkswagen</a>
+                            <a href="#" class="car-make"><img src="images/Audi Logo.jfif" alt="Audi Logo">Audi</a>
+                            <a href="#" class="car-make"><img src="images/Land-Rover-logo.jpg" alt="Land Rover Logo">Land Rover</a>
+                            <a href="#" class="car-make"><img src="images/honda-logo.png" alt="Honda Logo">Honda</a>
+                            <a href="#" class="car-make"><img src="images/ford-logo.png" alt="Ford Logo">Ford</a>
+                            <a href="#" class="car-make"><img src="images/hyundai-logo-2011-download.png" alt="Hyundai Logo">Hyundai</a>
+                            <a href="#" class="car-make"><img src="images/Renault-logo.jpg" alt="Renault Logo">Renault</a>
+                            <a href="#" class="car-make"><img src="images/Daihatsu-logo.png" alt="Daihatsu Logo"></a>
+                            <a href="#" class="car-make"><img src="images/jeep-logo.png" alt="Jeep Logo">Jeep</a>
+                            <a href="#" class="car-make"><img src="images/porsche-logo.png" alt="Porsche Logo">Porsche</a>
+                            <a href="#" class="car-make"><img src="images/Jaguar Logo.jfif" alt="Jaguar Logo">Jaguar</a>
+                            <a href="#" class="car-make"><img src="images/Peugeot-logo.jpg" alt="Peugeot Logo">Peugeot</a>
+                            <a href="#" class="car-make"><img src="images/Volvo-logo.jpg" alt="Volvo Logo">Volvo</a>
+                            <a href="#" class="car-make"><img src="images/Isuzu-logo.jpg" alt="Isuzu Logo"></a>
+                            <a href="#" class="car-make"><img src="images/Mobius logo.jfif" alt="Mobius Logo">Mobius</a>
+                            <a href="#" class="car-make"><img src="images/bentley-logo-2002-download.png" alt="Bentley Logo">Bentley</a>
+                            <a href="#" class="car-make"><img src="images/Assistência Técnica Yamaha.jfif" alt="Yamaha Logo">Yamaha</a>
+                        </div>
+                        <div class="adminlogin">
+                            <button id="admin_btn">ADMIN</button>
+                        </div>
+
+                        <!--div class="dealerlogin_btn">
+                            <button id="logindealer_btn">Dealer Login</button>
+                        </div-->
+                    </div>
+                    <div class="menu_2">
+                        <ul class="list">
+                            <li><a href="#"><i class="material-icons">home</i> Home</a></li>
+                            <li><a href="join_us.html"><i class="material-icons">handshake</i> Join Us</a></li>
+                            <li><a href="about_us.html"><i class="material-icons">group</i> About Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <section class="content_section position-relative">
+                <div class="bootstrap-carousel">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="images/carousel_4.jpg" alt="First slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="images/carousel_2.0.jpg" alt="Second slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="images/carousel_3.jpg" alt="Third slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="images/carousel_1.jpg" alt="Fourth slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="images/carousel_5.jpg" alt="Fifth slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="images/carousel_6.jpg" alt="Sixth slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="images/corousel.7.jpg" alt="Seventh slide">
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Toast container -->
+            <div id="toast" style="
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                min-width: 250px;
+                padding: 15px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: bold;
+                display: none;
+                z-index: 9999;
+            "></div>
+
+            <!-- Search Bar Section -->
+            <section class="search-bar-section">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <form id="search-form">  
+                                <input type="text" id="search-input" placeholder="Search for a Vehicle..." required>  
+                                <button type="submit">Search</button>  
+                            </form>  
+                        </div>
+                    </div>
+                </div>
+                <div id="search-results"></div>  
+            </section>
+
+            <!-- Trending Sales Section -->
+            <main>
+                <section class="trending_sales">
+                    <div class="container">
+                        <div class="header text-center">
+                            <h1 style="font-size: 40px; font-weight: bold; padding: 20px;">Flash Sales🔥</h1>
+                        </div>
+                        <div id="flash-sale-vehicles">
+                        </div>
+                    </div>
+                </section>
+                <section id="trending_sales_1"  class="trending_sales_1">
+                    <h2 class="text-center mb-4">MagariSoko Vehicles</h2>
+                    <div class="container">
+                        <div class="vehicle-card">
+                            <div class="row" id="magarisoko">
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="dealer-section" class="dealer-section">
+                    <h2 class="text-center mb-4">Dealers Section</h2>
+                    <div class="container">
+                        <div class="vehicle-card">
+                            <div class="row" id="dealer">
+                                <!--vehicles posted by the magarisoko dealers will be dynamically be displaed here-->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="dealers-section" class="dealers-section">
+                    <h2 class="text-center mb-4">Clients Section</h2>
+                    <div class="container">
+                        <div class="vehicle-card">
+                            <div class="row" id="clients">
+                                <!--vehicles posted by the magarisoko clients will be dynamically be displaed here-->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+            
+            <iframe src="sell.html" style="display:none;" id="sellFormFrame"></iframe>
+            
+            <!-- Admin Login Modal -->
+            <div id="adminModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Admin Login</h2>
+                    <form id="adminLoginForm">
+                        <label for="adminUsername">Username:</label>
+                        <input type="text" id="adminUsername" name="username" required>
+                        
+                        <label for="adminPassword">Password:</label>
+                        <input type="password" id="adminPassword" name="password" required>
+                        
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Footer Section -->
+            <footer class="footer_section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 footer-col">
+                            <!-- Contact Us section -->
+                            <div class="footer_content" style="display: flex; flex-direction: column;">
+                                <h4>Contact Us</h4>
+                                <div class="contact_link_box">
+                                    <a href="https://maps.app.goo.gl/X5jKPCnbjW9TkLET7" target="_blank"><i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                        <span>Location</span>
+                                    </a>
+                                    <a href="tel:+254742743059"><i class="fas fa-phone" aria-hidden="true"></i>
+                                        <span>Call +254 742 743059</span>
+                                    </a><br>
+                                    <a href="mailto:baschelle5@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i>
+                                        <span style="margin-left: 5px;">baschelle5@gmail.com</span>
+                                    </a>        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 footer-col">
+                            <!-- Footer Detail section -->
+                            <div class="footer_detail">
+                                <a href="index.html" class="footer-logo">
+                                    MagariSoko
+                                </a>
+                                <em>"Quality Cars, Unbeatable Prices"</em>
+                                <div class="footer_social">
+                                    <a href="https://web.facebook.com/people/Basil/100023719690145/" target="_blank"><img src="images/social_logos/facebook_logo_icon.png" alt="Facebook"></a>
+                                    <a href="https://wa.me/+254742743059" target="_blank"><img src="images/social_logos/WhatsApp_Logo.png" alt="WhatsApp"></a>
+                                    <a href="https://twitter.com/baschelle5" target="_blank"><img src="images/social_logos/x_logo.jpeg" alt="Twitter"></a>
+                                    <a href="https://www.linkedin.com/in/basil-onyango-61a081250/" target="_blank"><img src="images/social_logos/linkedin logo_icon.png" alt="linkedIn"></a>
+                                    <a href="https://www.youtube.com/@basilonyango5160" target="_blank"><img src="images/social_logos/youtube_logo.png" alt="Youtube"></a>
+                                    <a href="https://www.instagram.com/_.blu.berry.__/" target="_blank"><img src="images/social_logos/instagram_logo_icon.png" alt="Instragram"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 footer-col mb-4">
+                            <!-- MagariSoko Icon section -->
+                            <div class="MagariSoko_icon">
+                                <div class="img_logo">
+                                    <img src="images/magarisoko_2.jfif" alt="MagariSoko Logo"> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 footer-col">
+                            <!-- Footer Info section -->
+                            <div class="footer-info">
+                                <p>&copy; <span id="displayYear"></span> All Rights Reserved By
+                                    <a href="index.html">MagariSoko</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- Google Sign-In API -->
+            <script src="https://accounts.google.com/gsi/client" async defer></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+            <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+            <script src="js/script.js"></script>
+            <script>
+                // Modal functionality
+                const adminModal = document.getElementById("adminModal");
+                const adminBtn = document.getElementById("admin_btn");
+                const closeBtn = document.querySelector("#adminModal .close");
+                const adminLoginForm = document.getElementById("adminLoginForm");
+              
+                // Show modal on button click
+                adminBtn.addEventListener("click", () => {
+                  adminModal.style.display = "block";
+                });
+              
+                // Close modal on close button click
+                closeBtn.addEventListener("click", () => {
+                  adminModal.style.display = "none";
+                });
+              
+                // Close modal if user clicks outside modal content
+                window.addEventListener("click", (event) => {
+                  if (event.target === adminModal) {
+                    adminModal.style.display = "none";
+                  }
+                });
+              
+                // Submit admin login form securely
+                adminLoginForm.addEventListener("submit", async (event) => {
+                  event.preventDefault();
+              
+                  const username = document.getElementById("adminUsername").value;
+                  const password = document.getElementById("adminPassword").value;
+              
+                  try {
+                    const response = await fetch("/admin-login", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ username, password }),
+                    });
+              
+                    const result = await response.json();
+              
+                    if (result.success) {
+                      // Redirect to admin page
+                      window.location.href = result.redirect || "/admin.html";
+                    } else {
+                      alert(result.message || "Invalid username or password.");
+                    }
+                  } catch (error) {
+                    console.error("Login error:", error);
+                    alert("Server error. Please try again later.");
+                  }
+                });
+            </script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function(){
+                    fetch('/api/magari')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        const magariSection = document.getElementById('magarisoko');
+                        data.forEach( vehicle => {
+                            const vehicleElement = document.createElement('div');
+                            vehicleElement.classList.add('col-md-3', 'mb-4')
+                            vehicleElement.innerHTML = `
+                            <div class="row">
+                                <div class="card">
+                                    <img src="/${vehicle.vehicle_images[0]}" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                    <div class="card-body">
+                                        <h3>${vehicle.vehicle_make} ${vehicle.vehicle_model}</h3>
+                                        <p>Price: Ksh.${vehicle.vehicle_price}</p>
+                                        <p>Fuel: ${vehicle.type_of_fuel}</p>
+                                        <p>Engine: ${vehicle.engine_capacity} CC</p>
+                                        <p>Dealer: ${vehicle.dealer_name}</p>
+                                        <p>Phone: ${vehicle.phone_number}</p>
+                                        <a href="/car_details.html?vehicleId=${vehicle._id}" class="btn btn-primary">Veiw Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+                            magariSection.appendChild(vehicleElement);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching vehicles:', error));
+                })
+            </script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    fetch('http://localhost:3000/api/vehicles')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);  // Add this line to log the data
+                        const dealersSection = document.getElementById('clients');
+                        data.forEach(vehicle => {
+                            const vehicleElement = document.createElement('div');
+                            vehicleElement.classList.add('col-md-3','mb-3')
+                            vehicleElement.innerHTML = `
+                            <div class="row">
+                                <div class="card">
+                                    <img src="/${vehicle.vehicle_images[1]}" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                    <div class="card-body">
+                                        <h3>${vehicle.vehicle_make} ${vehicle.vehicle_model}</h3>
+                                        <p>Price: Ksh.${vehicle.vehicle_price.toLocaleString()}</p>
+                                        <p>Fuel: ${vehicle.type_of_fuel}</p>
+                                        <p>Engine: ${vehicle.engine_capacity} cc</p>
+                                        <p>Dealer: ${vehicle.dealer_name}</p>
+                                        <p>Phone: ${vehicle.phone_number}</p>
+                                        <a href="/car_details.html?vehicleId=${vehicle._id}" class="btn btn-primary">Veiw Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+                            dealersSection.appendChild(vehicleElement);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching vehicles:', error));
+                });
+        
+                document.getElementById('signupForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+        
+                    const formData = new FormData(e.target);
+                    const formObject = {};
+                    formData.forEach((value, key) => {
+                        formObject[key] = value;
+                    });
+        
+                    const response = await fetch('/signup', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formObject)
+                    });
+        
+                    const result = await response.json();
+                    if (response.ok) {
+                        alert('Sign-up successful!');
+                    } else {
+                        alert('Error: ' + result.error);
+                    }
+                });
+            </script>
+            <script>
+                //code for the displaying of the vehicle posted by the dealer from the dealers dashboard
+                // Fetch and display vehicles in index.html
+                document.addEventListener('DOMContentLoaded', function(){
+                    fetch('/api/dealerVehicles')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        const dealerSection = document.getElementById('dealer');
+                        data.forEach( vehicle => {
+                            const vehicleElement = document.createElement('div');
+                            vehicleElement.classList.add('col-md-3', 'mb-4')
+                            vehicleElement.innerHTML = `
+                            <div class="row">
+                                <div class="card">
+                                    <img src="/${vehicle.vehicle_images[0]}" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                    <div class="card-body">
+                                        <h3>${vehicle.vehicle_make} ${vehicle.vehicle_model}</h3>
+                                        <p>Price: Ksh.${vehicle.vehicle_price.toLocaleString()}</p>
+                                        <p>Fuel: ${vehicle.type_of_fuel}</p>
+                                        <p>Engine: ${vehicle.engine_capacity} CC</p>
+                                        <p>Dealer: ${vehicle.dealer_name}</p>
+                                        <p>Phone: ${vehicle.phone_number}</p>
+                                        <a href="/car_details.html?vehicleId=${vehicle._id}" class="btn btn-primary">Veiw Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+                            dealerSection.appendChild(vehicleElement);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching vehicles:', error));
+                })
+            </script>
+
+            <script>
+                //Function to check if the user is logged in 
+                async function checkLoginStatus(){
+                    try {
+                        const response = await fetch('/check-login-status');
+                        const data = await response.json();
+                        return data.loggedIn;
+                    } catch (error) {
+                        console.error('Error checking login status:', error);
+                        return false;
+                    }
+                }
+                //Get the dealer login and the corresponding modals
+                var dealerlogin_btn = document.getElementById("logindealer_btn")
+                
+                //add more codes here 
+                //event listener when the login button has been clicked 
+                dealerlogin_btn.onclick = async function() {
+                    const isLoggedIn = await checkLoginStatus();
+
+                    if (isLoggedIn) {
+                        //if the user has logged in, show the sign-up modal 
+                        window.location.href = "/dealers.html";
+
+                    } else {
+                        //if the user has not logged in,  show an alert and redirect to the login page 
+                        alert("You need to login first. You will be redirected to the top home page.");
+                        window.location.href = "/index.html"; // will redirect the user to the top page  
+                    }
+                }
+            </script>
+            <script>
+                document.getElementById('search-form').addEventListener('submit', async (e) => {
+                    e.preventDefault(); // Prevent form submission from reloading the page
+
+                    const query = document.getElementById('search-input').value.trim();
+                    const resultsDiv = document.getElementById('search-results');
+                    const mainContent = document.querySelector('main'); // Select the main content element
+                    resultsDiv.innerHTML = ''; // Clear previous results
+
+                    if (!query) {
+                        resultsDiv.innerHTML = '<p>Please enter a search term.</p>';
+                        return;
+                    }
+
+                    mainContent.style.display = 'none'; // Hide the main content
+
+                    try {
+                        // Fetch search results from the server
+                        const response = await fetch('/search', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ query })
+                        });
+
+                        const data = await response.json();
+
+                        if (data.success && data.data.length > 0) {
+                            const rowContainer = document.createElement('div');
+                            rowContainer.classList.add('row', 'g-4'); // Add Bootstrap row with spacing
+
+                            data.data.forEach((vehicle) => {
+                                const imageField = vehicle.images && vehicle.images.length > 0
+                                    ? vehicle.images[0]
+                                    : (vehicle.vehicle_images && vehicle.vehicle_images.length > 0
+                                        ? vehicle.vehicle_images[0]
+                                        : 'placeholder.jpg'); // Fallback to placeholder
+
+                                const col = document.createElement('div');
+                                col.classList.add('col-md-3');
+
+                                col.innerHTML = `
+                                    <div class="card vehicle-card">
+                                        <img src="${imageField}" class="card-img-top" alt="${vehicle.make} ${vehicle.model}">
+                                        <div class="card-body">
+                                            <h3 class="card-title">${vehicle.make || vehicle.vehicle_make} ${vehicle.model || vehicle.vehicle_model}</h3>
+                                            <p class="card-text"><strong>Price:</strong> ${vehicle.price || vehicle.vehicle_price}</p>
+                                            <p class="card-text"><strong>Fuel:</strong> ${vehicle.fuel || vehicle.type_of_fuel}</p>
+                                            <p class="card-text"><strong>Engine:</strong> ${vehicle.engine || vehicle.engine_capacity} cc</p>
+                                            <p class="card-text"><strong>Description:</strong> ${vehicle.description || vehicle.vehicle_description}</p>
+                                            <a href="/car_details.html?vehicleId=${vehicle._id}" class="btn btn-primary">Veiw Details</a>
+                                        </div>
+                                    </div>
+                                `;
+                                rowContainer.appendChild(col);
+                            });
+
+                            resultsDiv.appendChild(rowContainer);
+                        } else {
+                            resultsDiv.innerHTML = '<p style="text-align: center; color: red; font-size: 45px; font-weight: bold; ">No results found.</p>';
+                        }
+                    } catch (error) {
+                        console.error('Error fetching search results:', error);
+                        resultsDiv.innerHTML = '<p>Something went wrong. Please try again later.</p>';
+                    }
+                });
+
+                // Add an event listener to the search input to toggle visibility of the main content
+                document.getElementById('search-input').addEventListener('input', () => {
+                    const query = document.getElementById('search-input').value.trim();
+                    const mainContent = document.querySelector('main');
+                    const resultsDiv = document.getElementById('search-results');
+
+                    if (query === '') {
+                        mainContent.style.display = ''; // Show the main content
+                        resultsDiv.innerHTML = ''; // Clear the search results
+                    }
+                });
+
+            </script>
+            <script>
+                async function fetchFlashSaleVehicles() {
+                    try {
+                        const response = await fetch('/api/flash-sale');
+        
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch flash sale vehicle data');
+                        }
+                        const vehicles = await response.json();
+        
+                        // Create the rows and columns dynamically
+                        let vehicleCards = '';
+                        vehicles.forEach((vehicle, index) => {
+                            // Start a new row after every 4th vehicle
+                            if (index % 3 === 0) {
+                                if (index !== 0) {
+                                    vehicleCards += '</div>'; // Close the previous row
+                                }
+                                vehicleCards += '<div class="row">'; // Open a new row for every 4 vehicles
+                            }
+        
+                            // Add each vehicle card in a col-md-3 column
+                            vehicleCards += `
+                                <div class="col-md-4 mb-4">
+                                    <div class="card">
+                                        <img src="${vehicle.vehicle_images[0]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><strong>${vehicle.vehicle_make} ${vehicle.vehicle_model}</strong></h5>
+                                            <p class="card-text"><strong>Price:</strong> ${vehicle.vehicle_price.toLocaleString()}</p>
+                                            <p class="card-text"><strong>Fuel:</strong> ${vehicle.type_of_fuel}</p>
+                                            <p class="card-text"><strong>Engine:</strong> ${vehicle.engine_capacity} CC</p>
+                                            <p class="card-text"><strong>Description:</strong><br> ${vehicle.vehicle_description}</p>
+                                            <a href="/car_details.html?vehicleId=${vehicle._id}" class="btn btn-primary">Veiw Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+        
+                        // Close the final row if it exists
+                        if (vehicles.length % 3 !== 0) {
+                            vehicleCards += '</div>';
+                        }
+        
+                        document.getElementById('flash-sale-vehicles').innerHTML = vehicleCards;
+                    } catch (error) {
+                        console.error('Error fetching flash sale vehicles:', error);
+                        const errorContent = `
+                            <h2 style="margin-top: 10px;">Error</h2>
+                            <p>Unable to fetch flash sale vehicles. Please try again later. Error Details: ${error.message}</p>
+                        `;
+                        document.getElementById('flash-sale-vehicles').innerHTML = errorContent;
+                    }
+                }
+        
+                // Call the function to fetch flash sale vehicles on page load
+                fetchFlashSaleVehicles();
+            </script>
+    </body>
+</html>

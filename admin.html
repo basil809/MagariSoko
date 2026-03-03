@@ -1,0 +1,3214 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--Basic Meta Tags-->
+        <meta charset="UTF-8">
+        <meta name="description" content="Admin page for MagariSoko">
+        <meta name="viewport" content="width=device-width, initial-scale = 1.0">
+        <link rel="icon" href="images/magarisoko_2.jfif" type="image/gif">
+
+        <!--Site Meta Tags-->
+        <title>ADMIN | MagariSoko</title>
+        <!--CSS Links-->
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/sidebar.css">
+        <!--Other links-->
+        <!--link rel="stylesheet" href="css/responsive.css"-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <!--icon display style-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+        <style>
+            body{
+                display: flex;
+                padding-top: 50px;
+                overflow-x: auto;
+            }
+            main{
+                flex: 1;
+                margin-top: 0;
+                padding-top: 0;
+                padding-left: 50px;
+                
+            }
+
+            .modal {
+                display: none; 
+                position: fixed; 
+                z-index: 1; 
+                left: 0;
+                top: 0;
+                width: 100%; 
+                height: 100%; 
+                overflow: auto; 
+                background-color: rgb(0, 0, 0); 
+                background-color: rgba(0,0,0,0.4); 
+            }
+            #editClientVehicleModal .modal {
+                display: none; /* Hidden by default */
+                position: fixed;
+                z-index: 1000; /* Ensure it appears on top */
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+            }
+            .modal h2{
+                text-align: center;
+                padding-bottom: 10px;
+                font-weight: bold;
+            }
+
+            .form-control {
+                border-radius: 5px;
+                padding: 10px;
+            }
+
+            #editVehicleForm .col-md-4{
+                flex: 1 1 calc(33.333% - 10px); /* Makes each field take up one-third of the row */
+                min-width: 200px; /* Ensures a minimum width for smaller screens */
+                display: flex;
+                flex-direction: column;
+            }
+
+            #editDealerVehicleForm .col-md-4{
+                flex: 1 1 calc(33.333% - 10px); /* Makes each field take up one-third of the row */
+                min-width: 200px; /* Ensures a minimum width for smaller screens */
+                display: flex;
+                flex-direction: column;
+            }
+            #editClientVehicleForm .col-md-4{
+                flex: 1 1 calc(33.333% - 10px); /* Makes each field take up one-third of the row */
+                min-width: 200px; /* Ensures a minimum width for smaller screens */
+                display: flex;
+                flex-direction: column;
+            }
+
+            #editDealerForm .col-md-6{
+                flex: 1 1 calc(50% - 10px); /* Makes each field take up one-third of the row */
+                min-width: 200px; /* Ensures a minimum width for smaller screens */
+                display: flex;
+                flex-direction: column;
+            }
+
+            #editDealerForm label {
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            #editDealerVehicleForm label {
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            #editVehicleForm label {
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            #editClientVehicleForm label {
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            #editUserForm label{
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            #editVehicleForm input,
+            #editVehicleForm select {
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            #editDealerVehicleForm input,
+            #editDealerVehicleForm select {
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            #editDealerForm input,
+            #editDealerForm select {
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            #editClientVehicleForm input,
+            #editClientVehicleForm select {
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+
+            #editVehicleForm .description {
+                flex: 1 1 100%; /* Makes the description take up the entire row */
+                display: flex;
+                flex-direction: column;
+                margin-top: 20px; /* Add some margin above the description */
+            }
+
+            #editDealerForm .address {
+                flex: 1 1 100%; /* Makes the description take up the entire row */
+                display: flex;
+                flex-direction: column;
+                margin-top: 20px; /* Add some margin above the description */
+            }
+
+            #editDealerVehicleForm .description {
+                flex: 1 1 100%; /* Makes the description take up the entire row */
+                display: flex;
+                flex-direction: column;
+                margin-top: 20px; /* Add some margin above the description */
+            }
+
+            #editClientVehicleForm .description {
+                flex: 1 1 100%; /* Makes the description take up the entire row */
+                display: flex;
+                flex-direction: column;
+                margin-top: 20px; /* Add some margin above the description */
+            }
+
+            #editDealerVehicleForm .address {
+                width: 100%; /* Ensures the textarea covers the full width */
+                padding: 10px;
+                height: 150px; /* Sets height similar to the one in your image */
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                resize: none; /* Allows users to resize the height */
+            }
+
+            #editDealerForm .description textarea {
+                width: 100%; /* Ensures the textarea covers the full width */
+                padding: 10px;
+                height: 150px; /* Sets height similar to the one in your image */
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                resize: none; /* Allows users to resize the height */
+            }
+
+            #editVehicleForm .description textarea {
+                width: 100%; /* Ensures the textarea covers the full width */
+                padding: 10px;
+                height: 150px; /* Sets height similar to the one in your image */
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                resize: none; /* Allows users to resize the height */
+            }
+
+            #editClientVehicleForm .description textarea {
+                width: 100%; /* Ensures the textarea covers the full width */
+                padding: 10px;
+                height: 150px; /* Sets height similar to the one in your image */
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                resize: none; /* Allows users to resize the height */
+            } 
+
+            #editHireVehicleForm .col-md-4{
+                flex: 1 1 calc(33.333% - 10px); /* Makes each field take up one-third of the row */
+                min-width: 200px; /* Ensures a minimum width for smaller screens */
+                display: flex;
+                flex-direction: column;
+            }
+
+            #editHireVehicleForm label {
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            #editHireVehicleForm input,
+            #editHireVehicleForm select {
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            #editHireVehicleForm .description {
+                flex: 1 1 100%; /* Makes the description take up the entire row */
+                display: flex;
+                flex-direction: column;
+                margin-top: 20px; /* Add some margin above the description */
+            }
+
+            #editHireVehicleForm .description textarea {
+                width: 100%; /* Ensures the textarea covers the full width */
+                padding: 10px;
+                height: 150px; /* Sets height similar to the one in your image */
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                resize: none; /* Allows users to resize the height */
+            }
+
+            .modal-content {
+                background-color: #fefefe;
+                margin: 15% auto; 
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            .modal button{
+                color: #4CAF50;
+                border: 2px solid #4CAF50;
+                border-radius: 5px;
+                background-color: white;
+                height: 30px;
+                margin: 10px;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+            button:hover{
+                color: white;
+                border: 2px solid #4CAF50;
+                background-color: #4CAF50;
+            }
+        /* Container for the form */
+        #vehicleAddForm{
+            padding-top: 10px;
+            margin-left: 10px;
+            padding-left: 50px;
+        }
+        #Newvehicle-form {
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 20px;
+            padding-left: 5px;
+        }
+
+        /* Style for each form field container */
+        #Newvehicle-form .col-md-4 {
+            flex: 1 1 calc(33.333% - 10px); /* Makes each field take up one-third of the row */
+            min-width: 200px; /* Ensures a minimum width for smaller screens */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Label styling */
+        #Newvehicle-form label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        /* Input and select field styling */
+        #Newvehicle-form input, 
+        #Newvehicle-form select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Description styling */
+        #Newvehicle-form .description {
+            flex: 1 1 100%; /* Makes the description take up the entire row */
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px; /* Add some margin above the description */
+        }
+
+        #Newvehicle-form .description textarea {
+            width: 100%; /* Ensures the textarea covers the full width */
+            padding: 10px;
+            height: 150px; /* Sets height similar to the one in your image */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none; /* Allows users to resize the height */
+        }
+
+        #Newvehicle-form button{
+            color: #4CAF50;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            background-color: white;
+            text-align: center;
+            margin: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        #Newvehicle-form button:hover{
+            color: white;
+            border: 2px solid #4CAF50;
+            background-color: #4CAF50;
+        }
+        /* For smaller screens, stack the items vertically */
+        @media (max-width: 768px) {
+            #Newvehicle-form .col-md-4 {
+                flex: 1 1 100%;
+            }
+            .header h1{
+                font-size: 20px;
+                text-align: center;
+            }
+            #vehicleAddForm{
+                padding-top: 10px;
+                padding-left: 2px;
+                margin-left: 1px;
+            }
+            .uploadBtn{
+                padding-left: 2px;
+                margin-left: 1px;
+            }
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dealer-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .card{
+            color: black;
+            background-color: rgba(3, 0, 0, 0.2);
+        }
+        .card:hover{
+            border: 2px solid black;
+        }
+        /*style for the vehicle card buttons*/
+        .actionBtn a{  
+            margin-bottom: 5px; /* Adjust the value as needed */  
+        }
+        .actionBtn .btn{
+            margin-bottom: 5px;
+        }
+        .uploadBtn{
+            padding-left: 50px;
+            margin-left: 15px;
+        }
+        .FlashBtn{
+            color: green;
+            padding: 10px;
+            border: 2px solid green;
+            border-radius: 4px;
+            background-color: white;
+        }
+        .notification-popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #323232;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 300px;
+            z-index: 1000;
+            animation: fadein 0.5s;
+        }
+
+        .notification-popup .notification-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 12px;
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; bottom: 0; }
+            to { opacity: 1; bottom: 20px; }
+        }
+        /* code for displazing the hamburger in smaller screens*/
+        
+        .hamburger {
+            display: none;
+            font-size: 28px;
+            background: none;
+            border: none;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        /* Hide sidebar by default on small screens */
+        @media (max-width: 768px) {
+            #sidebar {
+                display: none; /* Initially hidden */
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 250px;
+                height: 100%;
+                background-color: white;
+                z-index: 2000;
+                overflow-y: auto;
+                box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+                padding-left: 10px;
+            }
+
+            #sidebar.active {
+                display: block; /* Shown when active */
+            }
+            #sidebar.logo{
+                display: hidden;
+            }
+            .hamburger {
+                display: block;
+                z-index: 1000;
+                background-color: white;
+            }
+            .hamburger:hover{
+                background-color: white;
+                color: #323232;
+            }
+            .main_section{
+                margin-left: 0;
+                padding-left: 0;
+            }
+        }
+
+    </style>
+    </head>
+    <body>
+        <!--Top Navigation Bar-->
+        <nav class="custom-navbar">
+            <div class="navbar-top container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-auto img_logo">
+                        <a href="#" class="logo">
+                            <img src="images/magarisoko_2.jfif" alt="MagariSoko Logo">
+                            <span>MagariSoko</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--div class="header">
+                <h1>
+                    Hi<img src="images/social_logos/hi emoji.png" style="height: 50px; width: 50px;" alt="hi_emoji">,Welcome to the MagariSoko Admin Page.
+                </h1>
+            </div-->
+        </nav>
+        <button id="hamburger" class="hamburger">
+            &#9776;
+        </button>
+        <aside id="sidebar" class="sidebar">
+            <div class="logo">
+                <img src="images/magarisoko_2.jfif" alt="logo">
+                <h2>MagariSoko</h2>
+            </div>
+            <!-- Close Button for Mobile -->
+            <button id="closeSidebar" class="close-btn">&times;</button>
+            <ul class="links">
+                <hr class="divider_1">
+                <h4>Webpages</h4>
+                <li>
+                    <span class="material-icons">home</span>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <span class="material-icons">local_fire_department</span>
+                    <a href="trending.html">Trending</a>
+                </li>
+                <li>
+                    <span class="material-icons">car_rental</span>
+                    <a href="hire.html">CarHire</a>
+                </li>
+                <li>
+                    <span class="material-icons">handshake</span>
+                    <a href="join_us.html">Join Us</a>
+                </li>
+                <li >
+                    <span class="material-icons">group</span>
+                    <a href="about_us.html">About Us</a>
+                </li>
+                <hr>
+                <h4>Admin Tools</h4>
+                <div class="admin-tools">
+                    <li>
+                        <span class="material-icons"style="background-color: darkgray;">add</span>
+                        <a href="javascript:void(0)" onclick="togglePostTools();"style="background-color: white;">Post Vehicle</a>
+                        <div id="tools" class="hidden">
+                            <div class="list">
+                                <hr style="background-color: #f0f0f0;">
+                                <li><a href="#" onclick="showAddVehicle(); return false;">New Vehicle</a></li>
+                                <li><a href="#" onclick="showHireVehicle(); return false;">For Hire</a></li>
+                                <li><a href="#" onclick="showFlashVehicle(); return false;">Flash Sale</a></li>
+                                <li><a href="#" onclick="showapprovals(); return false;">Approvals</a></li>
+                            </div>
+                            <hr style="background-color: #ccc;">
+                        </div> 
+                    </li>
+                </div>
+                <li>
+                    <span class="material-icons" style="background-color: darkgray;">pageview</span>
+                    <a href="javascript:void(0)" onclick="toggleVehicleTypes();" style="background-color: white;">View vehicles</a>
+                    <div id="vehicle_types" class="hidden">
+                        <hr style="background-color: #fff; box-shadow: black;">
+                        <div class="list">
+                            <li><a href="#" onclick="showMagaris(); return false;">MagariSoko Vehicles</a></li>
+                            <li><a href="#" onclick="showFlashVehicles(); return false;">FlashSale Vehicles</a></li>
+                            <li><a href="#" onclick="showHireVehicles(); return false;">Hire Vehicles</a></li>  
+                            <li><a href="#" onclick="showDealerVehicles(); return false;">Dealer vehicles</a></li>
+                            <li><a href="#" onclick="showClientVehicles(); return false;">Clients Vehicles</a></li>
+                        </div>
+                    </div>
+                    <hr>  
+                </li>
+                <h4>Contributers</h4>
+                <li>
+                    <span class="material-icons">diversity_3</span>
+                    <a href="#" onclick="showDealers(); return false;">Dealers</a>
+                </li>
+                <li>
+                    <span class="material-icons">person</span>
+                    <a href="#" onclick="showUsers(); return false;">Clients</a>
+                </li>
+            </ul>
+        </aside> 
+        <!--Main Content Section-->
+        <main class="main_section"> 
+            <div class="main_content">  
+                <!-- Content will be dynamically inserted here -->
+                <!--Notification popup-->
+                <div id="notification" class="notification-popup" style="display:none;">
+                    <span id="notificationMessage"><img src="images/social_logos/hi emoji.png" style="height: 30px; width: 30px;" alt="hi_emoji">Welcome back, Admin</span>
+                    <button id="notification-close" class="notification-close" onclick="closepopup()">×</button>
+                </div>
+            </div>
+
+            <!-- Edit Dealer Modal -->
+            <div id="editDealerModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Edit Dealer</h2>
+                    <form id="editDealerForm">
+                        <input type="hidden" id="editDealerId">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="editDealerUsername">Username:</label>
+                                    <input type="text" id="editDealerUsername" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="editDealerEmail">Email:</label>
+                                    <input type="email" id="editDealerEmail" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="editDealerIdNo">ID Number:</label>
+                                    <input type="text" id="editDealerIdNo" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="editDealerPhoneNumber">Phone Number:</label>
+                                    <input type="text" id="editDealerPhoneNumber" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editDealerAddress">Address:</label>
+                            <textarea type="text" id="editDealerAddress" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+
+            <!--Edit MagariSoko vehicle-->
+            <div id="editVehicleModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Edit  Magari Vehicle</h2>
+                    <form id="editVehicleForm">
+                        <input type="hidden" id="editVehicleId">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editVehicleMake">Make:</label>
+                                    <input type="text" id="editVehicleMake" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editVehicleModel">Model:</label>
+                                    <input type="text" id="editVehicleModel" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editVehiclePrice">Price:</label>
+                                    <input type="text" id="editVehiclePrice" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="status">Status:</label>
+                                <select id="status" name="status" required>
+                                    <option value="Available">Available</option>
+                                    <option value="Sold">Sold</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="transmission">Transmission:</label>
+                                <select id="transmission" name="transmission" required>
+                                    <option value="Automatic">Automatic</option>
+                                    <option value="Manual">Manual</option>
+                                    <option value="CVT">Continuously Variable Transmission</option>
+                                    <option value="AMT">Automated Manual Transmission </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="kilometers">Kilometers:</label>
+                                <input type="text" id="kilometers" name="kilometers" placeholder="kilometers" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="color">Color:</label>
+                                <input type="text" id="color" name="color" placeholder="black" required>
+                            </div>
+                            <div class="col-md-4"> 
+                                <label for="Interior">Interior:</label>
+                                <input type="text" id="Interior" name="Interior" placeholder="black" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="dealer_name">Dealer Name:</label>
+                                <input type="text" id="dealer_name" name="dealer_name" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="phone_number">Phone Number:</label>
+                                <input type="text" id="phone_number" name="phone_number" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editVehicleFuel">Fuel Type:</label>
+                                    <input type="text" id="editVehicleFuel" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editVehicleEngine">Engine Capacity (CC):</label>
+                                    <input type="text" id="editVehicleEngine" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editVehicleDescription">Description:</label>
+                            <textarea id="editVehicleDescription" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+
+            <!--Edit Hire vehicle-->
+            <div id="editHireVehicleModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Edit Hire Vehicle</h2>
+                    <form id="editHireVehicleForm">
+                        <input type="hidden" id="editHireVehicleId">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editHireVehicleMake">Make:</label>
+                                    <input type="text" id="editHireVehicleMake" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editHireVehicleModel">Model:</label>
+                                    <input type="text" id="editHireVehicleModel" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editHireVehiclePrice">Price:</label>
+                                    <input type="text" id="editHireVehiclePrice" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="status">Status:</label>
+                                <select id="Hirestatus" name="status" required>
+                                    <option value="Available">Available</option>
+                                    <option value="Hired">Hired</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="transmission">Transmission:</label>
+                                <select id="Hiretransmission" name="transmission" required>
+                                    <option value="Automatic">Automatic</option>
+                                    <option value="Manual">Manual</option>
+                                    <option value="CVT">Continuously Variable Transmission</option>
+                                    <option value="AMT">Automated Manual Transmission </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="kilometers">Kilometers:</label>
+                                <input type="text" id="Hirekilometers" name="kilometers" placeholder="kilometers" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="color">Color:</label>
+                                <input type="text" id="Hirecolor" name="color" placeholder="black" required>
+                            </div>
+                            <div class="col-md-4"> 
+                                <label for="Interior">Interior:</label>
+                                <input type="text" id="HireInterior" name="Interior" placeholder="black" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="dealer_name">Dealer Name:</label>
+                                <input type="text" id="Hiredealer_name" name="dealer_name" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="phone_number">Phone Number:</label>
+                                <input type="text" id="Hirephone_number" name="phone_number" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editHireVehicleFuel">Fuel Type:</label>
+                                    <input type="text" id="editHireVehicleFuel" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editHireVehicleEngine">Engine Capacity (CC):</label>
+                                    <input type="text" id="editHireVehicleEngine" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editHireVehicleDescription">Description:</label>
+                            <textarea id="editHireVehicleDescription" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+
+
+            <!--Edit User-->
+            <div id="editUserModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Edit User</h2>
+                    <form id="editUserForm">
+                        <input type="hidden" id="editUserId">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="editUserUsername">Username:</label>
+                                    <input type="text" id="editUserUsername" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="editUserEmail">Email:</label>
+                                    <input type="email" id="editUserEmail" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+
+                            
+            <!--Edit Dealer vehicle-->
+            <div id="editDealerVehicleModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Edit Dealer Vehicle</h2>
+                    <form id="editDealerVehicleForm">
+                        <input type="hidden" id="editDealerVehicleId">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editDealerVehicleMake">Make:</label>
+                                    <input type="text" id="editDealerVehicleMake" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editDealerVehicleModel">Model:</label>
+                                    <input type="text" id="editDealerVehicleModel" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editDealerVehiclePrice">Price:</label>
+                                    <input type="text" id="editDealerVehiclePrice" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editDealerVehicleFuel">Fuel Type:</label>
+                                    <input type="text" id="editDealerVehicleFuel" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editDealerVehicleEngine">Engine Capacity (CC):</label>
+                                    <input type="text" id="editDealerVehicleEngine" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editDealerVehicleDescription">Description:</label>
+                            <textarea id="editDealerVehicleDescription" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+
+
+            <!--Edit Client vehicle-->
+            <div id="editClientVehicleModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Edit Client Vehicle</h2>
+                    <form id="editClientVehicleForm">
+                        <input type="hidden" id="editClientVehicleId">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editClientVehicleMake">Make:</label>
+                                    <input type="text" id="editClientVehicleMake" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editClientVehicleModel">Model:</label>
+                                    <input type="text" id="editClientVehicleModel" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editClientVehicleStatus">Status:</label>
+                                    <select id="status" name="status" class="form-control" required>
+                                        <option value="Available">Available</option>
+                                        <option value="Sold">Sold</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editClientVehiclePrice">Price:</label>
+                                    <input type="text" id="editClientVehiclePrice" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editClientVehicleKilometers">Kilometers:</label>
+                                    <input type="text" id="editClientVehicleKilometers" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editClientVehicleTransmission">Transmission:</label>
+                                    <select id="editClientVehicleTransmission" name="transmission" class="form-control" required>
+                                        <option value="Automatic">Automatic</option>
+                                        <option value="Manual">Manual</option>
+                                        <option value="CVT">Continuously Variable Transmission</option>
+                                        <option value="AMT">Automated Manual Transmission </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editClientVehicleColor">Color:</label>
+                                    <input type="text" id="editClientVehicleColor" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editClientVehicleInterior">Interior:</label>
+                                    <input type="text" id="editClientVehicleInterior" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editClientVehicleYear">Year:</label>
+                                    <input type="text" id="editClientVehicleYear" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editClientVehicleFuel">Fuel Type:</label>
+                                    <input type="text" id="editClientVehicleFuel" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editClientVehicleEngine">Engine Capacity (CC):</label>
+                                    <input type="text" id="editClientVehicleEngine" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editClientVehicle">Dealer:</label>
+                                    <input type="text" id="editClientName" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editClientVehiclePhoneNumber">Phone Number:</label>
+                                    <input type="text" id="editClientVehiclePhoneNumber" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editClientID">ID No:</label>
+                                    <input type="text" id="editClientID" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editClientVehicleEmail">Email:</label>
+                                    <input type="text" id="editClientVehicleEmail" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editClientVehicleDescription">Description:</label>
+                            <textarea id="editClientVehicleDescription" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+            <!--Flash Sale Modal-->
+            <div id="FlashModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Flash Sale Modal</h2>
+                    <form id="editFlashVehicleForm">
+                        <input type="hidden" id="editFlashVehicleId">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editFlashVehicleMake">Make:</label>
+                                    <input type="text" id="editFlashVehicleMake" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editFlashVehicleModel">Model:</label>
+                                    <input type="text" id="editFlashVehicleModel" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editFlashVehiclePrice">Price:</label>
+                                    <input type="text" id="editFlashVehiclePrice" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="NewVehiclePrice">New Price:</label>
+                                    <input type="text" id="NewVehiclePrice" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editFlashVehicleFuel">Fuel Type:</label>
+                                    <input type="text" id="editFlashVehicleFuel" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editFlashVehicleEngine">Engine Capacity (CC):</label>
+                                    <input type="text" id="editFlashVehicleEngine" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editFlashVehicleEngine">Engine Capacity (CC):</label>
+                                    <input type="text" id="editFlashVehicleEngine" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editFlashVehicleDescription">Description:</label>
+                            <textarea id="editFlashVehicleDescription" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+
+            <!--Edit MotorModal-->
+            <div id="FlashMotorModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Flash Sale Modal</h2>
+                    <form id="editFlashMotorForm">
+                        <input type="hidden" id="editFlashMotorId">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editFlashMotorMake">Make:</label>
+                                    <input type="text" id="editFlashMotorMake" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editFlashMotorModel">Model:</label>
+                                    <input type="text" id="editFlashMotorModel" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editFlashMotorPrice">Price:</label>
+                                    <input type="text" id="editFlashMotorPrice" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="NewMotorPrice">New Price:</label>
+                                    <input type="text" id="NewMotorPrice" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editFlashMotorFuel">Fuel Type:</label>
+                                    <input type="text" id="editFlashMotorFuel" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="editFlashMotorEngine">Engine Capacity (CC):</label>
+                                    <input type="text" id="editFlashMotorEngine" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="editFlashMotorDescription">Description:</label>
+                            <textarea id="editFlashMotorDescription" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <!--javaScripts for the page-->
+        <!-- Add this in your HTML file's <head> section or just before closing </body> -->
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- Bootstrap JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!--code for displaying the hamburger in smaller screens-->
+        
+        <!--Notification Popup -->
+        <script>
+            function shownotification() {
+                const notification = document.getElementById('notification');
+                notification.style.display = 'flex';
+
+                // Auto fade after 5 seconds
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 5000);
+            }
+
+            function closepopup() {
+                document.getElementById('notification').style.display = 'none';
+            }
+
+            // show notification on page load
+            window.addEventListener('load', ()=> {
+                shownotification();
+            });
+        </script>
+        <script>
+            const sidebar = document.getElementById('sidebar');
+            const hamburger = document.getElementById('hamburger');
+            const closeBtn = document.getElementById('closeSidebar');
+          
+            // Toggle sidebar on hamburger click
+            hamburger.addEventListener('click', (e) => {
+              e.stopPropagation(); // prevent triggering document click
+              sidebar.classList.toggle('active');
+            });
+          
+            // Close sidebar on close button click
+            closeBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              sidebar.classList.remove('active');
+            });
+          
+            // Close sidebar when clicking outside of it
+            document.addEventListener('click', (e) => {
+              if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+                sidebar.classList.remove('active');
+              }
+            });
+        </script>          
+        <!--js code for openning and closing the side bar-->
+        <script>
+            function toggleSidebar() {  
+                const sidebar = document.getElementById('sidebar');  
+                const mainContent = document.querySelector('.main_content');  
+                sidebar.classList.toggle('collapsed');  
+                mainContent.classList.toggle('expanded');  
+            }  
+
+            function closeSidebar() {  
+                const sidebar = document.getElementById('sidebar');  
+                const mainContent = document.querySelector('.main_content');  
+                sidebar.classList.add('collapsed');  
+                mainContent.classList.add('expanded');  
+            }  
+
+            function toggleVehicleTypes() {  
+                const vehicleTypes = document.getElementById('vehicle_types');  
+                vehicleTypes.classList.toggle('hidden');  
+            }  
+
+            function showAddVehicle() {  
+                // Your function implementation here  
+            }  
+
+            function showDealers() {  
+                // Your function implementation here  
+            }  
+            
+            // display pending subscriptions awaiting admin approval
+            async function showapprovals() {
+                try {
+                    const res = await fetch('/api/pending-subscriptions');
+                    const list = await res.json();
+
+                    let rows = '';
+                    list.forEach((item, index) => {
+                        const name = item.userId?.username || '';
+                        const phone = item.phone || item.userId?.phone_number || '';
+                        const plan = item.plan;
+                        const code = item.checkoutRequestID || '';
+                        rows += `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${name}</td>
+                                <td>${phone}</td>
+                                <td>${plan}</td>
+                                <td>${code}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-success approve-btn" data-id="${item._id}">Approve</button>
+                                    <button class="btn btn-sm btn-danger deny-btn" data-id="${item._id}">Deny</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    const content = `
+                        <div class="container">
+                            <h2 style="text-align: center; padding-top: 10px;">Pending Approvals</h2>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Phone No</th>
+                                            <th>Subscription</th>
+                                            <th>Mpesa Code</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${rows}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    `;
+
+                    updateMainContent(content);
+
+                    // attach handlers for action buttons
+                    document.querySelectorAll('.approve-btn').forEach(btn => {
+                        btn.addEventListener('click', async () => {
+                            const id = btn.dataset.id;
+                            if (confirm('Approve this subscription?')) {
+                                const r = await fetch(`/api/pending-subscriptions/${id}/approve`, { method: 'POST' });
+                                if (r.ok) {
+                                    alert('Approved');
+                                    showapprovals();
+                                } else {
+                                    alert('Failed to approve');
+                                }
+                            }
+                        });
+                    });
+
+                    document.querySelectorAll('.deny-btn').forEach(btn => {
+                        btn.addEventListener('click', async () => {
+                            const id = btn.dataset.id;
+                            if (confirm('Deny and remove this request?')) {
+                                const r = await fetch(`/api/pending-subscriptions/${id}/deny`, { method: 'POST' });
+                                if (r.ok) {
+                                    alert('Denied');
+                                    showapprovals();
+                                } else {
+                                    alert('Failed to deny');
+                                }
+                            }
+                        });
+                    });
+                } catch (error) {
+                    console.error('Error loading approvals:', error);
+                    updateMainContent('<p>Error loading approvals.</p>');
+                }
+            }
+            function showUsers() {  
+                // Your function implementation here  
+            }
+        </script>
+        <script>
+            function  togglePostTools(){ 
+                var vehicleTypes = document.getElementById('tools');  
+                if (vehicleTypes.classList.contains('show')) {  
+                    vehicleTypes.classList.remove('show');  
+                    vehicleTypes.classList.add('hidden');  
+                } else {  
+                    vehicleTypes.classList.remove('hidden');  
+                    vehicleTypes.classList.add('show');  
+                    vehicleTypes.scrollIntoView({ behavior: 'smooth', block: 'end' }); // Scroll to the element  
+                }  
+            }  
+        </script>  
+        <script>
+            function toggleVehicleTypes() { 
+                var vehicleTypes = document.getElementById('vehicle_types');  
+                if (vehicleTypes.classList.contains('show')) {  
+                    vehicleTypes.classList.remove('show');  
+                    vehicleTypes.classList.add('hidden');  
+                } else {  
+                    vehicleTypes.classList.remove('hidden');  
+                    vehicleTypes.classList.add('show');  
+                    vehicleTypes.scrollIntoView({ behavior: 'smooth', block: 'end' }); // Scroll to the element  
+                }  
+            }  
+        </script>
+        <script>
+            // Function to update main content based on selected Admin Tool  
+            function updateMainContent(content) {  
+                const mainContentDiv = document.querySelector('.main_content');  
+                mainContentDiv.innerHTML = content; // Set the content of main_content  
+            }  
+
+            //Functions for Admin Tools links  
+            function showAddVehicle() {  
+                const content = `  
+                <div id="vehicleAddForm">
+                    <h2 style="text-align:center;">Add New Vehicle</h2>
+                    <form id="Newvehicle-form" action="/api/magari" method="POST" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="vehicle_image">Upload Photos:</label>
+                                <input type="file" id="vehicle_image" name="dealer_vehicle_image" multiple required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="car-make">Car-make:</label>
+                                <select id="vehicle_make" name="vehicle_make" required>
+                                    <option value="Toyota">Toyota</option>
+                                    <option value="Nissan">Nissan</option>
+                                    <option value="BMW">BMW</option>
+                                    <option value="Subaru">Subaru</option>
+                                    <option value="Chevrolet">Chevrolet</option>
+                                    <option value="Mercedes">Mercedes</option>
+                                    <option value="Mazda">Mazda</option>
+                                    <option value="Mitsubishi">Mitsubishi</option>
+                                    <option value="Suzuki">Suzuki</option>
+                                    <option value="Lexus">Lexus</option>
+                                    <option value="Volkswagen">Volkswagen</option>
+                                    <option value="Audi">Audi</option>
+                                    <option value="Land Rover">Land Rover</option>
+                                    <option value="Honda">Honda</option>
+                                    <option value="Ford">Ford</option>
+                                    <option value="Hyundai">Hyundai</option>
+                                    <option value="Renault">Renault</option>
+                                    <option value="Daihatsu">Daihatsu</option>
+                                    <option value="Jeep">Jeep</option>
+                                    <option value="Porsche">Porsche</option>
+                                    <option value="Jaguar">Jaguar</option>
+                                    <option value="Peugeot">Peugeot</option>
+                                    <option value="Volvo">Volvo</option>
+                                    <option value="Isuzu">Isuzu</option>
+                                    <option value="Mobius">Mobius</option>
+                                    <option value="Bentley">Bentley</option>
+                                    <option value="Yamaha">Yamaha</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="car-model">Car-model:</label>
+                                <input type="text" id="vehicle_model" name="vehicle_model" placeholder="Model" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="yom">year:</label>
+                                <input type="text" id="vehicle_year" name="vehicle_year" placeholder="Year" required>
+                            </div>
+                            <div class="col-md-4"> 
+                                <label for="price">Price:</label>
+                                <input type="text" id="vehicle_price" name="vehicle_price" placeholder="Price" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="fuel">Type of Fuel:</label>
+                                <select id="type_of_fuel" name="type_of_fuel" required>
+                                    <option value="Petrol">Petrol</option>
+                                    <option value="Diesel">Diesel</option>
+                                    <option value="Electric">Electric</option>
+                                    <option value="Hybrid">Hybrid</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="engine">Engine(cc):</label>
+                                <input type="text" id="engine_capacity" name="engine_capacity" placeholder="Enter engine capacity" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="status">Status:</label>
+                                <select id="status" name="status" required>
+                                    <option value="Available">Available</option>
+                                    <option value="Sold">Sold</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="transmission">Transmission:</label>
+                                <select id="transimission" name="transmission" required>
+                                    <option value="Automatic">Automatic</option>
+                                    <option value="Manual">Manual</option>
+                                    <option value="CVT">Continuously Variable Transmission</option>
+                                    <option value="AMT">Automated Manual Transmission </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="kilometers">Kilometers:</label>
+                                <input type="text" id="kilometers" name="kilometers" placeholder="kilometers" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="color">Color:</label>
+                                <input type="text" id="color" name="color" placeholder="black" required>
+                            </div>
+                            <div class="col-md-4"> 
+                                <label for="Interior">Interior:</label>
+                                <input type="text" id="Interior" name="Interior" placeholder="black" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="dealer_name">Posted By:</label>
+                                <input type="text" id="dealer_name" name="dealer_name" value="MagariSoko" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="dealer_email">Dealer Email:</label>
+                                <input type="email" id="dealer_email" name="dealer_email" value="magariSoko@gmail.com" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="phone_number">Phone Number:</label>
+                                <input type="text" id="phone_number" name="phone_number" value="+245742743059" readonly>
+                            </div>
+                        </div>
+                        <div class="description">
+                            <label for="description">Description:</label>
+                            <textarea type="text" id="vehicle_description" rows="10" name="vehicle_description" placeholder="Vehicle Description"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Add Vehicle</button>
+                    </form>
+                </div>
+                `;  
+                updateMainContent(content);  
+
+                // Add event listener for form submission
+                document.getElementById('Newvehicle-form').addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    const formData = new FormData(this);
+
+                    fetch('/api/magari', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Vehicle has been posted successfully!');
+                            this.reset(); // Reset the form on success
+                        } else {
+                            throw new Error('Failed to post the vehicle');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while posting the vehicle. Please try again.');
+                    });
+                });
+            }
+
+            // Function to display form for posting a vehicle for hire 
+            function showHireVehicle() {  
+                const content = `  
+                <div id="vehicleAddForm">
+                    <h2 style="text-align:center;">New Vehicle For Hire</h2>
+                        <form id="Newvehicle-form" action="/api/magariHire" method="POST" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="vehicle_image">Upload Photos:</label>
+                                    <input type="file" id="vehicle_image" name="dealer_vehicle_image"  multiple required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="car-make">Car-make:</label>
+                                    <select id="vehicle_make" name="vehicle_make" required>
+                                        <option value="Toyota">Toyota</option>
+                                        <option value="Nissan">Nissan</option>
+                                        <option value="BMW">BMW</option>
+                                        <option value="Subaru">Subaru</option>
+                                        <option value="Chevrolet">Chevrolet</option>
+                                        <option value="Mercedes">Mercedes</option>
+                                        <option value="Mazda">Mazda</option>
+                                        <option value="Mitsubishi">Mitsubishi</option>
+                                        <option value="Suzuki">Suzuki</option>
+                                        <option value="Lexus">Lexus</option>
+                                        <option value="Volkswagen">Volkswagen</option>
+                                        <option value="Audi">Audi</option>
+                                        <option value="Land Rover">Land Rover</option>
+                                        <option value="Honda">Honda</option>
+                                        <option value="Ford">Ford</option>
+                                        <option value="Hyundai">Hyundai</option>
+                                        <option value="Renault">Renault</option>
+                                        <option value="Daihatsu">Daihatsu</option>
+                                        <option value="Jeep">Jeep</option>
+                                        <option value="Porsche">Porsche</option>
+                                        <option value="Jaguar">Jaguar</option>
+                                        <option value="Peugeot">Peugeot</option>
+                                        <option value="Volvo">Volvo</option>
+                                        <option value="Isuzu">Isuzu</option>
+                                        <option value="Mobius">Mobius</option>
+                                        <option value="Bentley">Bentley</option>
+                                        <option value="Yamaha">Yamaha</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="car-model">Car-model:</label>
+                                    <input type="text" id="vehicle_model" name="vehicle_model" placeholder="Model" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="yom">year:</label>
+                                    <input type="text" id="vehicle_year" name="vehicle_year" placeholder="Year" required>
+                                </div>
+                                <div class="col-md-4"> 
+                                    <label for="price">Price:</label>
+                                    <input type="text" id="vehicle_price" name="vehicle_price" placeholder="Price" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="fuel">Type of Fuel:</label>
+                                    <select id="type_of_fuel" name="type_of_fuel" required>
+                                        <option value="Petrol">Petrol</option>
+                                        <option value="Diesel">Diesel</option>
+                                        <option value="Electric">Electric</option>
+                                        <option value="Hybrid">Hybrid</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="engine">Engine(cc):</label>
+                                    <input type="text" id="engine_capacity" name="engine_capacity" placeholder="Enter engine capacity" required>
+                                </div>
+                                <div class="col-md-4">
+                                <label for="status">Status:</label>
+                                <select id="status" name="status" required>
+                                    <option value="Available">Available</option>
+                                    <option value="Hired">Hired</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="transmission">Transmission:</label>
+                                <select id="transimission" name="transmission" required>
+                                    <option value="Automatic">Automatic</option>
+                                    <option value="Manual">Manual</option>
+                                    <option value="CVT">Continuously Variable Transmission</option>
+                                    <option value="AMT">Automated Manual Transmission </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="kilometers">Kilometers:</label>
+                                <input type="text" id="kilometers" name="kilometers" placeholder="kilometers" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="color">Color:</label>
+                                <input type="text" id="color" name="color" placeholder="black" required>
+                            </div>
+                            <div class="col-md-4"> 
+                                <label for="Interior">Interior:</label>
+                                <input type="text" id="Interior" name="Interior" placeholder="black" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="dealer_name">Posted By:</label>
+                                <input type="text" id="dealer_name" name="dealer_name" value="MagariSoko" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="dealer_email">Dealer Email:</label>
+                                <input type="email" id="dealer_email" name="dealer_email" value="magariSoko@gmail.com" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="phone_number">Phone Number:</label>
+                                <input type="text" id="phone_number" name="phone_number" value="+245742743059" readonly>
+                            </div>
+                            </div>
+                            <div class="description">
+                                <label for="description">Description:</label>
+                                <textarea type="text" id="vehicle_description" rows="10" name="vehicle_description" placeholder="Vehicle Description"></textarea>
+                            </div>
+                            <div class="submit_btn">
+                                <button type="submit">Add Vehicle</button>
+                            </div>
+                        </form>
+                    </div>
+                `;  
+                updateMainContent(content);
+                
+                //event listener for the form submission
+                document.getElementById('Newvehicle-form').addEventListener('submit', function(event) {
+                    event.preventDefault(); //To prevent the default form submission
+
+                    const formData = new FormData(this);
+                    
+                    fetch('/api/magariHire', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Vehicle has been posted successfully!');
+                            this.reset();
+                        } else {
+                            throw new Error('Failed to post the vehicle');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred wheile postiong the vehicle. Please try again.');
+                    });
+                });
+            }  
+            function showViewVehicles() {  
+                const content = `  
+                    <h2>View Vehicles</h2>  
+                    <p>Here you can view all vehicles.</p>  
+                    <!-- Display vehicle data here (can be fetched via an API or database) -->  
+                `;  
+                updateMainContent(content);  
+            }
+
+
+            async function showDealers() {
+                try {
+                    const response = await fetch('/api/dealers');
+                    const dealers = await response.json();
+
+                    const dealerCards = dealers.map(dealer => `
+                        <div class="card">
+                            <h3>${dealer.username}</h3>
+                            <p>Phone Number: ${dealer.phone_number}</p>
+                            <p>Email: ${dealer.email}</p>
+                            <p>ID No: ${dealer.id_no}</p>
+                            <p>Address: ${dealer.address}</p>
+                            <div class="actionBtn">
+                                <button class="btn btn-warning edit-Dealer" style="width: 100px;" data-id="${dealer._id}">Edit</button>
+                                <button class="btn btn-danger delete-Dealer" style="width: 100px;" data-id="${dealer._id}">Delete</button>
+                            </div>
+                        </div>
+                    `).join('');
+
+                    const content = `
+                        <h2 style="text-align: center; font-weight: bold; padding-top: 10px;">Dealers</h2>
+                        <div class="dealer-list" style="justify-content: center;">
+                            ${dealerCards}
+                        </div>
+                    `;
+
+                    updateMainContent(content);
+                    //attach event listeners for edit and delete
+                    attachEventListeners();
+                } catch (error) {
+                    console.error('Error fetching dealers:', error);
+                    const errorContent = `
+                        <h2>Error</h2>
+                        <p>Unable to fetch dealer information. Please try again later.</p>
+                    `;
+                    updateMainContent(errorContent);
+                }
+
+                function attachEventListeners() {
+                    //Handle edit button click
+                    document.querySelectorAll('.edit-Dealer').forEach(button => {
+                        button.addEventListener('click', async function () {
+                            const dealerId = this.getAttribute('data-id');
+                            //Fetch dealer details and show edit modal
+                            const dealer = await fetchDealerDetailsById(dealerId);
+                            showEditDealerModal(dealer);
+                        });
+                    });
+
+                    //Fetch dealer details by Id
+                    async function fetchDealerDetailsById(dealerId) {
+                        try {
+                            const response = await fetch(`/api/dealers/${dealerId}`);
+                            if (!response.ok) {
+                                throw new Error('Failed to fetch dealer by ID');
+                            }
+                            return await response.json();
+                        } catch (error) {
+                            console.error('Error fetching dealer by ID:', error);
+                            return null;
+                        }
+                    }
+
+                    //show edit modal with dealer details
+                    function showEditDealerModal(dealer) {
+                        console.log('Populating modal with Dealer Details:',dealer);
+
+                        // Populate the edit modal with dealer data
+                        document.getElementById('editDealerId').value = dealer._id;
+                        document.getElementById('editDealerUsername').value = dealer.username;
+                        document.getElementById('editDealerPhoneNumber').value = dealer.phone_number;
+                        document.getElementById('editDealerEmail').value = dealer.email;
+                        document.getElementById('editDealerIdNo').value = dealer.id_no;
+                        document.getElementById('editDealerAddress').value = dealer.address;
+
+                        //Display Modal
+                        const modal = document.getElementById('editDealerModal');
+                        modal.style.display = 'block';
+
+                        //Close the modal when the close button is clicked
+                        const closeButton = modal.querySelector('.close');
+                        closeButton.addEventListener('click', function() {
+                            modal.style.display = 'none';
+                        });
+
+                        //Close the modal when the user clicks outside the modal
+                        window.addEventListener('click', function(event) {
+                            if (event.target === modal) {
+                                modal.style.display = 'none';
+                            }
+                        });
+                    }
+
+
+                    //Handle form submission to save changes
+                    document.getElementById('editDealerForm').addEventListener('submit', async function(event){
+                        event.preventDefault(); // To prevent default form submission
+                        const dealerId = document.getElementById('editDealerId').value;
+                        const updatedDealer = {
+                            username: document.getElementById('editDealerUsername').value,
+                            phone_number: document.getElementById('editDealerPhoneNumber').value,
+                            email: document.getElementById('editDealerEmail').value,
+                            id_no: document.getElementById('editDealerIdNo').value,
+                            address: document.getElementById('editDealerAddress').value
+                        };
+
+                        const response = await fetch(`/api/dealers/${dealerId}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(updatedDealer)
+                        });
+
+                        if (response.ok) {
+                            alert('Dealer updated successfully!');
+                            document.getElementById('editDealerModal').style.display = 'none';
+                        } else {
+                            alert('Failed to update dealer');
+                        }
+                    });
+
+                    //Handle delete button click
+                    document.querySelectorAll('.delete-Dealer').forEach(button => {
+                        button.addEventListener('click', async function () {
+                            const dealerId = this.getAttribute('data-id');
+                            const deletionConfirmation = confirm('Are you sure you want to delete this dealer?');
+                            if (deletionConfirmation) {
+                                try {
+                                    const response = await fetch(`/api/dealers/${dealerId}`, {
+                                        method: 'DELETE',
+                                    });
+
+                                    if (response.ok) {
+                                        alert('Dealer deleted successfully!');
+                                        showDealers(); // Refresh the dealer list
+                                    } else {
+                                        throw new Error('Failed to delete dealer');
+                                    }
+                                } catch (error) {
+                                    console.error('Error deleting dealer:', error);
+                                }
+                            }
+                        });
+                    });
+                }
+            }
+
+
+            async function showUsers() {
+                try{
+                    const response = await fetch('/api/users');
+                    const users = await response.json();
+
+                    const userCards = users.map((user, index) => {
+                        let cardHTML = '';
+                        
+                        // Start a new row after every 4th user
+                        if (index % 4 === 0) {
+                            if (index !== 0) {
+                                cardHTML += '</div>'; // Close previous row
+                            }
+                            cardHTML += '<div class="row">'; // Open new row
+                        }
+
+                        // Add the user card
+                        cardHTML += `
+                            <div class="col-md-3 mb-4">
+                                <div class="card" style="width:max-content; height: 100%; display: flex; flex-direction: column;">
+                                    <div class="card-body" style="flex: 1; display: flex; flex-direction: column;">
+                                        <h3 style=" font-size: 20px; margin-bottom: 10px; word-break: break-word;">${user.username}</h3>
+                                        <p style="flex: 1; word-break: break-word; margin-bottom: 15px;">Email: <br> ${user.email}</p>
+                                        <div class="actionBtn" style="display: flex; gap: 5px; margin-top: auto;">
+                                            <button class="btn btn-warning edit-user" style="flex: 1;" data-id="${user._id}">Edit</button>
+                                            <button class="btn btn-danger delete-user" style="flex: 1;" data-id="${user._id}">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        return cardHTML;
+                    }).join('');
+
+                    // Close the final row if it exists
+                    const finalCards = users.length > 0 ? userCards + '</div>' : userCards;
+
+                    const content = `
+                        <h2 style="text-align: center; font-weight: bold; padding-top: 10px;">MagariSoko Users</h2>
+                            <div class="dealer-list" style="justify-content: center;">
+                                <div class="container">
+                                    ${finalCards}
+                                </div>
+                            </div>
+                    `;
+                    updateMainContent(content);
+
+                    //Attach event listeners for edit and delete 
+                    attachEventListeners();
+                } catch (error) {
+                    console.error('Error fetching Users:', error);
+                    const errorContent = `
+                        <h2>Error</h2>
+                        <p>Unable to fetch user information. Please try again later.</p>
+                    `;
+                    updateMainContent(errorContent);
+                }
+
+                function attachEventListeners() {
+                    //Handle edit button click
+                    document.querySelectorAll('.edit-user').forEach(button => {
+                        button.addEventListener('click', async function () {
+                            const userId = this.getAttribute('data-id');
+                            //Fetch user details and show edit modal
+                            const user = await fetchUserById(userId);
+                            showUserEditModal(user);
+                        });
+                    });
+
+                    //Fetch User Details for editing purposes
+                    async function fetchUserById(userId) {
+                        try {
+                            const response = await fetch(`/api/users/${userId}`);
+                            if (!response.ok) {
+                                throw new Error('Failed to fetch user details');
+                            }
+                            return await response.json();
+                        }catch (error) {
+                            console.error('Error fetching User by ID:', error);
+                            return null;
+                        }
+                    }
+
+                    //Show edit modal with User details
+                    function showUserEditModal(user) {
+                        console.log('Populating modal with user details:', user);
+
+                        document.getElementById('editUserId').value = user._id || '';
+                        document.getElementById('editUserUsername').value = user.username || '';
+                        document.getElementById('editUserEmail').value = user.email || '';
+
+                        //Display the modal 
+                        const modal = document.getElementById('editUserModal');
+                        modal.style.display = 'block';
+
+                        //Close modal when the close button is clicked
+                        const closeButton = modal.querySelector('.close');
+                        closeButton.addEventListener('click', function() {
+                            modal.style.display = 'none';
+                        });
+
+                        //Close modal when clicking outside the modal content
+                        window.addEventListener('click', (event) => {
+                            if (event.target === modal) {
+                                modal.style.display = 'none';
+                            }
+                        });
+                    }
+
+                    //Handle form submission to save the changes
+                    document.getElementById('editUserModal').addEventListener('submit', async function(event) {
+                        event.preventDefault(); //Prevent default form submission
+                        const userId = document.getElementById('editUserId').value;
+                        console.log('Vehicle ID being submitted:', userId);
+
+                        if (!userId) {
+                            alert('UserID is missing. Cannot update user.');
+                            return;
+                        }
+                        const updatedUser = {
+                            username: document.getElementById('editUserUsername').value,
+                            email: document.getElementById('editUserEmail').value,
+                        };
+
+                        const response = await fetch(`/api/users/${userId}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(updatedUser)
+                        });
+
+                        if (response.ok) {
+                            alert('User updated successfully!');
+                            document.getElementById('editUserModal').style.display = 'none';
+                        } else {
+                            alert('Failed to update User');
+                        }
+                    });
+
+
+                    //Handle delete button click
+                    document.querySelectorAll('.delete-user').forEach(button => {
+                        button.addEventListener('click', async function () {
+                            const userId = this.getAttribute('data-id');
+                            const deletionConfirmation = confirm('Are you sure you want to delete this user?');
+                            if (deletionConfirmation) {
+                                fetch(`/api/users/${userId}`, {
+                                    method: 'DELETE',
+                                })
+                                .then(response => {
+                                    if (response.ok) {
+                                        //Remove the user from the DOM
+                                        this.closest('.col-md-12').remove();
+                                    } else {
+                                        alert('Failed to delete user');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error deleting user:', error);
+                                    alert('An error occurred while deleting the user. Please try again.');
+                                });
+                            }
+                        });
+                    });
+                }
+            }
+
+            async function showMagaris() {
+                try {
+                    const response = await fetch('/api/magari');
+
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch vehicle data');
+                    }
+
+                    const magari = await response.json();
+
+                    // Create the rows and columns dynamically
+                    let magariCards = '';
+                    magari.forEach((vehicle, index) => {
+                        // Start a new row after every 3rd vehicle
+                        if (index % 3 === 0) {
+                            if (index !== 0) {
+                                magariCards += '</div>'; // Close the previous row
+                            }
+                            magariCards += '<div class="row">'; // Open a new row for every 3 vehicles
+                        }
+
+                        // Add each vehicle card in a col-md-4 column
+                        magariCards += `
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <img src="${vehicle.vehicle_images[0]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><strong>${vehicle.vehicle_make} ${vehicle.vehicle_model}</strong></h5>
+                                        <p class="card-text"><strong>Price:</strong> ${vehicle.vehicle_price.toLocaleString()}</p>
+                                        <p class="card-text"><strong>Fuel:</strong> ${vehicle.type_of_fuel}</p>
+                                        <p class="card-text"><strong>Engine:</strong> ${vehicle.engine_capacity} CC</p>
+                                        <p class="card-text"><strong>Description:</strong><br> ${vehicle.vehicle_description}</p>
+                                        <div class="actionBtn">
+                                            <button class="btn btn-warning edit-vehicle" data-id="${vehicle._id}">Edit</button>
+                                            <button class="btn btn-danger deleteMagari-vehicle" data-id="${vehicle._id}">Delete</button>
+                                            <a href="/car_details.html?vehicleId=${vehicle._id}" class="btn btn-primary">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    // Close the final row if it exists
+                    if (magari.length % 3 !== 0) {
+                        magariCards += '</div>';
+                    }
+
+                    const content = `
+                        <h2 style="text-align: center; font-weight: bold; padding-top: 10px;">MagariSoko Vehicles</h2>
+                        <div class="container">
+                            ${magariCards}
+                        </div>
+                    `;
+
+                    updateMainContent(content);
+
+                    // Attach event listeners for edit and delete buttons
+                    attachEventListeners();
+                } catch (error) {
+                    console.error('Error fetching vehicles:', error);
+                    const errorContent = `
+                        <h2 style="margin-top: 10px;">Error</h2>
+                        <p>Unable to fetch dealer Vehicles. Please try again later.  Error Details: ${error.message}</p>
+                    `;
+                    updateMainContent(errorContent);
+                }
+                
+                function attachEventListeners() {
+                    // Handle edit button click
+                    document.querySelectorAll('.edit-vehicle').forEach(button => {
+                        button.addEventListener('click', async function () {
+                            const vehicleId = this.getAttribute('data-id');
+                            // Fetch vehicle details and show edit modal
+                            const vehicle = await fetchVehicleById(vehicleId);
+                            console.log(vehicle)
+                            showEditModal(vehicle);
+                        });
+                    });
+
+                    //Fetch vehicle details by Id
+                    async function fetchVehicleById(vehicleId) {
+                        try {
+                            const response = await fetch(`/api/magari/${vehicleId}`);
+                            if (!response.ok) {
+                                throw new Error('Failed to fetch vehicle details');
+                            }
+                            return await response.json();
+                        } catch (error) {
+                            console.error('Error fetching vehicle by ID:', error);
+                            return null;
+                        }
+                    }
+
+                    // Show edit modal with vehicle details
+                    function showEditModal(data) {
+                        const vehicle = data.vehicle;
+
+                        console.log('Populating modal with vehicle:', vehicle);
+
+                        // Ensure the nested `vehicle` object exists
+                        if (!vehicle || typeof vehicle !== 'object') {
+                            console.error('Invalid vehicle data:', vehicle);
+                            return;
+                        }
+
+                        // Populate modal fields with the correct property names
+                        document.getElementById('editVehicleId').value = vehicle._id || 'N/A';
+                        document.getElementById('editVehicleMake').value = vehicle.vehicle_make || 'N/A';
+                        document.getElementById('editVehicleModel').value = vehicle.vehicle_model || '';
+                        document.getElementById('editVehiclePrice').value = vehicle.vehicle_price || '';
+                        document.getElementById('status').value = vehicle.status || '';
+                        document.getElementById('transmission').value = vehicle.transmission || '';
+                        document.getElementById('color').value = vehicle.color || '';
+                        document.getElementById('Interior').value = vehicle.Interior || '';
+                        document.getElementById('dealer_name').value = vehicle.dealer_name || '';
+                        document.getElementById('kilometers').value = vehicle.kilometers || '';
+                        document.getElementById('phone_number').value = vehicle.phone_number || '';
+                        document.getElementById('editVehicleFuel').value = vehicle.type_of_fuel || '';
+                        document.getElementById('editVehicleEngine').value = vehicle.engine_capacity || '';
+                        document.getElementById('editVehicleDescription').value = vehicle.vehicle_description || '';
+
+                        console.log('Modal fields being populated:', {
+                            id: document.getElementById('editVehicleId').value, 
+                            make: document.getElementById('editVehicleMake').value,
+                            model: document.getElementById('editVehicleModel').value,
+                            price: document.getElementById('editVehiclePrice').value, 
+                            fuel: document.getElementById('editVehicleFuel').value,
+                            engine: document.getElementById('editVehicleEngine').value,
+                            description: document.getElementById('editVehicleDescription').value,
+                            status: document.getElementById('status').value,
+                            transmission: document.getElementById('transmission').value,
+                            color: document.getElementById('color').value,
+                            Interior:  document.getElementById('Interior').value,
+                            kilometers: document.getElementById('kilometers').value,
+                            dealer_name: document.getElementById('dealer_name').value,
+                            phone_number: document.getElementById('phone_number').value
+
+                        });
+
+                        // Display the modal
+                        const modal = document.getElementById('editVehicleModal');
+                        if (!modal) {
+                            console.error('Modal element not found');
+                            return;
+                        }
+                        modal.style.display = 'block';
+                        console.log('Modal set to block');
+
+                        // Close modal when the close button is clicked
+                        const closeButton = modal.querySelector('.close');
+                        closeButton.addEventListener('click', () => {
+                            modal.style.display = 'none';
+                        });
+
+                        // Close modal when clicking outside the modal content
+                        window.addEventListener('click', (event) => {
+                            if (event.target === modal) {
+                                modal.style.display = 'none';
+                            }
+                        });
+                    }
+
+                    //Handle form submission to save changes
+                    document.getElementById('editVehicleForm').addEventListener('submit', async function(event) {
+                        event.preventDefault(); // Prevent default form submission
+                        const vehicleId = document.getElementById('editVehicleId').value;
+                        console.log('Vehicle ID being submitted:', vehicleId); // Debugging log
+
+                        if (!vehicleId) {
+                            alert('Vehicle ID is missing. Cannot update vehicle.');
+                            return;
+                        }
+
+                        const updatedVehicle = {
+                            vehicle_make: document.getElementById('editVehicleMake').value,
+                            vehicle_model: document.getElementById('editVehicleModel').value,
+                            vehicle_price: document.getElementById('editVehiclePrice').value,
+                            type_of_fuel: document.getElementById('editVehicleFuel').value,
+                            engine_capacity: document.getElementById('editVehicleEngine').value,
+                            vehicle_description: document.getElementById('editVehicleDescription').value,
+                            status: document.getElementById('status').value,
+                            transmission: document.getElementById('transmission').value,
+                            color: document.getElementById('color').value,
+                            Interior:  document.getElementById('Interior').value,
+                            kilometers: document.getElementById('kilometers').value,
+                            dealer_name: document.getElementById('dealer_name').value,
+                            phone_number: document.getElementById('phone_number').value
+                        };
+
+                        const response = await fetch(`/api/magariEdits/${vehicleId}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(updatedVehicle)
+                        });
+
+                        if (response.ok) {
+                            alert('Vehicle updated successfully!');
+                            document.getElementById('editVehicleModal').style.display = 'none';
+                        } else {
+                            alert('Failed to update vehicle');
+                        }
+                    });
+
+
+                    //Handle delete button click for MagariSoko vehicles
+                    document.querySelectorAll('.deleteMagari-vehicle').forEach(button => {
+                        button.addEventListener('click', function () {
+                            const vehicleId = this.getAttribute('data-id');
+                            const deleteConfirm = confirm('Are you sure you want to delete this vehicle?');
+                            if (deleteConfirm) {
+                                fetch(`/api/magari/${vehicleId}`, {
+                                    method: 'DELETE'
+                                })
+                                .then(response => {
+                                    if (response.ok) {
+                                        //Remove the vehicle from the DOM
+                                        this.closest('.col-md-4').remove();
+                                    } else {
+                                        alert('Failed to delete vehicle');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error deleting vehicle:', error);
+                                    alert('An error occurred while deleting the vehicle. Please try again.');
+                                });
+                            }
+                        });
+                    });
+                }
+            }
+
+            //Handle the showing of Client Vehicles and editing of the vehicle
+            async function showClientVehicles() {
+                try{
+                    const response = await fetch('api/vehicles');
+
+                    if(!response.ok) {
+                        throw new Error('Failed to fetch vehicle data');
+                    }
+
+                    const vehicles = await response.json();
+
+                    //Create the rows and columns dynamically
+                    let vehicleCards = '';
+                    vehicles.forEach((vehicle, index) =>{
+                        //start a new row after every 3rd vehicle
+                        if (index % 3 === 0) {
+                            if(index !== 0){
+                                vehicleCards += '</div>';
+                            }
+                            vehicleCards += '<div class="row">';
+                        }
+
+                        //add each vehicle card in a col-md-4 column
+                        vehicleCards += `
+                        <div class ="col-md-4">
+                            <div class="card">
+                                <img src="${vehicle.vehicle_images[1]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                <div class="card-body">
+                                        <h5 class="card-title"><strong>${vehicle.vehicle_make} ${vehicle.vehicle_model}</strong></h5>
+                                        <p class="card-text"><strong>Price:</strong> ${vehicle.vehicle_price.toLocaleString()}</p>
+                                        <p class="card-text"><strong>Fuel:</strong> ${vehicle.type_of_fuel}</p>
+                                        <p class="card-text"><strong>Engine:</strong> ${vehicle.engine_capacity} CC</p>
+                                        <p class="card-text"><strong>Dealer:</strong> ${vehicle.dealer_name}</p>
+                                        <p class="card-text"><strong>Phone Number:</strong> ${vehicle.phone_number}</p>
+                                        <p class="card-text"><strong>Description:</strong><br> ${vehicle.vehicle_description}</p>
+                                        <div class="actionBtn">
+                                            <button class="btn btn-warning edit-Clientvehicle" data-id="${vehicle._id}">Edit</button>
+                                            <button class="btn btn-danger deleteClient-vehicle" data-id="${vehicle._id}">Delete</button>
+                                            <a href="/car_details.html?vehicleId=${vehicle._id}" class="btn btn-primary">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+                    });
+
+                    if (vehicles.length % 3 !== 0) {
+                        vehicleCards += '</div>';
+                    }
+
+                    const content = `
+                    <h2 style="text-align: center; font-weight: bold;  padding-top: 10px;">Vehicles Posted by Clients</h2>
+                        <div class="container">
+                            ${vehicleCards}
+                        </div>
+                    `;
+
+                    updateMainContent(content);
+
+                    // Attach event listeners for edit and delete buttons
+                    attachEventListeners();
+                } catch (error) {
+                    console.error('Error fetching vehicles:', error);
+                    const errorContent = `
+                    <h2 style="margin-top:  10px;">Error</h2>
+                    <p>Unable to fetch Client vehicles. Please try again later. </p>
+                    `;
+                    updateMainContent(errorContent);
+                }
+
+                function attachEventListeners() {
+                //Handle edit button click
+                document.querySelectorAll('.edit-Clientvehicle').forEach(button => {
+                    console.log('Attaching click event to:', button);
+                    button.addEventListener('click', async function () {
+                        const vehicleId = this.getAttribute('data-id');
+                        const vehicle = await fetchVehicleById(vehicleId);
+                        showClientVehicleEditModal(vehicle);
+                    });
+                });
+
+
+                //Fetch vehicle details by Id
+                async function fetchVehicleById(vehicleId) {
+                    try {
+                        const response = await fetch(`/api/vehicles/${vehicleId}`);
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch vehicle details');
+                        }
+                        const data = await response.json();
+                        console.log('Fetched vehicle data:', data);
+                        return data;
+                    } catch (error) {
+                        console.error('Error fetching vehicle by ID:', error);
+                    }
+                }
+
+
+                // Show edit modal with vehicle details
+                function showClientVehicleEditModal(data) {
+                    const vehicle = data.vehicle;
+                    console.log('Vehicle object received:', vehicle);
+
+                    //Ensure the nested `vehicle` objected exists
+                    if (!vehicle || typeof vehicle !== 'object') {
+                        console.error('Invalid vehicle data:', vehicle);
+                        return;
+                    }
+
+                    // Populate modal fields
+                    document.getElementById('editClientVehicleId').value = vehicle._id || '';
+                    document.getElementById('editClientVehicleMake').value = vehicle.vehicle_make || '';
+                    document.getElementById('editClientVehicleModel').value = vehicle.vehicle_model || '';
+                    document.getElementById('editClientVehiclePrice').value = vehicle.vehicle_price || '';
+                    document.getElementById('editClientVehicleKilometers').value = vehicle.kilometers || '';
+                    document.getElementById('editClientVehicleTransmission').value = vehicle.transmission || '';
+                    document.getElementById('editClientVehicleColor').value = vehicle.color || '';
+                    document.getElementById('editClientVehicleInterior').value = vehicle. Interior || '';
+                    document.getElementById('editClientVehicleYear').value = vehicle.vehicle_year || '';
+                    document.getElementById('editClientName').value = vehicle.dealer_name || '';
+                    document.getElementById('editClientVehiclePhoneNumber').value = vehicle.phone_number || '';
+                    document.getElementById('editClientVehicleEmail').value = vehicle. dealer_email || '';
+                    document.getElementById('status').value = vehicle.status || '';
+                    document.getElementById('editClientID').value = vehicle. dealer_id || '';
+                    document.getElementById('editClientVehicleFuel').value = vehicle.type_of_fuel || '';
+                    document.getElementById('editClientVehicleEngine').value = vehicle.engine_capacity || '';
+                    document.getElementById('editClientVehicleDescription').value = vehicle.vehicle_description || '';
+
+                    // Display the modal
+                    const modal = document.getElementById('editClientVehicleModal');
+                    if (!modal) {
+                        console.error('Modal element not found');
+                        return;
+                    }
+                    modal.style.display = 'block';
+                    console.log('Modal set to block');
+
+                    // Attach close functionality
+                    const closeButton = modal.querySelector('.close');
+                    closeButton.addEventListener('click', function () {
+                        modal.style.display = 'none';
+                    });
+
+                    window.addEventListener('click', (event) => {
+                        if (event.target === modal) {
+                            modal.style.display = 'none';
+                        }
+                    });
+                }
+
+
+                // Handle form submission to save changes
+                document.getElementById('editClientVehicleForm').addEventListener('submit', async function(event) {
+                    event.preventDefault(); // Prevent default form submission
+                    const vehicleId = document.getElementById('editClientVehicleId').value;
+                    const updatedVehicle = {
+                        vehicle_make: document.getElementById('editClientVehicleMake').value,
+                        vehicle_model: document.getElementById('editClientVehicleModel').value,
+                        vehicle_price: document.getElementById('editClientVehiclePrice').value,
+                        type_of_fuel: document.getElementById('editClientVehicleFuel').value,
+                        engine_capacity: document.getElementById('editClientVehicleEngine').value,
+                        vehicle_description: document.getElementById('editClientVehicleDescription').value,
+                        kilometers: document.getElementById('editClientVehicleKilometers').value,
+                        vehicle_year: document.getElementById('editClientVehicleYear').value,
+                        status: document.getElementById('status').value,
+                        transmission: document.getElementById('editClientVehicleTransmission').value,
+                        color: document.getElementById('editClientVehicleColor').value,
+                        Interior: document.getElementById('editClientVehicleInterior').value,
+                    };
+
+                    try {
+                        const response = await fetch(`/api/vehicles/${vehicleId}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(updatedVehicle),
+                        });
+
+                        if (response.ok) {
+                            alert('Vehicle updated successfully!');
+                            document.getElementById('editClientVehicleModal').style.display = 'none';
+                        } else {
+                            throw new Error('Failed to update vehicle');
+                        }
+                    } catch (error) {
+                        console.error('Error updating vehicle:', error);
+                    }
+                });
+
+                    //Handle delete button click for client vehicles
+                    document.querySelectorAll('.deleteClient-vehicle').forEach(button => {
+                            button.addEventListener('click', function () {
+                                const vehicleId = this.getAttribute('data-id');
+                                const deleteConfirm = confirm('Are you sure you want to delete this vehicle?');
+                                if (deleteConfirm) {
+                                    fetch(`/api/vehicles/${vehicleId}`, {
+                                        method: 'DELETE'
+                                    })
+                                    .then(response => {
+                                        if (response.ok) {
+                                            //Remove the vehicle from the DOM
+                                            this.closest('.col-md-4').remove();
+                                        } else {
+                                            alert('Failed to delete vehicle');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error deleting vehicle:', error);
+                                        alert('An error occurred while deleting the vehicle. Please try again.');
+                                    });
+                                }
+                            });
+                    });
+                }
+            }
+
+            //Displaying and Editing the Dealer Vehicles
+            async function showDealerVehicles() {
+                try{
+                    const response = await fetch('/api/dealerVehicles');
+
+                    if (!response.ok){
+                        throw new Error('Failed to fetch vehicle data');
+                    }
+
+                    const dealerVehicles = await response.json();
+
+                    //Create the rows and columns dynamically
+                    let dealerVehicleCards = '';
+                    dealerVehicles.forEach((vehicle, index) =>{
+                        //start a new row after every 3rd vehicle
+                        if (index % 3 === 0) {
+                            if(index !== 0){
+                                dealerVehicleCards += '</div>';
+                            }
+                            dealerVehicleCards += '<div class="row">';
+                        }
+
+                        //add each vehicle card in a col-md-4 column
+                        dealerVehicleCards += `
+                            <div class ="col-md-4 mb-4">
+                                <div class="card">
+                                    <img src="${vehicle.vehicle_images[1]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><strong>${vehicle.vehicle_make} ${vehicle.vehicle_model}</strong></h5>
+                                        <p class="card-text"><strong>Price:</strong> ${vehicle.vehicle_price.toLocaleString()}</p>
+                                        <p class="card-text"><strong>Fuel:</strong> ${vehicle.type_of_fuel}</p>
+                                        <p class="card-text"><strong>Engine:</strong> ${vehicle.engine_capacity} CC</p>
+                                        <p class="card-text"><strong>Description:</strong><br> ${vehicle.vehicle_description}</p>
+                                        <div class="actionBtn">
+                                            <button class="btn btn-warning edit-vehicle" data-id="${vehicle._id}">Edit</button>
+                                            <button class="btn btn-danger delete-vehicle" data-id="${vehicle._id}">Delete</button>
+                                            <a href="/car_details.html?vehicleId=${vehicle._id}" class="btn btn-primary">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    //Close the finale row if it exists
+                    if (dealerVehicles.length % 3 !== 0) {
+                        dealerVehicleCards += '</div>';
+                    }
+
+                    const content = `
+                        <h2 style="text-align: center; font-weight: bold;  padding-top: 10px;">Vehicles Posted by Dealers</h2>
+                        <div class="container">
+                            ${dealerVehicleCards}
+                        </div>
+                    `;
+
+                    updateMainContent(content);
+
+                // Attach event listeners for edit and delete buttons
+                attachEventListeners();
+                } catch (error) {
+                console.error('Error fetching vehicles:', error);
+                const errorContent = `
+                    <h2 style="margin-top: 10px;">Error</h2>
+                    <p>Unable to fetch dealer Vehicles. Please try again later.  Error Details: ${error.message}</p>
+                `;
+                updateMainContent(errorContent);
+                }
+
+                function attachEventListeners() {
+                    // Handle edit button click
+                    document.querySelectorAll('.edit-vehicle').forEach(button => {
+                        button.addEventListener('click', async function () {
+                            const vehicleId = this.getAttribute('data-id');
+                            // Fetch vehicle details and show edit modal
+                            const vehicle = await fetchVehicleById(vehicleId);
+                            console.log(vehicle)
+                            showVehicleEditingModal(vehicle);
+                        });
+                    });
+
+                    //Fetch vehicle details by Id
+                    async function fetchVehicleById(vehicleId) {
+                        try {
+                            const response = await fetch(`/api/dealerVehicles/${vehicleId}`);
+                            if (!response.ok) {
+                                throw new Error('Failed to fetch vehicle by ID');
+                            }
+                            return await response.json();
+                        } catch (error){
+                            console.error('Error fetching vehicle by ID:', error);
+                            return null;
+                        }
+                    }
+
+                    // show the editing modal with vehicle details
+                    function showVehicleEditingModal(data) {
+                        const vehicle = data.vehicle; // Access the actual vehicle object
+
+                        console.log('Vehicle object received:', vehicle);
+
+                        // Ensure the nested `vehicle` object exists
+                        if (!vehicle || typeof vehicle !== 'object') {
+                            console.error('Invalid vehicle data:', vehicle);
+                            return;
+                        }
+
+                        // Populate modal fields with data from the vehicle object
+                        document.getElementById('editDealerVehicleId').value = vehicle._id || '';
+                        document.getElementById('editDealerVehicleMake').value = vehicle.vehicle_make || '';
+                        document.getElementById('editDealerVehicleModel').value = vehicle.vehicle_model || '';
+                        document.getElementById('editDealerVehiclePrice').value = vehicle.vehicle_price || '';
+                        document.getElementById('editDealerVehicleFuel').value = vehicle.type_of_fuel || '';
+                        document.getElementById('editDealerVehicleEngine').value = vehicle.engine_capacity || '';
+                        document.getElementById('editDealerVehicleDescription').value = vehicle.vehicle_description || '';
+
+                        console.log('Modal fields populated:', {
+                            id: document.getElementById('editDealerVehicleId').value,
+                            make: document.getElementById('editDealerVehicleMake').value,
+                            model: document.getElementById('editDealerVehicleModel').value,
+                            price: document.getElementById('editDealerVehiclePrice').value,
+                            fuel: document.getElementById('editDealerVehicleFuel').value,
+                            engine: document.getElementById('editDealerVehicleEngine').value,
+                            description: document.getElementById('editDealerVehicleDescription').value,
+                        });
+
+                        // Display the modal
+                        const modal = document.getElementById('editDealerVehicleModal');
+                        modal.style.display = 'block';
+
+                        // Close modal when the close button is clicked
+                        const closeButton = modal.querySelector('.close');
+                        closeButton.addEventListener('click', function () {
+                            modal.style.display = 'none';
+                        });
+
+                        // Close modal when clicking outside of the modal content
+                        window.addEventListener('click', (event) => {
+                            if (event.target === modal) {
+                                modal.style.display = 'none';
+                            }
+                        });
+                    }
+
+                    //Handle form submission to save changes
+                    document.getElementById('editDealerVehicleForm').addEventListener('submit', async function(event) {
+                        event.preventDefault(); // Prevent default form submission
+                        const vehicleId = document.getElementById('editDealerVehicleId').value;
+                        const updatedVehicle = {
+                            vehicle_make: document.getElementById('editDealerVehicleMake').value,
+                            vehicle_model: document.getElementById('editDealerVehicleModel').value,
+                            vehicle_price: document.getElementById('editDealerVehiclePrice').value,
+                            type_of_fuel: document.getElementById('editDealerVehicleFuel').value,
+                            engine_capacity: document.getElementById('editDealerVehicleEngine').value,
+                            vehicle_description: document.getElementById('editDealerVehicleDescription').value,
+                        };
+
+                        try {
+                            const response = await fetch(`/api/dealerVehicles/${vehicleId}`, {
+                                method: 'PUT',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(updatedVehicle),
+                            });
+
+                            if (response.ok) {
+                                alert('Vehicle updated successfully!');
+                                document.getElementById('editDealerVehicleModal').style.display = 'none';
+                            } else {
+                                throw new Error('Failed to update vehicle');
+                            }
+                        } catch (error) {
+                            console.error('Error updating vehicle:', error);
+                        }
+                    });
+
+
+                    //Handle delete button click for MagariSoko vehicles
+                    document.querySelectorAll('.delete-vehicle').forEach(button => {
+                        button.addEventListener('click', function () {
+                            const vehicleId = this.getAttribute('data-id');
+                            const deleteConfirm = confirm('Are you sure you want to delete this vehicle?');
+                            if (deleteConfirm) {
+                                fetch(`/api/dealerVehicles/${vehicleId}`, {
+                                    method: 'DELETE'
+                                })
+                                .then(response => {
+                                    if (response.ok) {
+                                        //Remove the vehicle from the DOM
+                                        this.closest('.col-md-4').remove();
+                                    } else {
+                                        alert('Failed to delete vehicle');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error deleting vehicle:', error);
+                                    alert('An error occurred while deleting the vehicle. Please try again.');
+                                });
+                            }
+                        });
+                    });
+                }
+            }
+        </script>
+        <script>
+            async function showHireVehicles() {
+                try{
+                    const response = await fetch('/api/magariHire');
+
+                    if(!response.ok) {
+                        throw new Error('Failed to fetch Vehicle data');
+                    }
+
+                    const magariHire = await response.json();
+                    
+                    //Create the rows and columns dynamically
+                    let magariHireCards = '';
+                    magariHire.forEach((vehicle, index) => {
+                        // Start a new row after every 3rd vehicle
+                        if (index % 3 === 0) {
+                            if(index !== 0) {
+                                magariHireCards += '</div>'; // Close the previous row
+                            }
+                            magariHireCards += '<div class="row">'; // Open a new row for every 3 vehicles
+                        }
+
+                        magariHireCards+= `
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <img src="${vehicle.vehicle_images[0]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><strong>${vehicle.vehicle_make} ${vehicle.vehicle_model}</strong></h5>
+                                        <p class="card-text"><strong>Price:</strong> ${vehicle.vehicle_price.toLocaleString()}</p>
+                                        <p class="card-text"><strong>Fuel:</strong> ${vehicle.type_of_fuel}</p>
+                                        <p class="card-text"><strong>Engine:</strong> ${vehicle.engine_capacity} CC</p>
+                                        <p class="card-text"><strong>Description:</strong><br> ${vehicle.vehicle_description}</p>
+                                        <div class="actionBtn">
+                                            <button class="btn btn-warning editHvehicle" data-id="${vehicle._id}">Edit</button>
+                                            <button class="btn btn-danger deleteHire-vehicle" data-id="${vehicle._id}">Delete</button>
+                                            <a href="/car_details.html?vehicleId=${vehicle._id}" class="btn btn-primary">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    // Close the final row if it exists
+                    if (magariHire.length % 3 !== 0) {
+                        magariHireCards += '</div>';
+                    }
+
+                    const content = `
+                        <h2 style="text-align: center; font-weight: bold;  padding-top: 10px;">Vehicles For Hire</h2>
+                        <div class="container">
+                            ${magariHireCards}
+                        </div>
+                    `;
+                    updateMainContent(content);
+                    //Attach event listeners for edit and delete 
+                    attachEventListeners();
+                } catch (error) {
+                    console.error('Error fetching vehicles:', error);
+                    const errorContent = `
+                        <h2>Error</h2>
+                        <p>Unable to fetch Hire Vehicles. Please try again later.</p>
+                    `;
+                    updateMainContent(errorContent);
+                }
+
+                function attachEventListeners() {
+                    //Handle edit button click
+                    document.querySelectorAll('.editHvehicle').forEach(button => {
+                        button.addEventListener('click', async function () {
+                            const vehicleId = this.getAttribute('data-id');
+                            //Fetch vehicle details and shoe edit modal
+                            const vehicle = await fetchVehicleById(vehicleId);
+                            showHireEditModal(vehicle);
+                        });
+                    });
+
+                    async function fetchVehicleById(vehicleId) {
+                            try {
+                                const response = await fetch(`/api/magariHire/${vehicleId}`);
+                                if (!response.ok){
+                                    throw new Error('Failed to fetch vehicle details');
+                                }
+                                return await response.json();
+                            } catch (error) {
+                                console.error('Error fetching vehicle:', error);
+                                return null;
+                            }
+                        }
+                        // Show edit modal (You can implement this modal in your HTML)
+                        function showHireEditModal(data) {
+                            const vehicle = data.vehicle;
+
+                            console.log('Populating modal with vehicle:', vehicle);
+
+                            // Ensure the nested `vehicle` object exists
+                            if (!vehicle || typeof vehicle !== 'object') {
+                                console.error('Invalid vehicle data:', vehicle);
+                                return;
+                            }
+
+                            // Populate the edit modal with vehicle data
+                            document.getElementById('editHireVehicleId').value = vehicle._id || '';
+                            document.getElementById('editHireVehicleMake').value = vehicle.vehicle_make || '';
+                            document.getElementById('editHireVehicleModel').value = vehicle.vehicle_model || '';
+                            document.getElementById('editHireVehiclePrice').value = vehicle.vehicle_price || '';
+                            document.getElementById('editHireVehicleFuel').value = vehicle.type_of_fuel || '';
+                            document.getElementById('Hirestatus').value = vehicle.status || '';
+                            document.getElementById('Hiretransmission').value = vehicle.transmission || '';
+                            document.getElementById('Hirekilometers').value = vehicle.kilometers || '';
+                            document.getElementById('Hirecolor').value = vehicle.color || '';
+                            document.getElementById('HireInterior').value = vehicle.Interior || '';
+                            document.getElementById('Hirephone_number').value = vehicle.phone_number || '';
+                            document.getElementById('Hiredealer_name').value = vehicle.dealer_name || '';
+                            document.getElementById('editHireVehicleEngine').value = vehicle.engine_capacity || '';
+                            document.getElementById('editHireVehicleDescription').value = vehicle.vehicle_description || '';
+
+                            // Display the Modal
+                            const modal = document.getElementById('editHireVehicleModal');
+                            modal.style.display = 'block';
+
+                            // Close modal when the close button is clicked
+                            const closeButton = modal.querySelector('.close');
+                            closeButton.addEventListener('click', function() {
+                                modal.style.display = 'none';
+                            });
+
+                            // Close modal when clicking outside of the modal content
+                            window.addEventListener('click', (event) => {
+                                if (event.target === modal) {
+                                    modal.style.display = 'none';
+                                }
+                            });
+                        }
+
+                    // Handle form submission to save changes
+                    document.getElementById('editHireVehicleForm').addEventListener('submit', async function(event) {
+                        event.preventDefault(); // Prevent default form submission
+                        const vehicleId = document.getElementById('editHireVehicleId').value;
+                        const updatedVehicle = {
+                            vehicle_make: document.getElementById('editHireVehicleMake').value,
+                            vehicle_model: document.getElementById('editHireVehicleModel').value,
+                            vehicle_price: document.getElementById('editHireVehiclePrice').value,
+                            type_of_fuel: document.getElementById('editHireVehicleFuel').value,
+                            engine_capacity: document.getElementById('editHireVehicleEngine').value,
+                            vehicle_description: document.getElementById('editHireVehicleDescription').value,
+                        };
+
+                        try {
+                            const response = await fetch(`/api/magariHire/${vehicleId}`, {
+                                method: 'PUT',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(updatedVehicle),
+                            });
+
+                            if (response.ok) {
+                                alert('Vehicle updated successfully!');
+                                document.getElementById('editHireVehicleModal').style.display = 'none';
+                            } else {
+                                throw new Error('Failed to update vehicle');
+                            }
+                        } catch (error) {
+                            console.error('Error updating vehicle:', error);
+                        }
+                    });
+
+                    //Handle delete button click for hire vehicles
+                    document.querySelectorAll('.deleteHire-vehicle').forEach(button => {
+                        button.addEventListener('click', function () {
+                            const vehicleId = this.getAttribute('data-id');
+                            const deleteConfirm = confirm('Are you sure you want to delete this vehicle?');
+                            if (deleteConfirm) {
+                                fetch(`/api/magariHire/${vehicleId}`, {
+                                    method: 'DELETE'
+                                })
+                                .then(response => {
+                                    if (response.ok) {
+                                        //Remove the vehicle from the DOM
+                                        this.closest('.col-md-4').remove();
+                                    } else {
+                                        alert('Failed to delete vehicle');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error deleting vehicle:', error);
+                                    alert('An error occurred while deleting the vehicle. Please try again.');
+                                });
+                            }
+                        });
+                    });
+                }
+            }
+        </script>
+        <script>
+            async function showFlashVehicle() {
+                try{
+                    const response = await fetch ('/api/magari');
+
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch vehicle data');
+                    }
+                    const magari = await response.json();
+
+                    // Create the rows and columns dynamically
+                    let magariCards = '';
+                    magari.forEach((vehicle, index) => {
+                        // Start a new row after every 3rd vehicle
+                        if (index % 3 === 0) {
+                            if (index !== 0) {
+                                magariCards += '</div>'; // Close the previous row
+                            }
+                            magariCards += '<div class="row">'; // Open a new row for every 3 vehicles
+                        }
+
+                        // Add each vehicle card in a col-md-4 column
+                        magariCards += `
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <label>
+                                        <input type="checkbox" data-id="${vehicle._id}" class="flash-sale-checkbox">
+                                        Mark as Flash Sale
+                                    </label>
+                                    <img src="${vehicle.vehicle_images[0]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><strong>${vehicle.vehicle_make} ${vehicle.vehicle_model}</strong></h5>
+                                        <p class="card-text"><strong>Price:</strong> ${vehicle.vehicle_price.toLocaleString()}</p>
+                                        <p class="card-text"><strong>Fuel:</strong> ${vehicle.type_of_fuel}</p>
+                                        <p class="card-text"><strong>Engine:</strong> ${vehicle.engine_capacity} CC</p>
+                                        <p class="card-text"><strong>Description:</strong><br> ${vehicle.vehicle_description}</p>
+                                        <div class="actionBtn">
+                                            <button class="btn btn-warning editFlashVehicle" data-id="${vehicle._id}">Edit</button>
+                                            <a href="/car_details.html?vehicleId=${vehicle._id}" class="btn btn-primary">View Details</a>
+                                            <button class="btn btn-danger deleteMagari-vehicle" data-id="${vehicle._id}">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    // Close the final row if it exists
+                    if (magari.length % 3 !== 0) {
+                        magariCards += '</div>';
+                    }
+
+                    const content = `
+                        <h2 style="text-align: center; font-weight: bold; padding-top: 10px;">Vehicles for Flash sale</h2>
+                        <div class="uploadBtn">
+                            <button onclick="saveFlashSaleSelection()" class="FlashBtn">Save Selection</button>
+                        </div>
+                        <div class="container">
+                            ${magariCards}
+                        </div>
+                    `;
+
+                    updateMainContent(content);
+
+                        // Attach event listeners for edit and delete buttons
+                        attachEventListeners();
+                } catch (error) {
+                    console.error('Error fetching vehicles:', error);
+                    const errorContent = `
+                        <h2 style="margin-top: 10px;">Error</h2>
+                    `;
+                    updateMainContent(errorContent);
+                }
+
+                function attachEventListeners() {
+                    //Handle edit button click
+                    document.querySelectorAll('.editFlashVehicle').forEach(button => {
+                        button.addEventListener('click', async function () {
+                            const vehicleId = this.getAttribute('data-id');
+                            // Fetch vehicle details and show edit modal
+                            const vehicle = await fetchVehicleById(vehicleId);
+                            console.log(vehicle)
+                            showFlashModal(vehicle);
+                        });
+                    });
+
+                    //Fetch vehicle details by Id
+                    async function fetchVehicleById(vehicleId) {
+                        try {
+                            const response = await fetch(`/api/magari/${vehicleId}`);
+                            if (!response.ok) {
+                                throw new Error('Failed to fetch vehicle details');
+                            }
+                            return await response.json();
+                        } catch (error) {
+                            console.error('Error fetching vehicle by ID:', error);
+                            return null;
+                        }
+                    }
+
+                    //show Flash Modal with vehicle details
+                    function showFlashModal(data) {
+                        const vehicle = data.vehicle;
+
+                        console.log('Populating modal with vehicle:', vehicle);
+
+                        // Ensure the nested `vehicle` object exists
+                        if (!vehicle || typeof vehicle !== 'object') {
+                            console.error('Invalid vehicle data:', vehicle);
+                            return;
+                        }
+
+                        // Populate modal fields with the correct property names
+                        document.getElementById('editFlashVehicleId').value = vehicle._id || 'N/A';
+                        document.getElementById('editFlashVehicleMake').value = vehicle.vehicle_make || 'N/A';
+                        document.getElementById('editFlashVehicleModel').value = vehicle.vehicle_model || '';
+                        document.getElementById('editFlashVehiclePrice').value = vehicle.vehicle_price || '';
+                        document.getElementById('editFlashVehicleFuel').value = vehicle.type_of_fuel || '';
+                        document.getElementById('editFlashVehicleEngine').value = vehicle.engine_capacity || '';
+                        document.getElementById('editFlashVehicleDescription').value = vehicle.vehicle_description || '';
+
+                        console.log('Modal fields being populated:', {
+                            id: document.getElementById('editFlashVehicleId').value,
+                            make: document.getElementById('editFlashVehicleMake').value,
+                            model: document.getElementById('editFlashVehicleModel').value,
+                            price: document.getElementById('editFlashVehiclePrice').value,
+                            fuel: document.getElementById('editFlashVehicleFuel').value,
+                            engine: document.getElementById('editFlashVehicleEngine').value,
+                            description: document.getElementById('editFlashVehicleDescription').value
+                        });
+
+                        // Display the modal
+                        const modal = document.getElementById('FlashModal');
+                        if (!modal) {
+                            console.error('Modal element not found');
+                            return;
+                        }
+                        modal.style.display = 'block';
+                        console.log('Modal set to block');
+
+                        // Close modal when the close button is clicked
+                        const closeButton = modal.querySelector('.close');
+                        closeButton.addEventListener('click', () => {
+                            modal.style.display = 'none';
+                        });
+
+                        // Close modal when clicking outside the modal content
+                        window.addEventListener('click', (event) => {
+                            if (event.target === modal) {
+                                modal.style.display = 'none';
+                            }
+                        });
+                    }
+                    //Handle delete button clicked for the flash vehicles 
+                    document.querySelectorAll('.deleteMagari-vehicle').forEach(button => {
+                        button.addEventListener('click', function () {
+                            const vehicleId = this.getAttribute('data-id');
+                            const deleteConfirm = confirm('Are you sure you want to Remove this vehicle from Queue?');
+                            if (deleteConfirm) {
+                                fetch(`/api/flash-sale/${vehicleId}`, {
+                                    method: 'DELETE'
+                                })
+                                .then(response => {
+                                    if (response.ok) {
+                                        //Remove the vehicle from the DOM
+                                        this.closest('.col-md-4').remove();
+                                    } else {
+                                        alert('Failed to delete vehicle');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error deleting vehicle:', error);
+                                    alert('An error occurred while deleting the vehicle. Please try again.');
+                                });
+                            }
+                        });
+                    });
+                }
+            }
+        </script>
+        <script>
+            // Fetching the Flash Sale Vehicles and displaying them in the view vehicle section
+            async function showFlashVehicles() {
+                try{
+                    const response = await fetch ('/api/flash-sale');
+
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch vehicle data');
+                    }
+                    const flashVehicles = await response.json();
+
+                    // Create the rows and columns dynamically 
+                    let FlashVehicleCards = '';
+                    flashVehicles.forEach((vehicle, index) => {
+                        // Start a new row after every 3rd vehicle
+                        if (index % 3 === 0) {
+                            if (index !== 0) {
+                                FlashVehicleCards += '</div>'; // Close the previous row
+                            }
+                            FlashVehicleCards += '<div class="row">'; // Open a new row for every 3 vehicles
+                        }
+
+                        // Add each vehicle card in a col-md-4 column
+                        FlashVehicleCards += `
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <img src="${vehicle.vehicle_images[0]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><strong>${vehicle.vehicle_make} ${vehicle.vehicle_model}</strong></h5>
+                                        <p class="card-text"><strong>Price:</strong> ${vehicle.vehicle_price.toLocaleString()}</p>
+                                        <p class="card-text"><strong>Fuel:</strong> ${vehicle.type_of_fuel}</p>
+                                        <p class="card-text"><strong>Engine:</strong> ${vehicle.engine_capacity} CC</p>
+                                        <p class="card-text"><strong>Description:</strong><br> ${vehicle.vehicle_description}</p>
+                                        <div class="actionBtn">
+                                            <button class="btn btn-warning editFlashMotor" data-id="${vehicle._id}">Edit</button>
+                                            <button class="btn btn-danger deleteFlashMotor" data-id="${vehicle._id}">Delete</button>
+                                            <a href="/car_details.html?vehicleId=${vehicle._id}" class="btn btn-primary">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    //close the final row if its exists
+                    if (flashVehicles.length % 3 !== 0) {
+                        FlashVehicleCards += '</div>';
+                    }
+
+                    const content = `
+                        <h2 style="text-align: center; font-weight: bold; padding-top: 10px;">Flash Sale Vehicles</h2>
+                        <div class="container">
+                            ${FlashVehicleCards}
+                        </div>
+                    `;
+
+                    updateMainContent(content);
+
+                    //Attach event listeners for edit and delete 
+                    attachEventListeners();
+                } catch (error) {
+                    console.error ('Error fetching vehicles:', error);
+                    const errorContent = `
+                        <h2 style="margin-top: 10px;">Error</h2>
+                        <p>Unable to fetch Flash Sale Vehicles. Please try again later. Error Details: ${error.message}</p>
+                    `;
+                    updateMainContent(errorContent);
+                }
+
+                function attachEventListeners(){
+                    //Handle edit button click
+                    document.querySelectorAll('.editFlashMotor').forEach(button => {
+                        button.addEventListener('click', async function () {
+                            const vehicleId = this.getAttribute('data-id');
+                            //Fetch vehicle details and show edit modal
+                            const vehicle = await fetchVehicleById(vehicleId);
+                            console.log(vehicle)
+                            showModalFlash(vehicle);
+                        });
+                    });
+
+                    //Fetch vehicle details by Id
+                    async function fetchVehicleById(vehicleId) {
+                        try {
+                            const response = await fetch(`/api/flash-sale/${vehicleId}`);
+                            if (!response.ok) {
+                                throw new Error('Failed to fetch vehicle details');
+                            }
+                            return await response.json();
+                        } catch (error) {
+                            console.error('Error fetching vehicle by ID:', error);
+                            return null;
+                        }
+                    }
+
+                    //Show Flash Modal with vehicle details
+                    function showModalFlash(data) {
+                        const vehicle = data.vehicle;
+
+                        console.log('Populating modal with vehicle:', vehicle);
+
+                        //Ensure the nested `vehicle` object exists
+                        if (!vehicle || typeof vehicle !== 'object') {
+                            console.error('Invalid vehicle data:', vehicle);
+                            return;
+                        }
+
+                        // Populate modal fields with the correct property names
+                        document.getElementById('editFlashMotorId').value = vehicle._id || 'N/A';
+                        document.getElementById('editFlashMotorMake').value = vehicle.vehicle_make || 'N/A';
+                        document.getElementById('editFlashMotorModel').value = vehicle.vehicle_model || '';
+                        document.getElementById('editFlashMotorPrice').value = vehicle.vehicle_price || '';
+                        document.getElementById('editFlashMotorFuel').value = vehicle.type_of_fuel || '';
+                        document.getElementById('editFlashMotorEngine').value = vehicle.engine_capacity || '';
+                        document.getElementById('editFlashMotorDescription').value = vehicle.vehicle_description || '';
+
+                        console.log('Modal fields being populated:', {
+                            id: document.getElementById('editFlashMotorId').value,
+                            make: document.getElementById('editFlashMotorMake').value,
+                            model: document.getElementById('editFlashMotorModel').value,
+                            price: document.getElementById('editFlashMotorPrice').value,
+                            fuel: document.getElementById('editFlashMotorFuel').value,
+                            engine: document.getElementById('editFlashMotorEngine').value,
+                            description: document.getElementById('editFlashMotorDescription').value
+                        });
+
+                        // Display the modal
+                        const modal = document.getElementById('FlashMotorModal');
+                        if (!modal) {
+                            console.error('Modal element not found');
+                            return;
+                        }
+                        modal.style.display = 'block';
+                        console.log('Modal set to block');
+
+                        // Close modal when the close button is clicked
+                        const closeButton = modal.querySelector('.close');
+                        closeButton.addEventListener('click', () => {
+                            modal.style.display = 'none';
+                        });
+
+                        // Close modal when clicking outside the modal content
+                        window.addEventListener('click', (event) => {
+                            if (event.target === modal) {
+                                modal.style.display = 'none';
+                            }
+                        });
+                    }
+
+                    //Handle form submission to save changes
+                    document.getElementById('editFlashMotorForm').addEventListener('submit', async function(event) {
+                        event.preventDefault(); // Prevent default form submission
+                        const vehicleId = document.getElementById('editFlashMotorId').value;
+                        const updatedVehicle = {
+                            vehicle_make: document.getElementById('editFlashMotorMake').value,
+                            vehicle_model: document.getElementById('editFlashMotorModel').value,
+                            vehicle_price: document.getElementById('editFlashMotorPrice').value,
+                            newPrice: document.getElementById("NewMotorPrice").value,
+                            type_of_fuel: document.getElementById('editFlashMotorFuel').value,
+                            engine_capacity: document.getElementById('editFlashMotorEngine').value,
+                            vehicle_description: document.getElementById('editFlashMotorDescription').value,
+                        };
+
+                        try {
+                            const response = await fetch(`/api/flash-sale/${vehicleId}`, {
+                                method: 'PUT',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(updatedVehicle),
+                            });
+
+                            if (response.ok) {
+                                alert('Vehicle updated successfully!');
+                                document.getElementById('FlashMotorModal').style.display = 'none';
+                            } else {
+                                throw new Error('Failed to update vehicle');
+                            }
+                        } catch (error) {
+                            console.error('Error updating vehicle:', error);
+                        }
+                    });
+
+                    //Handle delete button click for the flash vehicles
+                    document.querySelectorAll('.deleteFlashMotor').forEach(button => {
+                        button.addEventListener('click', function () {
+                            const vehicleId = this.getAttribute('data-id');
+                            const deleteConfirm = confirm('Are you sure you want to delete this vehicle?');
+                            if (deleteConfirm) {
+                                fetch(`/api/flash-sale/${vehicleId}`, {
+                                    method: 'DELETE'
+                                })
+                                .then(response => {
+                                    if (response.ok) {
+                                        //Remove the vehicle from the DOM
+                                        this.closest('.col-md-4').remove();
+                                    } else {
+                                        alert('Failed to delete vehicle');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error deleting vehicle:', error);
+                                    alert('An error occurred while deleting the vehicle. Please try again.');
+                                });
+                            }
+                        });
+                    });
+                }
+            }
+        </script>
+        <script>
+            async function saveFlashSaleSelection() {
+                try {
+                    const checkboxes = document.querySelectorAll('.flash-sale-checkbox');
+                    const flashSaleVehicleIds = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.getAttribute('data-id'));
+
+                    const response = await fetch('/api/flash-sale', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ flashSaleVehicleIds })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Failed to save flash sale selection');
+                    }
+
+                    const result = await response.json();
+                    alert(result.message);
+                } catch (error) {
+                    console.error('Error saving flash sale selection:', error);
+                    alert('Unable to save flash sale selection. Please try again later.');
+                }
+            }
+
+            //Code to refresh the page after a successful submission
+            function refreshPage() {
+                window.location.reload();
+            }
+        </script>
+</body>
+</html>

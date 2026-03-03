@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/MagariSoko_icon.jfif" type="image/gif">
+
+    <!-- Site Meta Tags -->
+    <title>Account Settings | MagariSoko</title>
+    
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!--link rel="stylesheet" href="css/responsive.css"-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!--icon display style-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        :root{
+            --orange:#ff5722;
+            --dark: #0a0a0a;
+            --muted: #f4f4f4;
+            --card-border: #e6e6e6;
+            --background-image: url("public/images/background.png");
+        }
+        main{
+            display: block;
+            padding: 20px;
+            padding-left: 10px;
+            
+        }
+        /* Styles the main background section */
+        .breadcrumb-header-section {
+            background-image: url("images/background.png");
+            /* Light gray background color from the image */
+            /* Bootstrap's py-5 handles padding top/bottom */
+        }
+
+        /* Styles the main title "Product Details" */
+        .breadcrumb-header-section h1 {
+            color: #333;
+            font-size: 36px; /* Adjust size to match image scale */
+        }
+
+        /* Styles the breadcrumb links */
+        .breadcrumb-item a {
+            color: #777; /* Medium gray color for links */
+            text-decoration: none; /* Removes underline from links */
+        }
+
+        .breadcrumb-item a:hover {
+            color: var(--orange); /* Optional: A subtle hover color */
+        }
+
+        /* Styles the active item "Product Details" */
+        .breadcrumb-item.active {
+            color: var(--orange); /* Keeps the active item the same color as the links */
+            font-weight: normal; /* Ensures it's not bolded by default BS styles */
+        }
+
+        .content_display{
+            display: block;
+            position: relative;
+            padding-bottom: 100px; /* Make space for the button */
+        }
+        h1{
+            text-align: center;
+        }
+        #account-form label{
+            font-weight: bold;
+        }
+        #account-form{
+            display: block;
+            padding: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+        .Username, .user_email, .user_password {
+            display: block;
+            margin-bottom: 20px; /* Add space between the fields */
+        }
+        .Username input, .user_email input, .user_password input {
+            width: 100%; /* Make inputs take full width */
+            max-width: 500px; /* Optional: Set a max-width */
+            padding: 10px; /* Add padding for better appearance */
+            box-sizing: border-box; /* Ensure padding is included in width calculation */
+        }
+        .UpdateBtn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .UpdateBtn button{
+            background-color: white;
+            color: #4CAF50;
+            padding: 10px;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+        }
+        .UpdateBtn button:hover{
+            background-color: #4CAF50;
+            color: white;
+        }
+        #userEdit.modal{
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+        #userEdit h1{
+            text-align: center;
+            padding-bottom: 10px;
+            font-weight: bold;
+        }
+        #userEdit .modal-content{
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        .user_icon{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .user_icon img{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        .card{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;;
+        }
+        .card-body{
+            display: block;
+            padding: 10px;
+            align-items: center;
+        }
+        .card p{
+            font-weight: bold;
+        }
+
+        /*style for the modal*/
+        .modal{
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 15%;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 60px;
+        }
+        .modal-content{
+            background-color: #fefefe;
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 100%; 
+            max-width: 500px;
+        }
+        .modal-body{
+            width: 100%;
+        }
+        label, input{
+            display: block;
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        /* Customize input field appearance */
+        .form-control {
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .fade-out {
+        animation: fadeOut 1s ease forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+        }
+    </style>
+    <nav class="custom-navbar">
+        <div class="navbar-bottom">
+            <div class="menu_2">
+                <ul class="list">
+                    <li><a href="index.html"><i class="material-icons">home</i> Home</a></li>
+                    <li><a href="#" id="logout-link"><i class="material-icons">logout</i>Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="navbar-top container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-auto img_logo">
+                    <a href="images/magarisoko_2.jfif" class="logo">
+                        <img src="images/magarisoko_2.jfif" alt="MagariSoko Logo">
+                        <span>MagariSoko</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</head>
+<body>
+    <main>
+        <section class="breadcrumb-header-section">
+            <div class="container py-5"> <!-- py-5 adds padding top and bottom -->
+                <!-- Centered Main Title -->
+                <h1 class="text-center mb-3">Dealer Dashboard</h1>
+                
+                <!-- Centered Breadcrumb Navigation -->
+                <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center bg-transparent m-0 p-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Account Settings</li>
+                </ol>
+                </nav>
+            </div>
+        </section>
+        <section class="content_display">
+            <div id="user-card-container"></div>
+        </section>
+        <section class="content_display">
+            <div id="userEit" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h1>Account Settings</h1>
+                    <div class="row">
+                        <form id="account-form">
+                            <input id="dealerId" name="dealerId" type="hidden" readonly>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Username:</label>
+                                        <input type="text" id="name" name="name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Email:</label>
+                                        <input type="email" id="email" name="email" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="password">Password:</label>
+                                        <input type="password" name="password" id="password">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--User Details editing modal-->
+            <div id="editUserModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <form id="EditUserForm">
+                        <div class="modal-header">
+                            <h5 style="text-align: center; font-weight: bold; font-size: 30px;">Edit User Data</h5>
+                            <span aria-hidden="true" class="close">&times;</span> <!--This is what our JS listens for -->
+                        </div>
+                        <div class="modal-body">
+                            <!-- Form fields for user data -->
+                            <input type="hidden" id="editUserId" name="id">
+                            <div class="mb-3">
+                                <div class="form-group">
+                                    <label for="username"><strong>Username:</strong></label>
+                                    <input type="text" name="username" id="editUsername"  class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-group">
+                                    <label for="email"><strong>Email:</strong></label>
+                                    <input type="email" name="email" id="editEmail" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-group">
+                                    <label for="password"><strong>New Password:</strong></label>
+                                    <input type="text" name="password" id="editPassword" placeholder="Leave blank to keep current password" class="form-control">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer Section -->
+    <footer class="footer_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 footer-col">
+                    <!-- Contact Us section -->
+                    <div class="footer_content" style="display: flex; flex-direction: column;">
+                        <h4>Contact Us</h4>
+                        <div class="contact_link_box">
+                            <a href="https://maps.app.goo.gl/X5jKPCnbjW9TkLET7" target="_blank"><i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                <span>Location</span>
+                            </a>
+                            <a href="tel:+254742743059"><i class="fas fa-phone" aria-hidden="true"></i>
+                                <span>Call +254 742 743059</span>
+                            </a><br>
+                            <a href="mailto:baschelle5@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i>
+                                <span style="margin-left: 5px;">baschelle5@gmail.com</span>
+                            </a>        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-col">
+                    <!-- Footer Detail section -->
+                    <div class="footer_detail">
+                        <a href="index.html" class="footer-logo">
+                            MagariSoko
+                        </a>
+                        <em>"Quality Cars, Unbeatable Prices"</em>
+                        <div class="footer_social">
+                            <a href="https://web.facebook.com/people/Basil/100023719690145/" target="_blank"><img src="images/social_logos/facebook_logo_icon.png" alt="Facebook"></a>
+                            <a href="https://wa.me/+254742743059" target="_blank"><img src="images/social_logos/WhatsApp_Logo.png" alt="WhatsApp"></a>
+                            <a href="https://twitter.com/baschelle5" target="_blank"><img src="images/social_logos/x_logo.jpeg" alt="Twitter"></a>
+                            <a href="https://www.linkedin.com/in/basil-onyango-61a081250/" target="_blank"><img src="images/social_logos/linkedin logo_icon.png" alt="linkedIn"></a>
+                            <a href="https://www.youtube.com/@basilonyango5160" target="_blank"><img src="images/social_logos/youtube_logo.png" alt="Youtube"></a>
+                            <a href="https://www.instagram.com/_.blu.berry.__/" target="_blank"><img src="images/social_logos/instagram_logo_icon.png" alt="Instragram"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-col mb-4">
+                    <!-- MagariSoko Icon section -->
+                    <div class="MagariSoko_icon">
+                        <div class="img_logo">
+                            <img src="images/magarisoko_2.jfif" alt="MagariSoko Logo"> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 footer-col">
+                    <!-- Footer Info section -->
+                    <div class="footer-info">
+                        <p>&copy; <span id="displayYear"></span> All Rights Reserved By
+                            <a href="index.html">MagariSoko</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer> 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Fetch User's data from the server
+                const response = await fetch('/user-info');
+                const result = await response.json();
+
+                if (result.success) {
+                    const user = result.dealer;
+
+                    if (!user) {
+                        alert('User data not found.');
+                        return;
+                    }
+
+                    // Create user card
+                    const userCard = `
+                        <div class="card">
+                            <div class="user_icon">
+                                <img src="images/user_icon/account_circle_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg" alt="user_icon">
+                            </div>
+                            <h1>${user.username}</h1>
+                            <p>Email: ${user.email}</p>
+                            <p>Password: <strong style="font-size:30px;">••••••••</strong></p>
+                            <div class="actionBtn">
+                                <button class="btn btn-warning editUser" style="width: 100px;" data-id="${user._id}">Edit</button>
+                                <button class="btn btn-danger deleteUser" style="width: 100px;" data-id="${user._id}">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                    document.getElementById('user-card-container').innerHTML = userCard;
+
+                    // Attach event listeners after rendering
+                    document.addEventListener('click', async (e) => {
+                        const editBtn = e.target.closest('.editUser');
+                        if (editBtn) {
+                            const userId = editBtn.getAttribute('data-id');
+                            console.log("User ID captured on edit click:", userId);
+                            document.getElementById('editUserId').value = userId;
+                        
+                            // Save ID to a hidden field or in JS for submission
+                            document.getElementById('editUserId').value = userId;
+
+                            // Fetch existing user data from server
+                            const res = await fetch(`/user-info?id=${userId}`);
+                            const data = await res.json();
+
+                            if (data.success) {
+                                document.getElementById('editUsername').value = data.dealer.username;
+                                document.getElementById('editEmail').value = data.dealer.email;
+                                // password field can be left blank
+                            }
+
+                            // Show the modal
+                            document.getElementById('editUserModal').style.display = 'block';
+
+                            //Close the modal when the close button is clicked
+                            const modal = document.getElementById('editUserModal');
+                            const closeButton = modal.querySelector('.close');
+                            closeButton.addEventListener('click', () => {
+                                modal.style.display = 'none';
+                            });
+                        }
+
+                    });
+
+                    // Handle deletion of user account
+                    document.querySelector('.deleteUser').addEventListener('click', async () => {
+                        if (confirm('Are you sure you want to delete your Account?')) {
+                            const res = await fetch (`/delete-user/${user._id}`, { method: 'DELETE' });
+                            const result = await res.json();
+                            if (result.success) {
+                                alert('User deleted successfully.');
+                                const card = document.querySelector('.card');
+                                card.classList.add('fade-out');
+
+                                setTimeout(() => {
+                                    window.location.href = '/'; // Redirect to homepage after 1.5s
+                                }, 1500)
+                            } else {
+                                alert('Failed to delete user.');
+                            }
+                        }
+                    });
+
+                    // Handle form submission to update user data
+                    document.getElementById('EditUserForm').addEventListener('submit', async (e) => {
+                        e.preventDefault();
+
+                        const id = document.getElementById('editUserId').value;
+                        const username = document.getElementById('editUsername').value;
+                        const email = document.getElementById('editEmail').value;
+                        const password = document.getElementById('editPassword').value;
+
+                        const res = await fetch('/update-user', {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ id, username, email, password })
+                        });
+
+                        const result = await res.json();
+                        if (result.success) {
+                            alert('User updated successfully!');
+                            location.reload(); // or close modal and update DOM
+                        } else {
+                            alert('Failed to update user.');
+                        }
+                    });
+
+                } else {
+                    alert('An error occurred while fetching user data.');
+                    console.error('Failed to fetch user data:', result.message);
+                }
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        });
+    </script>
+    <script>
+        document.getElementById('logout-link').addEventListener('click', async (e) => {
+        e.preventDefault();
+        
+        // Optional: Confirm logout
+        if (confirm("Are you sure you want to log out?")) {
+            // Redirect to logout route
+            window.location.href = '/logout';
+        }
+        });
+    </script>
+  
+</body>
+</html>

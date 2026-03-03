@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/MagariSoko_icon.jfif" type="image/gif">
+
+    <!-- Site Meta Tags -->
+    <title>Account Settings | MagariSoko</title>
+    
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!--link rel="stylesheet" href="css/responsive.css"-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!--icon display style-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        :root{
+            --orange:#ff5722;
+            --dark: #0a0a0a;
+            --muted: #f4f4f4;
+            --card-border: #e6e6e6;
+            --background-image: url("public/images/background.png");
+        }
+
+        main{
+            display: block;
+            padding: 20px;
+            padding-left: 10px;
+            
+        }
+        /* Styles the main background section */
+        .breadcrumb-header-section {
+            background-image: url("images/background.png");
+            /* Light gray background color from the image */
+            /* Bootstrap's py-5 handles padding top/bottom */
+        }
+
+        /* Styles the main title "Product Details" */
+        .breadcrumb-header-section h1 {
+            color: #333;
+            font-size: 36px; /* Adjust size to match image scale */
+        }
+
+        /* Styles the breadcrumb links */
+        .breadcrumb-item a {
+            color: #777; /* Medium gray color for links */
+            text-decoration: none; /* Removes underline from links */
+        }
+
+        .breadcrumb-item a:hover {
+            color: var(--orange); /* Optional: A subtle hover color */
+        }
+
+        /* Styles the active item "Product Details" */
+        .breadcrumb-item.active {
+            color: var(--orange); /* Keeps the active item the same color as the links */
+            font-weight: normal; /* Ensures it's not bolded by default BS styles */
+        }
+
+        .content_display{
+            display: block;
+            border-radius: 5px;
+            padding-bottom: 100px; /* Make space for the button */
+        }
+        
+        /* For smaller screens, stack the items vertically */
+        @media (max-width: 768px){
+            .menu_2 .list li a span{
+                display: none;
+            } 
+        }
+
+        h1{
+            text-align: center;
+        }
+        #account-form{
+            display: flex;
+            padding: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+        #account-form label,
+        #account-form input {
+            margin: 10px 0;
+        }
+        #account-form label{
+            font-weight: bold;
+        }
+        #account-form input{
+            width: 40%;
+        }
+        .UpdateBtn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .UpdateBtn button{
+            background-color: white;
+            color: #4CAF50;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+        }
+        .UpdateBtn button:hover{
+            background-color: #4CAF50;
+            color: white;
+        }
+        .user_icon{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .user_icon img{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        .card{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;;
+        }
+        .card p{
+            font-weight: bold;
+        }
+        #dealerEdit.modal{
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        #dealerEdit h2{
+            text-align: center;
+            padding-bottom: 10px;
+            font-weight: bold;
+        }
+        #dealerEdit .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .fade-out {
+        animation: fadeOut 1s ease forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+        }
+    </style>
+
+    <nav class="custom-navbar">
+        <div class="navbar-bottom">
+            <div class="menu_2">
+                <ul class="list">
+                    <li><a href="index.html"><i class="material-icons">home</i><span>Home</span></a></li>
+                    <li><a href="index.html"><i class="material-icons">logout</i><span>Log Out</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="navbar-top container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-auto img_logo">
+                    <a href="images/magarisoko_2.jfif" class="logo">
+                        <img src="images/magarisoko_2.jfif" alt="MagariSoko Logo">
+                        <span>MagariSoko</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</head>
+<body>
+<main>
+    <section class="breadcrumb-header-section">
+        <div class="container py-5"> <!-- py-5 adds padding top and bottom -->
+            <!-- Centered Main Title -->
+            <h1 class="text-center mb-3">Account Settings</h1>
+            
+            <!-- Centered Breadcrumb Navigation -->
+            <nav aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center bg-transparent m-0 p-0">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="dealers.html">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Settings</li>
+            </ol>
+            </nav>
+        </div>
+    </section>
+    <div id="dealerEdit" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Personal Data</h2>
+            <div class="row"></div>
+            <form id="edit-dealer-form">
+                <input type="hidden" id="dealerId" name="dealerId" >
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="username"><strong>Username:</strong></label>
+                            <input type="text" name="username" id="user_name"  class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="id_no"><strong>ID No:</strong></label>
+                            <input type="text" name="id_no" id="user_idNo" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="phone_number"><strong>Phone Number:</strong></label>
+                            <input type="text" name="phone_number" id="phone_Number"  class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="email"><strong>Email:</strong></label>
+                            <input type="email" name="email" id="user_email" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="address"><strong>Address:</strong></label>
+                            <input type="text" name="address" id="user_address" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+        </div>
+    </div>
+    <section class="content_display">
+        <div class="container">
+            <div id="account-info">
+                <!--user inform will dynamically be displayed here-->
+        </div>
+    </section>
+
+</main>
+<!-- Footer Section -->
+<footer class="footer_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 footer-col">
+                <!-- Contact Us section -->
+                <div class="footer_content" style="display: flex; flex-direction: column;">
+                    <h4>Contact Us</h4>
+                    <div class="contact_link_box">
+                        <a href="https://maps.app.goo.gl/X5jKPCnbjW9TkLET7" target="_blank"><i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            <span>Location</span>
+                        </a>
+                        <a href="tel:+254742743059"><i class="fas fa-phone" aria-hidden="true"></i>
+                            <span>Call +254 742 743059</span>
+                        </a><br>
+                        <a href="mailto:baschelle5@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i>
+                            <span style="margin-left: 5px;">baschelle5@gmail.com</span>
+                        </a>        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 footer-col">
+                <!-- Footer Detail section -->
+                <div class="footer_detail">
+                    <a href="index.html" class="footer-logo">
+                        MagariSoko
+                    </a>
+                    <em>"Quality Cars, Unbeatable Prices"</em>
+                    <div class="footer_social">
+                        <a href="https://web.facebook.com/people/Basil/100023719690145/" target="_blank"><img src="images/social_logos/facebook_logo_icon.png" alt="Facebook"></a>
+                        <a href="https://wa.me/+254742743059" target="_blank"><img src="images/social_logos/WhatsApp_Logo.png" alt="WhatsApp"></a>
+                        <a href="https://twitter.com/baschelle5" target="_blank"><img src="images/social_logos/x_logo.jpeg" alt="Twitter"></a>
+                        <a href="https://www.linkedin.com/in/basil-onyango-61a081250/" target="_blank"><img src="images/social_logos/linkedin logo_icon.png" alt="linkedIn"></a>
+                        <a href="https://www.youtube.com/@basilonyango5160" target="_blank"><img src="images/social_logos/youtube_logo.png" alt="Youtube"></a>
+                        <a href="https://www.instagram.com/_.blu.berry.__/" target="_blank"><img src="images/social_logos/instagram_logo_icon.png" alt="Instragram"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 footer-col mb-4">
+                <!-- MagariSoko Icon section -->
+                <div class="MagariSoko_icon">
+                    <div class="img_logo">
+                        <img src="images/magarisoko_2.jfif" alt="MagariSoko Logo"> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 footer-col">
+                <!-- Footer Info section -->
+                <div class="footer-info">
+                    <p>&copy; <span id="displayYear"></span> All Rights Reserved By
+                        <a href="index.html">MagariSoko</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="js/script.js"></script>
+<script src="js/account.js"></script>
+</body>
+</html>

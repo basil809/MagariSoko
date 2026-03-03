@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/MagariSoko_icon.jfif" type="image/gif">
+
+    <!-- Site Meta Tags -->
+    <title>About Us | MagariSoko</title>
+    
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!--link rel="stylesheet" href="css/responsive.css"-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!--icon display style-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        .img_logo {
+        display: flex;
+        justify-content: flex-end; /* Align items to the right */
+        align-items: center; /* Center vertically */
+        height: 100%; /* Ensure the container takes full height */
+    }
+
+    .img_logo img {
+        max-width: 250px; /* Adjust the size as needed */
+        height: 150px; /* Maintain aspect ratio */
+    }
+    .hidden{
+        margin-bottom: 4px;
+    }
+    
+    .count-section {
+        padding: 40px 0;
+        background-color: #f8f9fa; /* optional background */
+    }
+
+        .count-section .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* center-align on larger screens */
+            gap: 20px; /* space between circles */
+        }
+
+        .circle {
+            flex: 0 0 22%; /* width of each circle block */
+            max-width: 22%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .interior_circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .interior_circle h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .interior_circle p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Responsive adjustment */
+        @media (max-width: 768px) {
+            .circle {
+                flex: 0 0 45%;
+                max-width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .circle {
+                flex: 0 0 90%;
+                max-width: 90%;
+            }
+        }
+
+        .client_section {
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 10px;
+            padding-right: 10px;
+            background-color: #f8f9fa;
+        }
+        
+        .client_section #carouselExampleControls {
+            padding: 0 10%;
+        }
+        
+        .client_section .box {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            margin-top: 45px;
+        }
+        
+        .client_section .box .img-box {
+            width: 145px;
+        }
+        
+        .client_section .box .img-box img {
+            width: 100%;
+            border-radius: 100%;
+        }
+        
+        .client_section .box .detail-box {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            margin-top: 20px;
+        }
+        
+        .client_section .box .detail-box h4 {
+            font-weight: bold;
+            font-size: 18px;
+            padding: 0 10px;
+            border-bottom: 1px solid #ffffff;
+        }
+        
+        .client_section .box .detail-box p {
+            margin-top: 10px;
+        }
+        
+        .client_section .carousel_btn-box {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                    justify-content: center;
+        }
+        
+        .client_section .carousel-control-prev,
+        .client_section .carousel-control-next {
+            position: absolute;
+            top: 50%;
+            width: 45px;
+            height: 45px;
+            border: none;
+            opacity: 1;
+            background-color: black;
+            color: #ffffff;
+            border-radius: 100%;
+            -webkit-transform: translateY(-50%);
+                    transform: translateY(-50%);
+            font-size: 18px;
+        }
+        
+        .client_section .carousel-control-prev:hover,
+        .client_section .carousel-control-next:hover {
+            background-color: red;
+        }
+        
+        .client_section .carousel-control-prev {
+            left: 0;
+        }
+        
+        .client_section .carousel-control-next {
+            left: initial;
+            right: 0;
+        }
+        .team_section{
+            background: var(--white);
+            border-radius: 2rem;
+            box-shadow: rgba(0, 0, 0, 0.5) 0px 6px 24px 0px;
+        }
+        .team_section .heading_container{
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 20px;
+        }
+        #team-members{
+            justify-content: center;
+            margin: auto;
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            padding: 1.5rem;
+        }
+        #team-members.heading_container h2{
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .team-member{
+            position: relative;
+            z-index: 1;
+            min-height: 3.75rem;
+            width: 10rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 1rem;
+            border-radius: 1.5rem;
+            font-size: 1rem;
+            padding: 1rem;
+            align-items: center;
+            background: var(--white);
+            box-shadow: rgba(0, 0, 0, 0.5) 0px 6px 24px 0px;
+        }
+        .team-member:hover{
+            cursor: grab;
+        }
+        .social-links{
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            margin: 0 auto;
+            gap: 0.375rem;
+            flex-direction: row;
+        }
+        .social-links img{
+           width: 1.25rem;
+           height: 1.25rem;
+        }
+        .team-member-avatar{
+            width: 3.75em;
+            height: 3.75rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .team-member-name{
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        .team-member-name h3{
+            font-size: 1.25rem;
+        }
+        .team-member-name p{
+            font-size: 0.875rem;
+        }
+        .team-member-chosen{
+            box-shadow: 8px 8px 32px #E1E1E1;
+        }
+        .team-member-drag{
+            opacity: 0;
+        }
+        @media(max-width: 400px) {
+            .social-links{
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="custom-navbar">
+        <div class="navbar-top">
+            <a href="images/magarisoko_2.jfif" class="logo">
+                <img src="images/magarisoko_2.jfif" alt="MagariSoko Logo">
+                <span>MagariSoko</span>
+            </a>
+        </div>
+        <div class="navbar-bottom">
+            <div id="menu-icon" onclick="toggleSidebar()">☰</div>
+            <div id="sidebar" class="custom-sidebar">
+                <div class="close-btn" onclick="toggleSidebar()">×</div>
+                <a href="index.html">Home</a>
+                <a href="trending.html">Flash Sales</a>
+                <a href="hire.html">Car Hire</a>
+                <a href="sell.html">Sell my car</a>
+                <a href="javascript:void(0)" onclick="toggleCarMakes()">Car Makes:</a>
+                <div id="car-makes" class="hidden">
+                    <a href="toyota.html" class="car-make"><img src="images/toyota_logo.png" alt="Toyota Logo">Toyota</a>
+                    <a href="nissan.html" class="car-make"><img src="images/nissan-logo-2013-700x700.png" alt="Nissan Logo">Nissan</a>
+                    <a href="BMW.html" class="car-make"><img src="images/bmw_logo.png" alt="BMW Logo">BMW</a>
+                    <a href="#" class="car-make"><img src="images/Subaru Logo Stencil.jfif" alt="Subaru Logo">Subaru</a>
+                    <a href="#" class="car-make"><img src="images/Chevrolet-logo.png" alt="Chevrolet Logo">Chevrolet</a>
+                    <a href="#" class="car-make"><img src="images/mercedes_logo.jfif" alt="Mercedes Logo">Mercedes Benz</a>
+                    <a href="#" class="car-make"><img src="images/mazda logo.png" alt="Mazda Logo">Mazda</a>
+                    <a href="#" class="car-make"><img src="images/Mitsubishi Logo.jfif" alt="Mitsubishi Logo">Mitsubishi</a>
+                    <a href="#" class="car-make"><img src="images/Suzuki-symbol-640x480.jpg" alt="Suzuki Logo">Suzuki</a>
+                    <a href="#" class="car-make"><img src="images/Lexus-logo.jpg" alt="Lexus Logo">Lexus</a>
+                    <a href="#" class="car-make"><img src="images/Volkswagen-logo.jpg" alt="Volkswagen Logo">Volkswagen</a>
+                    <a href="#" class="car-make"><img src="images/Audi Logo.jfif" alt="Audi Logo">Audi</a>
+                    <a href="#" class="car-make"><img src="images/Land-Rover-logo.jpg" alt="Land Rover Logo">Land Rover</a>
+                    <a href="#" class="car-make"><img src="images/honda-logo.png" alt="Honda Logo">Honda</a>
+                    <a href="#" class="car-make"><img src="images/ford-logo.png" alt="Ford Logo">Ford</a>
+                    <a href="#" class="car-make"><img src="images/hyundai-logo-2011-download.png" alt="Hyundai Logo">Hyundai</a>
+                    <a href="#" class="car-make"><img src="images/Renault-logo.jpg" alt="Renault Logo">Renault</a>
+                    <a href="#" class="car-make"><img src="images/Daihatsu-logo.png" alt="Daihatsu Logo"></a>
+                    <a href="#" class="car-make"><img src="images/jeep-logo.png" alt="Jeep Logo">Jeep</a>
+                    <a href="#" class="car-make"><img src="images/porsche-logo.png" alt="Porsche Logo">Porsche</a>
+                    <a href="#" class="car-make"><img src="images/Jaguar Logo.jfif" alt="Jaguar Logo">Jaguar</a>
+                    <a href="#" class="car-make"><img src="images/Peugeot-logo.jpg" alt="Peugeot Logo">Peugeot</a>
+                    <a href="#" class="car-make"><img src="images/Volvo-logo.jpg" alt="Volvo Logo">Volvo</a>
+                    <a href="#" class="car-make"><img src="images/Isuzu-logo.jpg" alt="Isuzu Logo"></a>
+                    <a href="#" class="car-make"><img src="images/Mobius logo.jfif" alt="Mobius Logo">Mobius</a>
+                    <a href="#" class="car-make"><img src="images/bentley-logo-2002-download.png" alt="Bentley Logo">Bentley</a>
+                    <a href="#" class="car-make"><img src="images/Assistência Técnica Yamaha.jfif" alt="Yamaha Logo">Yamaha</a>
+                </div>
+            </div>
+            <div class="menu_2">
+                <ul class="list">
+                    <li><a href="index.html"><i class="material-icons">home</i> Home</a></li>
+                    <li><a href="join_us.html"><i class="material-icons">handshake</i> Join Us</a></li>
+                    <li><a href="#"><i class="material-icons">group</i> About Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="about_section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="img-box">
+                        <img src="images/magarisoko_2.jfif" alt="logo">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="detail-box">
+                        <div class="heading_container">
+                        <h2 class="half-underline">MagariSoko</h2>
+                        </div>
+                        <p>              
+                        Welcome to MagariSoko, your top destination for finding the perfect vehicle. Since our establishment in 2022, we have dedicated ourselves to providing a seamless and enjoyable car buying experience for our valued customers.<br><br>
+                        At MagariSoko, we recognize that purchasing a car is a significant investment and a personal decision. Our mission is to make this process as easy, transparent, and satisfying as possible.
+                        We offer a wide selection of high-quality new and pre-owned vehicles to meet every need, preference, and budget.<br> <br>
+                        Our team of experienced professionals is passionate about cars and committed to helping you find the right vehicle. We take pride in our customer-first approach, ensuring that every interaction is tailored to meet your unique requirements. From the moment you step into our showroom to the time you drive away in your new car, we strive to exceed your expectations at every turn.<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="add_about_us_section">
+        <div class="add_about_us" style="margin-bottom: 4px;">
+        <div class="toggle-container" onclick="toggleAboutUs()">
+            <span>Why Choose Us?</span>
+        </div>
+        <div id="about-us" >
+            <div class="left-align">
+                <a>1.  <strong>Inventory:</strong> Our diverse selection of cars includes the latest models from leading brands as well as meticulously inspected pre-owned vehicles.</a><br><br>
+                <a>2.  <strong>Competitive Pricing:</strong> We offer fair and transparent pricing, ensuring you get the best value for your money.</a><br><br>
+                <a>3.  <strong>Exceptional Customer Service:</strong> Our knowledgeable and friendly staff are here to assist you with any questions and guide you through every step of the buying process.</a><br><br>
+                <a>4.  <strong>Financing Options:</strong> We provide flexible financing solutions to make your car buying experience convenient and affordable.</a>
+            </div>
+        </div>
+      </div>
+    </section>
+    <section class="count-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 circle">
+                    <div class="interior_circle">
+                        <h2><span class="counter">500</span>+</h2>
+                        <p>Happy Clients</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 circle">
+                    <div class="interior_circle">
+                        <h2><span class="counter">500</span>+</h2>
+                        <p>Sales</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 circle">
+                    <div class="interior_circle">
+                        <h2><span class="counter">10</span>+</h2>
+                        <p>Years of Experience</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 circle">
+                    <div class="interior_circle">
+                        <h2><span class="counter">50k</span>+</h2>
+                        <p>vehicles</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="client_section layout_padding">
+        <div class="carousel slide" id="carouselExampleControls" data-ride="carousel">
+            <div class="container">
+                <div class="heading_container heading_center">
+                    <h2 style="font-weight: bold;">Client Testimonials</h2>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="images/clients_testimonials/Mitchell Wanjiru.jpg" alt="client image">
+                            </div>
+                            <div class="detail-box">
+                                <h4>— Amina K., Individual Buyer</h4>
+                                <p>
+                                    "Buying my next vehicle through Magarisoko was a great experience. The variety and transparency made me confident in my purchase."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="images/clients_testimonials/Henry Omondi.jpg" alt="client image">
+                            </div>
+                            <div class="detail-box">
+                                <h4>— John D., Individual Seller</h4>
+                                <p>
+                                    "Magarisoko made selling my car so simple and quick. I received a fair offer, and the process was hassle-free. Highly recommended!"
+                                </p>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="carousel-item">
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="images/clients_testimonials/johnnz.jpg" alt="client">
+                            </div>
+                            <div class="detail-box">
+                                <h4>— Ali S., Car Dealer</h4>
+                                <p>
+                                    "As a dealer, I rely on Magarisoko to source quality vehicles efficiently. It’s become my go-to platform for bulk and individual sales."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel_btn-box">
+                    <a href="#carouselExampleControls" class="carousel-control-prev" role="button" data-slide="prev">
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a href="#carouselExampleControls" class="carousel-control-next" role="button" data-slide="next">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="team_section layout_padding">
+        <div class="heading_container heading_center">
+            <h2 style="font-weight: bold;">Meet Our Team</h2>
+        </div>
+        <div id="team-members">
+            <article class="team-member">
+                <img
+                    class="team-member-avatar"
+                    src="images/clients_testimonials/Henry Omondi.jpg"
+                    alt="Basil Onyango"
+                />
+                <div class="team-member-name">
+                    <h3>Basil Onyango</h3>
+                    <p>Founder & CEO</p>
+                </div>
+                <ul class="social-links">
+                    <li>
+                        <a href="#">
+                            <img src="images/social_logos/facebook_logo_icon.png" alt="Facebook">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/social_logos/x_logo.jpeg" alt="Twitter">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/social_logos/linkedin logo_icon.png" alt="LinkedIn">
+                        </a>
+                    </li>
+                </ul>
+            </article>
+            <article class="team-member">
+                <img
+                    class="team-member-avatar"
+                    src="images/clients_testimonials/Mitchell Wanjiru.jpg"
+                    alt="Mitchell Wanjiru"
+                />
+                <div class="team-member-name">
+                    <h3>Mitchell Wanjiru</h3>
+                    <p>Marketing Manager</p>
+                </div>
+                <ul class="social-links">
+                    <li>
+                        <a href="#">
+                            <img src="images/social_logos/facebook_logo_icon.png" alt="Facebook">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/social_logos/x_logo.jpeg" alt="Twitter">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/social_logos/linkedin logo_icon.png" alt="LinkedIn">
+                        </a>
+                    </li>
+                </ul>
+            </article>
+            <article class="team-member">
+                <img
+                    class="team-member-avatar"
+                    src="images/clients_testimonials/johnnz.jpg"
+                    alt="John Nzomo"
+                />
+                <div class="team-member-name">
+                    <h3>John Nzomo</h3>
+                    <p>Sales Executive</p>
+                </div>
+                <ul class="social-links">
+                    <li>
+                        <a href="#">
+                            <img src="images/social_logos/facebook_logo_icon.png" alt="Facebook">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/social_logos/x_logo.jpeg" alt="Twitter">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="images/social_logos/linkedin logo_icon.png" alt="LinkedIn">
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </div>
+    </section>
+    <!-- Footer Section -->
+    <footer class="footer_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 footer-col">
+                    <!-- Contact Us section -->
+                    <div class="footer_content" style="display: flex; flex-direction: column;">
+                        <h4>Contact Us</h4>
+                        <div class="contact_link_box">
+                            <a href="https://maps.app.goo.gl/X5jKPCnbjW9TkLET7" target="_blank"><i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                <span>Location</span>
+                            </a>
+                            <a href="tel:+254742743059"><i class="fas fa-phone" aria-hidden="true"></i>
+                                <span>Call +254 742 743059</span>
+                            </a><br>
+                            <a href="mailto:baschelle5@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i>
+                                <span style="margin-left: 5px;">baschelle5@gmail.com</span>
+                            </a>        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-col">
+                    <!-- Footer Detail section -->
+                    <div class="footer_detail">
+                        <a href="index.html" class="footer-logo">
+                            MagariSoko
+                        </a>
+                        <em>"Quality Cars, Unbeatable Prices"</em>
+                        <div class="footer_social">
+                            <a href="https://web.facebook.com/people/Basil/100023719690145/" target="_blank"><img src="images/social_logos/facebook_logo_icon.png" alt="Facebook"></a>
+                            <a href="https://wa.me/+254742743059" target="_blank"><img src="images/social_logos/WhatsApp_Logo.png" alt="WhatsApp"></a>
+                            <a href="https://twitter.com/baschelle5" target="_blank"><img src="images/social_logos/x_logo.jpeg" alt="Twitter"></a>
+                            <a href="https://www.linkedin.com/in/basil-onyango-61a081250/" target="_blank"><img src="images/social_logos/linkedin logo_icon.png" alt="linkedIn"></a>
+                            <a href="https://www.youtube.com/@basilonyango5160" target="_blank"><img src="images/social_logos/youtube_logo.png" alt="Youtube"></a>
+                            <a href="https://www.instagram.com/_.blu.berry.__/" target="_blank"><img src="images/social_logos/instagram_logo_icon.png" alt="Instragram"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-col mb-4">
+                    <!-- MagariSoko Icon section -->
+                    <div class="MagariSoko_icon">
+                        <div class="img_logo">
+                            <img src="images/magarisoko_2.jfif" alt="MagariSoko Logo"> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 footer-col">
+                    <!-- Footer Info section -->
+                    <div class="footer-info">
+                        <p>&copy; <span id="displayYear"></span> All Rights Reserved By
+                            <a href="index.html">MagariSoko</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+    <style>
+        .hidden {
+            display: none;
+        }
+        .left-align {
+            text-align: left;
+        }
+        .add_about_us_section {
+            padding-left: 20px;
+        }
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 30px;
+            font-weight: bold;
+            padding-bottom: 15px;
+            }
+        .toggle-container i {
+            margin-left: 5px;
+        }
+        .toggle-container a{
+            padding-bottom: 20px;
+            }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <script>
+        const dragAndDropItems = document.getElementById('team-members');
+
+        // Sortable.js will now be available in this script
+        new Sortable(dragAndDropItems, {
+            animation: 350,
+            chosenClass: 'team-member-chosen',
+            dragclass: 'team-member-drag',
+        });
+    </script>
+    <script>
+        function toggleAboutUs() {
+            const aboutUs = document.getElementById('about-us');
+            if (aboutUs.classList.contains('hidden')) {
+                aboutUs.classList.remove('hidden');
+            } else {
+                aboutUs.classList.add('hidden');
+            }
+        }
+    </script>
+    <script>
+        function toggleAboutUs() {
+            const aboutUs = document.getElementById('about-us');
+            if (aboutUs.classList.contains('hidden')) {
+                aboutUs.classList.remove('hidden');
+            } else {
+                aboutUs.classList.add('hidden');
+            }
+        }
+    </script>
+    <script>
+        function animateCounter(el, target) {
+            let current = 0;
+            const increment = Math.ceil(target / 100); // speed control
+            const duration = 1000; // total duration in ms
+            const stepTime = Math.floor(duration / (target / increment));
+      
+            const counterInterval = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    el.textContent = target;
+                    clearInterval(counterInterval);
+                } else {
+                    el.textContent = current;
+                }
+            }, stepTime);
+        }
+      
+        const counters = document.querySelectorAll(".counter");
+        const options = {
+            root: null,
+            threshold: 0.5
+        };
+      
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.textContent);
+                    animateCounter(el, target);
+                    observer.unobserve(el); // stop observing once triggered
+                }
+            });
+        }, options);
+      
+        counters.forEach(counter => {
+            observer.observe(counter);
+        });
+    </script>      
+</body>
+</html>

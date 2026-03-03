@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/MagariSoko_icon.jfif" type="image/gif">
+
+    <!-- Site Meta Tags -->
+    <title>Car Details | MagariSoko</title>
+    
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/cardetails.css">
+    <!--link rel="stylesheet" href="css/responsive.css"-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!--icon display style-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS for Thumbnails -->
+    <style>
+        .car-details-section{
+            padding: 10px;
+        }
+        .thumbnails {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .thumbnails img{
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+        }
+        .thumbnails img:hover {
+            border: 2px solid #0b0b0b;
+        }
+        
+        .img_logo {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            height: 100%;
+        }
+
+        .img_logo img {
+            max-width: 250px;
+            height: 150px;
+        }
+
+        .footer-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .center-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .full-screen-image {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .overlay .arrow {
+            color: white;
+            font-size: 3em;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .overlay .arrow.left {
+            left: 10px;
+        }
+
+        .overlay .arrow.right {
+            right: 10px;
+        }
+
+        .overlay .close-btn {
+            color: white;
+            font-size: 3em;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            z-index: 1002;
+        }
+        aside h3, 
+    aside button {
+        width: 100%;
+        display: block;
+        
+
+    }
+    aside button {
+        color: white;
+    }
+    aside button i {
+        vertical-align: middle;
+        margin-right: 8px;
+    }
+
+    aside a {
+        text-decoration: none;
+    }
+    aside .phone_button a,
+    aside .ms_dealer a {
+        color: black;
+        text-decoration: none;
+    }
+    aside .phone_button a:hover,
+    aside .ms_dealer a:hover {
+        color: black;
+        text-decoration: underline;
+    }
+    /* Modal Container */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed;/*stay on top*/
+        z-index: 1;/*modal to sit on top*/
+        left: 0;
+        top: 0;
+        width: 100%;/*full width*/
+        height: 100%;/*full height*/
+        overflow: auto;/* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);/* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 10px;
+    }
+    /* Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    /* Media Query for Smaller Screens */
+    @media screen and (max-width: 768px) {
+        .modal-content {
+            top: 50%; /* Vertically center */
+            left: 50%;  /*Horizontally center */
+            transform: translate(-50%, -50%); /* Adjust both vertically and horizontally */
+            width: 90%; /* Increase width slightly */
+            max-height: 80vh; /* Ensure content doesn't overflow */
+            overflow-y: auto; /* Allow scrolling inside the modal */
+        }
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* Form Styling */
+    #messageForm input[type="text"],
+    #messageForm textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    #messageForm button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    #messageForm button:hover {
+        background-color: #45a049;
+    }
+    .card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .card:hover{
+            border: 2px solid black;
+        }
+        #fullscreenContainer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #fullscreenImageWrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            height: 90%;
+        }
+
+        #fullscreenImage {
+            max-width: 100%;
+            max-height: 100%;
+            position: relative;
+        }
+
+        #prevImage, #nextImage, #closeFullscreen {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 1001;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        #prevImage:hover, #nextImage:hover, #closeFullscreen:hover {
+            background: rgba(255, 255, 255, 0.8);
+            color: black;
+        }
+
+        /* Positioning the buttons */
+        #prevImage {
+            left: 10%;
+            transform: translateY(-50%);
+        }
+
+        #nextImage {
+            right: 10%;
+            transform: translateY(-50%);
+        }
+
+        #closeFullscreen {
+            top: 5%;
+            right: 5%;
+            transform: translate(-50%, -50%);
+        }
+
+        .share-socials .links a i{
+            color: #0b0b0b;
+        }
+
+        .share-socials .links a i:hover{
+            font-size: 20px;
+            color: #02b5f7;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="custom-navbar">
+        <div class="navbar-top">
+            <a href="images/magarisoko_2.jfif" class="logo">
+                <img src="images/magarisoko_2.jfif" alt="MagariSoko Logo">
+                <span>MagariSoko</span>
+            </a>
+        </div>
+        <div class="navbar-bottom">
+            <div id="menu-icon" onclick="toggleSidebar()">☰</div>
+            <div id="sidebar" class="custom-sidebar">
+                <div class="close-btn" onclick="toggleSidebar()">×</div>
+                <a href="index.html">Home</a>
+                <a href="trending.html">Flash Sales</a>
+                <a href="hire.html">Car Hire</a>
+                <a href="sell.html">Sell my car</a>
+                <a href="javascript:void(0)" onclick="toggleCarMakes()">Car Makes:</a>
+                <div id="car-makes" class="hidden">
+                    <a href="toyota.html" class="car-make"><img src="images/toyota_logo.png" alt="Toyota Logo">Toyota</a>
+                    <a href="nissan.html" class="car-make"><img src="images/nissan-logo-2013-700x700.png" alt="Nissan Logo">Nissan</a>
+                    <a href="BMW.html" class="car-make"><img src="images/bmw_logo.png" alt="BMW Logo">BMW</a>
+                    <a href="#" class="car-make"><img src="images/Subaru Logo Stencil.jfif" alt="Subaru Logo">Subaru</a>
+                    <a href="#" class="car-make"><img src="images/Chevrolet-logo.png" alt="Chevrolet Logo">Chevrolet</a>
+                    <a href="#" class="car-make"><img src="images/mercedes_logo.jfif" alt="Mercedes Logo">Mercedes Benz</a>
+                    <a href="#" class="car-make"><img src="images/mazda logo.png" alt="Mazda Logo">Mazda</a>
+                    <a href="#" class="car-make"><img src="images/Mitsubishi Logo.jfif" alt="Mitsubishi Logo">Mitsubishi</a>
+                    <a href="#" class="car-make"><img src="images/Suzuki-symbol-640x480.jpg" alt="Suzuki Logo">Suzuki</a>
+                    <a href="#" class="car-make"><img src="images/Lexus-logo.jpg" alt="Lexus Logo">Lexus</a>
+                    <a href="#" class="car-make"><img src="images/Volkswagen-logo.jpg" alt="Volkswagen Logo">Volkswagen</a>
+                    <a href="#" class="car-make"><img src="images/Audi Logo.jfif" alt="Audi Logo">Audi</a>
+                    <a href="#" class="car-make"><img src="images/Land-Rover-logo.jpg" alt="Land Rover Logo">Land Rover</a>
+                    <a href="#" class="car-make"><img src="images/honda-logo.png" alt="Honda Logo">Honda</a>
+                    <a href="#" class="car-make"><img src="images/ford-logo.png" alt="Ford Logo">Ford</a>
+                    <a href="#" class="car-make"><img src="images/hyundai-logo-2011-download.png" alt="Hyundai Logo">Hyundai</a>
+                    <a href="#" class="car-make"><img src="images/Renault-logo.jpg" alt="Renault Logo">Renault</a>
+                    <a href="#" class="car-make"><img src="images/Daihatsu-logo.png" alt="Daihatsu Logo"></a>
+                    <a href="#" class="car-make"><img src="images/jeep-logo.png" alt="Jeep Logo">Jeep</a>
+                    <a href="#" class="car-make"><img src="images/porsche-logo.png" alt="Porsche Logo">Porsche</a>
+                    <a href="#" class="car-make"><img src="images/Jaguar Logo.jfif" alt="Jaguar Logo">Jaguar</a>
+                    <a href="#" class="car-make"><img src="images/Peugeot-logo.jpg" alt="Peugeot Logo">Peugeot</a>
+                    <a href="#" class="car-make"><img src="images/Volvo-logo.jpg" alt="Volvo Logo">Volvo</a>
+                    <a href="#" class="car-make"><img src="images/Isuzu-logo.jpg" alt="Isuzu Logo"></a>
+                    <a href="#" class="car-make"><img src="images/Mobius logo.jfif" alt="Mobius Logo">Mobius</a>
+                    <a href="#" class="car-make"><img src="images/bentley-logo-2002-download.png" alt="Bentley Logo">Bentley</a>
+                    <a href="#" class="car-make"><img src="images/Assistência Técnica Yamaha.jfif" alt="Yamaha Logo">Yamaha</a>
+                </div>
+            </div>
+            <div class="menu_2">
+                <ul class="list">
+                    <li><a href="index.html"><i class="material-icons">home</i> Home</a></li>
+                    <li><a href="join_us.html"><i class="material-icons">handshake</i> Join Us</a></li>
+                    <li><a href="about_us.html"><i class="material-icons">group</i> About Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" id="breadcrumb-nav">
+            <!-- Breadcrumb links will be inserted here dynamically -->
+        </ol>
+    </nav>
+
+    <!-- Car Details Section -->
+    <section class="car-details-section">
+        <div class="container">
+            <div class="row" id="car-details">
+                <!-- Car details will be loaded here dynamically -->
+            </div>
+        </div>
+    </section>
+    <section class="DB_cardetails-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="vehicle-details">
+                        <div class="vehicle-images">
+                            <img id="mainImage" src="" class="d-block w-100 main-image" alt="Vehicle Image">
+                            <div id="thumbnails" class="thumbnails"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="vehicle-info">
+                        <h1 id="vehicleTitle"></h1>
+                        <p><strong>Price:</strong> <span id="vehiclePrice"></span></p>
+                        <p><strong>Status:</strong> <span id="vehicleStatus"></span></p>
+                        <p><strong>Dealer:</strong> <span id="dealerName"></span></p>
+                        <p><strong>Phone:</strong> <span id="dealerPhone"></span></p>
+                        <p><strong>Kilometers:</strong> <span id="vehicleKilometers"></span></p>
+                        <p><strong>Year:</strong> <span id="vehicleYear"></span></p>
+                        <p><strong>Fuel Type:</strong> <span id="vehicleFuel"></span></p>
+                        <p><strong>Transmission:</strong> <span id="vehicleTransmission"></span></p>
+                        <p><strong>Engine:</strong> <span id="vehicleEngine"></span> cc</p>
+                        <p><strong>Color:</strong> <span id="vehicleColor"></span></p>
+                        <p><strong>Interior:</strong> <span id="vehicleInterior"></span></p>
+                        <h2>Description</h2>
+                        <p id="vehicleDescription"></p>
+                    </div>
+                </div>
+                <!-- Right Section -->
+                <aside class="col-md-4">
+                    <h2>Contact Dealer</h2>
+                    <table>
+                        <tr>
+                            <td><b>Dealer</b></td>
+                            <td id="contactDealerName"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Phone</b></td>
+                            <td id="contactDealerPhone"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Price</b></td>
+                            <td id="contactPrice"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Status</b></td>
+                            <td id="contactStatus"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <div class="share-socials">
+                            <div class="links">
+                                <p><small><strong>Share:</strong></small></p>
+                                <a href="#" onclick="shareOnInstagram(event)"><i class="fab fa-instagram"></i></a>
+                                <a href="#" onclick="shareOnFacebook(event)"><i class="fab fa-facebook"></i></a>
+                                <a href="#" onclick="shareOnWhatsApp(event)"><i class="fab fa-whatsapp"></i></a>
+                                <a href="#" onclick="shareOnTwitter(event)"><i class="fab fa-twitter"></i></a>
+                            </div>
+                    </div>
+                    <br>
+                    <div class="contact-dealer">
+                        <button
+                            style="width: 100%; border-radius: 2px; color:black; background-color:#26c45d; border: 1px solid #26c45d;"
+                            onclick="callDealer()">
+                            <i class="fas fa-phone" aria-hidden="true" style="margin-right: 8px;"></i>
+                            <a id="phoneDealerLink" href="#" style="text-decoration: none; color: black;">Phone dealer</a>
+                        </button>
+                        <div class="ms_dealer" style="width: 100%;">
+                            <button id="messageDealerBtn" style="width: 100%; border-radius: 2px; color:black;background-color:#02b5f7; border: 1px solid #02b5f7;"><i class="material-icons" style="vertical-align: middle; margin-right: 8px;color:white;">mail</i> Message dealer</button>
+                        </div>
+                        <button
+                            style="width: 100%; border-radius: 2px; color: green; background-color: white; border: 2px solid #25D366; "
+                            onclick="whatsappDealer()">
+                            <i class="fab fa-whatsapp" aria-hidden="true" style="margin-right: 8px;"></i>
+                            <a id="whatsappDealerLink" href="#" style="text-decoration: none; color: black;">WhatsApp dealer</a>
+                        </button>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+    <!-- Full Screen Overlay for Images -->
+    <div id="fullScreenOverlay" class="overlay">
+        <span class="arrow left" onclick="prevImage()">&#10094;</span>
+        <img id="fullScreenImage" class="full-screen-image" src="" alt="Full Screen Image">
+        <span class="arrow right" onclick="nextImage()">&#10095;</span>
+        <span class="close-btn" onclick="closeFullScreen()">×</span>
+    </div>
+    <footer class="footer_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 footer-col">
+                    <!-- Contact Us section -->
+                    <div class="footer_content" style="display: flex; flex-direction: column;">
+                        <h4>Contact Us</h4>
+                        <div class="contact_link_box">
+                            <a href="https://maps.app.goo.gl/X5jKPCnbjW9TkLET7" target="_blank"><i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                <span>Location</span>
+                            </a>
+                            <a href="tel:+254742743059"><i class="fas fa-phone" aria-hidden="true"></i>
+                                <span>Call +254 742 743059</span>
+                            </a><br>
+                            <a href="mailto:baschelle5@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i>
+                                <span style="margin-left: 5px;">baschelle5@gmail.com</span>
+                            </a>        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-col">
+                    <!-- Footer Detail section -->
+                    <div class="footer_detail">
+                        <a href="index.html" class="footer-logo">
+                            MagariSoko
+                        </a>
+                        <em>"Quality Cars, Unbeatable Prices"</em>
+                        <div class="footer_social">
+                            <a href="https://web.facebook.com/people/Basil/100023719690145/" target="_blank"><img src="images/social_logos/facebook_logo_icon.png" alt="Facebook"></a>
+                            <a href="https://wa.me/+254742743059" target="_blank"><img src="images/social_logos/WhatsApp_Logo.png" alt="WhatsApp"></a>
+                            <a href="https://twitter.com/baschelle5" target="_blank"><img src="images/social_logos/x_logo.jpeg" alt="Twitter"></a>
+                            <a href="https://www.linkedin.com/in/basil-onyango-61a081250/" target="_blank"><img src="images/social_logos/linkedin logo_icon.png" alt="linkedIn"></a>
+                            <a href="https://www.youtube.com/@basilonyango5160" target="_blank"><img src="images/social_logos/youtube_logo.png" alt="Youtube"></a>
+                            <a href="https://www.instagram.com/_.blu.berry.__/" target="_blank"><img src="images/social_logos/instagram_logo_icon.png" alt="Instragram"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-col mb-4">
+                    <!-- MagariSoko Icon section -->
+                    <div class="MagariSoko_icon">
+                        <div class="img_logo">
+                            <img src="images/magarisoko_2.jfif" alt="MagariSoko Logo"> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 footer-col">
+                    <!-- Footer Info section -->
+                    <div class="footer-info">
+                        <p>&copy; <span id="displayYear"></span> All Rights Reserved By
+                            <a href="index.html">MagariSoko</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Links -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const params = new URLSearchParams(window.location.search);
+    const carId = params.get('id');
+    const car = carData.find(car => car.id == carId);
+
+    if (car) {
+        // Update Breadcrumb Navigation
+        const breadcrumbNav = document.getElementById('breadcrumb-nav');
+        breadcrumbNav.innerHTML = `
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">${car.name}</li>
+        `;
+
+        // Load Car Details
+        const mainImage = car.images[0];
+        const thumbnails = car.images.map((img, index) => `
+            <img src="${img}" class="img-thumbnail" alt="${car.name}" onclick="showFullScreen(${index})">
+        `).join('');
+
+        document.getElementById('car-details').innerHTML = `
+            <div class="col-md-4">
+                <img src="${mainImage}" class="d-block w-100 main-image" alt="${car.name}">
+                <div class="thumbnails">
+                    ${thumbnails}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h1>${car.name}</h1>
+                <p><strong>Price:</strong> ${car.price}</p>
+                <p><strong>Status:</strong> ${car.status}</p>
+                <p><strong>Dealer:</strong> ${car.dealer}</p>
+                <p><strong>Phone:</strong> ${car.phone}</p>
+                <p><strong>Kilometers:</strong> ${car.kilometers}</p>
+                <p><strong>Year:</strong> ${car.year}</p>
+                <p><strong>Fuel Type:</strong> ${car.fuelType}</p>
+                <p><strong>Transmission:</strong> ${car.transmission}</p>
+                <p><strong>Engine:</strong> ${car.engine}</p>
+                <p><strong>Color:</strong> ${car.color}</p>
+                <p><strong>Interior:</strong> ${car.interior}</p>
+            </div>
+            <aside class="col-md-4">
+                <h3><i class="material-icons" style="vertical-align: middle;">chat</i> Contact dealer</h3>
+                <table style="width: 100%;">
+                    <tr>
+                        <th style="width: 50%;">Dealer</th>
+                        <th style="width: 50%;">Phone</th>
+                    </tr>
+                    <tr>
+                        <td>${car.dealer}</td>
+                        <td id="dealer-phone">${car.phone}</td>
+                    </tr>
+                    <tr>
+                        <th style="width: 50%;">Price</th>
+                        <th style="width: 50%;">Status</th>
+                    </tr>
+                    <tr>
+                        <td>${car.price}</td>
+                        <td>${car.status}</td>
+                    </tr>
+                </table>
+                <br>
+                <div class="phone_button" style="width: 100%;">
+                    <button
+                        style="width: 100%; color:black;background-color:#26c45d; border: 1px solid #26c45d;"
+                        onclick="callDealer()">
+                        <i class="fas fa-phone" aria-hidden="true" style="margin-right: 8px;"></i>
+                        <a id="phoneDealerLink" href="#" style="text-decoration: none; color: black;">Phone dealer</a>
+                    </button>
+                </div>
+                <br>
+                <div class="ms_dealer" style="width: 100%;">
+                    <button id="messageDealerBtn" style="width: 100%; color:black;background-color:#02b5f7; border: 1px solid #02b5f7;"><i class="material-icons" style="vertical-align: middle; margin-right: 8px;color:white;">mail</i> Message dealer</button>
+                </div>
+                <br>
+                <div class="whatsapp_dealer" style="width: 100%;">
+                    <button style="width: 100%; background-color:white; color:black; border: 1px solid green;"><img src="images/social_logos/WhatsApp_Logo.png" alt="WhatsApp" style="width:30px;height:30px;"><a href="https://wa.me/${car.phone}" target="_blank" style="text-decoration: none; color: black;">Whatsapp dealer</a></button>
+                </div>
+            </aside>
+
+            
+            <!-- Message Dealer Modal -->  
+            <div id="messageModal" class="modal">  
+                <div class="modal-content">  
+                    <span class="close">&times;</span>  
+                    <h2>Message Dealer</h2>  
+                    <form id="messageForm" action="/api/ClientMesso" method="POST" enctype="multipart/form-data">  
+                        <label for="vehicleID">Car ID:</label>  
+                        <input type="text" id="vehicleID" name="vehicleID" value="${carId}" readonly><br><br>  
+                        
+                        <label for="carName">Vehicle Name:</label>  
+                        <input type="text" id="vehicleName" name="vehicleName" value="${car.name}" readonly><br><br>  
+                        
+                        <label for="dealerName">To:</label>  
+                        <input type="text" id="dealerName" name="dealerName" value="${car.dealer}" readonly><br><br>  
+                        
+                        <label for="userName">Your Name:</label>  
+                        <input type="text" id="userName" name="userName" placeholder="Enter your name" required><br><br>  
+
+                        <label for="phoneNumber">Your Phone:</label>  
+                        <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter Phone Number" required><br><br>  
+                        
+                        <label for="message">Message:</label>  
+                        <textarea id="message" name="message" placeholder="Write your message here..." required></textarea><br><br>  
+                        
+                        <button type="submit">Send Message</button>  
+                    </form>  
+                </div>  
+            </div>
+        `;
+
+        // Modal functionality
+        const modal = document.getElementById("messageModal");
+        const btn = document.getElementById("messageDealerBtn");
+        const span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        
+    }
+});
+
+function callDealer() {
+// Get the phone number from the <td> element
+const phoneNumber = document.getElementById("contactDealerPhone").textContent.trim();
+
+// Check if the phone number is not empty
+if (phoneNumber) {
+    // Update the href attribute of the <a> tag to include the phone number
+    const phoneDealerLink = document.getElementById("phoneDealerLink");
+    phoneDealerLink.href = `tel:${phoneNumber}`;
+
+    // Simulate a click on the <a> tag to open the phone app
+    phoneDealerLink.click();
+} else {
+    alert("Phone number is not available.");
+}
+}
+
+function whatsappDealer() {
+// Get the phone number from the <td> element
+const phoneNumber = document.getElementById("contactDealerPhone").textContent.trim();
+
+// Check if the phone number is not empty
+if (phoneNumber) {
+    // Remove spaces and format phone number for WhatsApp (if needed)
+    const formattedNumber = phoneNumber.replace(/\s+/g, "");
+
+    // Update the href attribute of the <a> tag for WhatsApp
+    const whatsappDealerLink = document.getElementById("whatsappDealerLink");
+    whatsappDealerLink.href = `https://wa.me/${formattedNumber}`;
+
+    // Simulate a click on the <a> tag to open WhatsApp
+    whatsappDealerLink.click();
+} else {
+    alert("Phone number is not available.");
+}
+}
+
+let currentImageIndex = 0;
+
+function showFullScreen(index) {
+    currentImageIndex = index;
+    const car = carData.find(car => car.id == new URLSearchParams(window.location.search).get('id'));
+    const fullScreenOverlay = document.getElementById('fullScreenOverlay');
+    const fullScreenImage = document.getElementById('fullScreenImage');
+    fullScreenImage.src = car.images[index];
+    fullScreenOverlay.style.display = 'flex';
+}
+
+function closeFullScreen() {
+    const fullScreenOverlay = document.getElementById('fullScreenOverlay');
+    fullScreenOverlay.style.display = 'none';
+}
+
+function nextImage() {
+    const car = carData.find(car => car.id == new URLSearchParams(window.location.search).get('id'));
+    currentImageIndex = (currentImageIndex + 1) % car.images.length;
+    document.getElementById('fullScreenImage').src = car.images[currentImageIndex];
+}
+
+function prevImage() {
+    const car = carData.find(car => car.id == new URLSearchParams(window.location.search).get('id'));
+    currentImageIndex = (currentImageIndex - 1 + car.images.length) % car.images.length;
+    document.getElementById('fullScreenImage').src = car.images[currentImageIndex];
+}
+// code for sending the message modal to the dealer
+document.getElementById('sendMessageButton').addEventListener('click', function () {
+    const messageText = document.getElementById('messageText').value;
+    const vehicleId = document.getElementById('vehicleId').value;
+    const receiverId = document.getElementById('dealerId').value;
+
+    fetch('/api/messages/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ senderId: userId, receiverId, vehicleId, messageText })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Message sent successfully');
+        } else {
+            alert('Failed to send message');
+        }
+    });
+});
+
+// Function to get vehicle data from the page
+function getVehicleShareData() {
+    const title = document.getElementById('vehicleTitle')?.textContent || 'Check out this vehicle!';
+    const price = document.getElementById('vehiclePrice')?.textContent || '';
+    const description = document.getElementById('vehicleDescription')?.textContent || '';
+    const currentImage = document.getElementById('mainImage')?.src || '';
+    const vehicleId = new URLSearchParams(window.location.search).get('vehicleId');
+    const pageUrl = window.location.href;
+    
+    return {
+        title,
+        price,
+        description: description.substring(0, 100), // Limit description to 100 chars
+        image: currentImage,
+        url: pageUrl,
+        vehicleId
+    };
+}
+
+// Share on WhatsApp
+function shareOnWhatsApp(event) {
+    event.preventDefault();
+    const vehicle = getVehicleShareData();
+    const shareText = `🚗 *${vehicle.title}*\n💰 Price: ${vehicle.price}\n📝 ${vehicle.description}\n🔗 View full details: ${vehicle.url}`;
+    const encodedText = encodeURIComponent(shareText);
+    window.open(`https://wa.me/?text=${encodedText}`, '_blank');
+}
+
+// Share on Facebook
+function shareOnFacebook(event) {
+    event.preventDefault();
+    const vehicle = getVehicleShareData();
+    
+    if (window.FB) {
+        // If Facebook SDK is loaded
+        FB.ui({
+            method: 'share',
+            href: vehicle.url,
+            hashtag: '#MagariSoko',
+            quote: `Check out this ${vehicle.title} - ${vehicle.price}. ${vehicle.description}`,
+            display: 'popup',
+        }, function(){});
+    } else {
+        // Fallback: Open Facebook share dialog
+        const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(vehicle.url)}&quote=${encodeURIComponent(`${vehicle.title} - ${vehicle.price}. ${vehicle.description}`)}`;
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+    }
+}
+
+// Share on Twitter
+function shareOnTwitter(event) {
+    event.preventDefault();
+    const vehicle = getVehicleShareData();
+    const shareText = `Check out this ${vehicle.title} - ${vehicle.price} on MagariSoko! ${vehicle.description.substring(0, 50)}... #MagariSoko #Cars`;
+    const encodedText = encodeURIComponent(shareText);
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodeURIComponent(vehicle.url)}`;
+    window.open(twitterUrl, '_blank', 'width=600,height=400');
+}
+
+// Share on Instagram (Copy to Clipboard approach since Instagram doesn't have direct web sharing)
+function shareOnInstagram(event) {
+    event.preventDefault();
+    const vehicle = getVehicleShareData();
+    const shareText = `🚗 ${vehicle.title}\n💰 ${vehicle.price}\n📝 ${vehicle.description}\n\nCheck it out on MagariSoko!\n${vehicle.url}\n\n#MagariSoko #Cars #CarDealership`;
+    
+    // Copy to clipboard
+    navigator.clipboard.writeText(shareText).then(() => {
+        alert('Vehicle details copied to clipboard! You can now paste it on Instagram Stories or Direct Messages.');
+        // Optionally open Instagram
+        window.open('https://www.instagram.com/', '_blank');
+    }).catch(err => {
+        console.error('Failed to copy:', err);
+        alert('Could not copy to clipboard. Please try again.');
+    });
+}
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const vehicleId = urlParams.get('vehicleId');
+            if (!vehicleId) {
+                alert('No vehicle ID provided.');
+                return;
+            }
+            
+
+            try {
+                // Fetch data from all APIs concurrently
+                const apiResponses = await Promise.allSettled([
+                    fetch(`/api/magari/${vehicleId}`),
+                    fetch(`/api/dealerVehicles/${vehicleId}`),
+                    fetch(`/api/magariHire/${vehicleId}`),
+                    fetch(`/api/vehicles/${vehicleId}`),
+                    fetch(`/api/flash-sale-vehicles/${vehicleId}`)
+                ]);
+        
+                let vehicle = null;
+        
+                // Function to validate and extract vehicle data
+                const extractVehicleData = async (response, mapping) => {
+                    if (response.status === 'fulfilled' && response.value.ok) {
+                        try {
+                            const data = await response.value.json();
+                            console.log('Parsed API response data:', data); //Log parsed data
+                            //Adjust validation to directly check the structure of my API response
+                            if (data.success && data.vehicle) {
+                                console.log('Vehicle data extracted:', data);
+                                return {
+                                    images: data.vehicle[mapping.images] || [],
+                                    make: data.vehicle[mapping.make] || 'N/A',
+                                    model: data.vehicle[mapping.model] || 'N/A',
+                                    price: data.vehicle[mapping.price] || 'N/A',
+                                    fuel: data.vehicle[mapping.fuel] || 'N/A',
+                                    color: data.vehicle[mapping.color] || 'N/A',
+                                    status: data.vehicle[mapping.status] || 'N/A',
+                                    Interior: data.vehicle[mapping.interior] || 'N/A',
+                                    kilometers: data.vehicle[mapping.kilometers] || 'N/A',
+                                    transmission: data.vehicle[mapping.transmission] || 'N/A',
+                                    engine: data.vehicle[mapping.engine] || 'N/A',
+                                    dealer_name: data.vehicle[mapping.dealer_name] || 'N/A',
+                                    phone_number: data.vehicle[mapping.phone_number] || 'N/A',
+                                    year: data.vehicle[mapping.year] || 'N/A',
+                                    description: data.vehicle[mapping.description] || 'N/A',
+                                };
+                            }
+                        } catch (err) {
+                            console.error('Error parsing JSON:', err);
+                        }
+                    }
+                    return null;
+                };
+        
+                // Priority check for APIs
+                const mappings = [
+                    { images: 'vehicle_images', make: 'vehicle_make', model: 'vehicle_model', price: 'vehicle_price', fuel: 'type_of_fuel', engine: 'engine_capacity', dealer_name: 'dealer_name', phone_number: 'phone_number', year: 'vehicle_year', status:'status', color:'color', interior:'Interior', kilometers:'kilometers', transmission: 'transmission', description: 'vehicle_description' },
+                    { images: 'vehicle_images', make: 'vehicle_make', model: 'vehicle_model', price: 'vehicle_price', fuel: 'type_of_fuel', engine: 'engine_capacity', dealer_name: 'dealer_name', phone_number: 'phone_number', year: 'vehicle_year', status:'status', color:'color', interior:'Interior', kilometers:'kilometers', transmission: 'transmission', description: 'vehicle_description' },
+                    { images: 'vehicle_images', make: 'vehicle_make', model: 'vehicle_model', price: 'vehicle_price', fuel: 'type_of_fuel', engine: 'engine_capacity', dealer_name: 'dealer_name', phone_number: 'phone_number', year: 'vehicle_year', status:'status', color:'color', interior:'Interior', kilometers:'kilometers', transmission: 'transmission', description: 'vehicle_description' },
+                    { images: 'vehicle_images', make: 'vehicle_make', model: 'vehicle_model', price: 'vehicle_price', fuel: 'type_of_fuel', engine: 'engine_capacity', dealer_name: 'dealer_name', phone_number: 'phone_number', year: 'vehicle_year', status:'status', color:'color', interior:'Interior', kilometers:'kilometers', transmission: 'transmission', description: 'vehicle_description' },
+                    { images: 'vehicle_images', make: 'vehicle_make', model: 'vehicle_model', price: 'vehicle_price', fuel: 'type_of_fuel', engine: 'engine_capacity', dealer_name: 'dealer_name', phone_number: 'phone_number', year: 'vehicle_year', status:'status', color:'color', interior:'Interior', kilometers:'kilometers', transmission: 'transmission', description: 'vehicle_description' }
+                ];
+        
+                for (let i = 0; i < apiResponses.length; i++) {
+                    vehicle = await extractVehicleData(apiResponses[i], mappings[i]);
+                    if (vehicle) break; // Exit loop if vehicle data is found
+                }
+        
+                if (!vehicle) {
+                    alert('Vehicle not found in all the APIs.');
+                    return;
+                } 
+        
+                // Update vehicle details (UI)
+                document.getElementById('vehicleTitle').textContent = `${vehicle.make} ${vehicle.model}`;
+                document.getElementById('vehiclePrice').textContent = `Ksh. ${vehicle.price.toLocaleString()}`;
+                document.getElementById('contactPrice').textContent = `Ksh. ${vehicle.price.toLocaleString()}`;
+                document.getElementById('dealerName').textContent = vehicle.dealer_name;
+                document.getElementById('contactDealerName').textContent = vehicle.dealer_name;
+                document.getElementById('vehicleKilometers').textContent = vehicle.kilometers.toLocaleString();
+                document.getElementById('vehicleStatus').textContent = vehicle.status;
+                document.getElementById('contactStatus').textContent = vehicle.status;
+                document.getElementById('vehicleColor').textContent = vehicle.color;
+                document.getElementById('vehicleTransmission').textContent = vehicle.transmission;
+                document.getElementById('vehicleInterior').textContent = vehicle.Interior;
+                document.getElementById('dealerPhone').textContent = vehicle.phone_number;
+                document.getElementById('contactDealerPhone').textContent = vehicle.phone_number;
+                document.getElementById('vehicleYear').textContent = vehicle.year;
+                document.getElementById('vehicleFuel').textContent = vehicle.fuel;
+                document.getElementById('vehicleEngine').textContent = vehicle.engine;
+                document.getElementById('vehicleDescription').textContent = vehicle.description;
+        
+                // Update image gallery
+                const mainImage = document.getElementById('mainImage');
+                const thumbnails = document.getElementById('thumbnails');
+                if (vehicle.images.length > 0) {
+                    mainImage.src = vehicle.images[0];
+                    let currentImageIndex = 0;
+        
+                    const fullscreenContainer = document.createElement('div');
+                    fullscreenContainer.id = 'fullscreenContainer';
+                    fullscreenContainer.innerHTML = `
+                        <div id="fullscreenImageWrapper">
+                            <img id="fullscreenImage" src="" alt="Vehicle Image">
+                            <button id="prevImage">&#10094;</button>
+                            <button id="nextImage">&#10095;</button>
+                            <button id="closeFullscreen">✕</button>
+                        </div>
+                    `;
+                    document.body.appendChild(fullscreenContainer);
+        
+                    const fullscreenImage = document.getElementById('fullscreenImage');
+                    const prevButton = document.getElementById('prevImage');
+                    const nextButton = document.getElementById('nextImage');
+                    const closeFullscreen = document.getElementById('closeFullscreen');
+        
+                    const openFullscreen = (index) => {
+                        currentImageIndex = index;
+                        fullscreenImage.src = vehicle.images[currentImageIndex];
+                        fullscreenContainer.style.display = 'flex';
+                    };
+        
+                    const closeFullscreenView = () => {
+                        fullscreenContainer.style.display = 'none';
+                    };
+        
+                    const showNextImage = () => {
+                        currentImageIndex = (currentImageIndex + 1) % vehicle.images.length;
+                        fullscreenImage.src = vehicle.images[currentImageIndex];
+                    };
+        
+                    const showPrevImage = () => {
+                        currentImageIndex = (currentImageIndex - 1 + vehicle.images.length) % vehicle.images.length;
+                        fullscreenImage.src = vehicle.images[currentImageIndex];
+                    };
+        
+                    closeFullscreen.addEventListener('click', closeFullscreenView);
+                    nextButton.addEventListener('click', showNextImage);
+                    prevButton.addEventListener('click', showPrevImage);
+        
+                    vehicle.images.forEach((image, index) => {
+                        const img = document.createElement('img');
+                        img.src = image;
+                        img.alt = `Vehicle Image ${index + 1}`;
+                        img.classList.add('thumbnail');
+                        img.addEventListener('click', () => {
+                            mainImage.src = image;
+                            openFullscreen(index);
+                        });
+                        thumbnails.appendChild(img);
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching vehicle details:', error);
+                alert('An error occurred while fetching vehicle details.');
+            }
+        });
+    </script>
+</body>
+</html>
