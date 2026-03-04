@@ -667,7 +667,7 @@
                   <div class="modal-content" style="padding:20px; border-radius:10px;">
                     <h4 class="text-center">How to Pay via M-Pesa</h4>
                     <ol>
-                      <li><strong>Copy the till number:</strong> <span id="tillNumber">124676</span> <button id="copyTill" class="btn btn-sm btn-outline-secondary"><i class="fa fa-copy"></i></button></li>
+                      <li><strong>Copy the till number:</strong> <span id="tillNumber">3248567</span> <button id="copyTill" class="btn btn-sm btn-outline-secondary"><i class="fa fa-copy"></i></button></li>
                       <li>Open your M-Pesa app or toolkit</li>
                       <li>Select <em>Buy Goods &amp; Services</em></li>
                       <li>Paste the copied till number</li>
@@ -974,7 +974,7 @@
       // copy till number when user clicks icon
       document.addEventListener('click', (e) => {
           if (e.target.id === 'copyTill' || e.target.closest('#copyTill')) {
-              navigator.clipboard.writeText('124676')
+              navigator.clipboard.writeText('3248567')
                   .then(() => alert('Till number copied'))
                   .catch(err => console.error('Clipboard error', err));
           }
