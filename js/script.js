@@ -423,7 +423,7 @@ checkUserStatus();
 //js code for feeding the user dashboard
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const response = await fetch('/api/user-info', {
+    const response = await fetch('https://magarisoko-backend.onrender.com/api/user-info', {
       credentials: 'include'  // ✅ send cookie
     });
 

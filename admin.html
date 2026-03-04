@@ -1200,7 +1200,7 @@
             // display pending subscriptions awaiting admin approval
             async function showapprovals() {
                 try {
-                    const res = await fetch('/api/pending-subscriptions');
+                    const res = await fetch('https://magarisoko-backend.onrender.com/api/pending-subscriptions');
                     const list = await res.json();
 
                     let rows = '';
@@ -1254,7 +1254,7 @@
                         btn.addEventListener('click', async () => {
                             const id = btn.dataset.id;
                             if (confirm('Approve this subscription?')) {
-                                const r = await fetch(`/api/pending-subscriptions/${id}/approve`, { method: 'POST' });
+                                const r = await fetch(`https://magarisoko-backend.onrender.com/api/pending-subscriptions/${id}/approve`, { method: 'POST' });
                                 if (r.ok) {
                                     alert('Approved');
                                     showapprovals();
@@ -1269,7 +1269,7 @@
                         btn.addEventListener('click', async () => {
                             const id = btn.dataset.id;
                             if (confirm('Deny and remove this request?')) {
-                                const r = await fetch(`/api/pending-subscriptions/${id}/deny`, { method: 'POST' });
+                                const r = await fetch(`https://magarisoko-backend.onrender.com/api/pending-subscriptions/${id}/deny`, { method: 'POST' });
                                 if (r.ok) {
                                     alert('Denied');
                                     showapprovals();
@@ -1326,7 +1326,7 @@
                 const content = `  
                 <div id="vehicleAddForm">
                     <h2 style="text-align:center;">Add New Vehicle</h2>
-                    <form id="Newvehicle-form" action="/api/magari" method="POST" enctype="multipart/form-data">
+                    <form id="Newvehicle-form" action="https://magarisoko-backend.onrender.com/api/magari" method="POST" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="vehicle_image">Upload Photos:</label>
@@ -1446,7 +1446,7 @@
 
                     const formData = new FormData(this);
 
-                    fetch('/api/magari', {
+                    fetch('https://magarisoko-backend.onrender.com/api/magari', {
                         method: 'POST',
                         body: formData
                     })
@@ -1470,7 +1470,7 @@
                 const content = `  
                 <div id="vehicleAddForm">
                     <h2 style="text-align:center;">New Vehicle For Hire</h2>
-                        <form id="Newvehicle-form" action="/api/magariHire" method="POST" enctype="multipart/form-data">
+                        <form id="Newvehicle-form" action="https://magarisoko-backend.onrender.com/api/magariHire" method="POST" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="vehicle_image">Upload Photos:</label>
@@ -1592,7 +1592,7 @@
 
                     const formData = new FormData(this);
                     
-                    fetch('/api/magariHire', {
+                    fetch('https://magarisoko-backend.onrender.com/api/magariHire', {
                         method: 'POST',
                         body: formData
                     })
@@ -1622,7 +1622,7 @@
 
             async function showDealers() {
                 try {
-                    const response = await fetch('/api/dealers');
+                    const response = await fetch('https://magarisoko-backend.onrender.com/api/dealers');
                     const dealers = await response.json();
 
                     const dealerCards = dealers.map(dealer => `
@@ -1672,7 +1672,7 @@
                     //Fetch dealer details by Id
                     async function fetchDealerDetailsById(dealerId) {
                         try {
-                            const response = await fetch(`/api/dealers/${dealerId}`);
+                            const response = await fetch(`https://magarisoko-backend.onrender.com/api/dealers/${dealerId}`);
                             if (!response.ok) {
                                 throw new Error('Failed to fetch dealer by ID');
                             }
@@ -1749,7 +1749,7 @@
                             const deletionConfirmation = confirm('Are you sure you want to delete this dealer?');
                             if (deletionConfirmation) {
                                 try {
-                                    const response = await fetch(`/api/dealers/${dealerId}`, {
+                                    const response = await fetch(`https://magarisoko-backend.onrender.com/api/dealers/${dealerId}`, {
                                         method: 'DELETE',
                                     });
 
@@ -1771,7 +1771,7 @@
 
             async function showUsers() {
                 try{
-                    const response = await fetch('/api/users');
+                    const response = await fetch('https://magarisoko-backend.onrender.com/api/users');
                     const users = await response.json();
 
                     const userCards = users.map((user, index) => {
@@ -1842,7 +1842,7 @@
                     //Fetch User Details for editing purposes
                     async function fetchUserById(userId) {
                         try {
-                            const response = await fetch(`/api/users/${userId}`);
+                            const response = await fetch(`https://magarisoko-backend.onrender.com/api/users/${userId}`);
                             if (!response.ok) {
                                 throw new Error('Failed to fetch user details');
                             }
@@ -1894,7 +1894,7 @@
                             email: document.getElementById('editUserEmail').value,
                         };
 
-                        const response = await fetch(`/api/users/${userId}`, {
+                        const response = await fetch(`https://magarisoko-backend.onrender.com/api/users/${userId}`, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -1917,7 +1917,7 @@
                             const userId = this.getAttribute('data-id');
                             const deletionConfirmation = confirm('Are you sure you want to delete this user?');
                             if (deletionConfirmation) {
-                                fetch(`/api/users/${userId}`, {
+                                fetch(`https://magarisoko-backend.onrender.com/api/users/${userId}`, {
                                     method: 'DELETE',
                                 })
                                 .then(response => {
@@ -1940,7 +1940,7 @@
 
             async function showMagaris() {
                 try {
-                    const response = await fetch('/api/magari');
+                    const response = await fetch('https://magarisoko-backend.onrender.com/api/magari');
 
                     if (!response.ok) {
                         throw new Error('Failed to fetch vehicle data');
@@ -2128,7 +2128,7 @@
                             phone_number: document.getElementById('phone_number').value
                         };
 
-                        const response = await fetch(`/api/magariEdits/${vehicleId}`, {
+                        const response = await fetch(`https://magarisoko-backend.onrender.com/api/magariEdits/${vehicleId}`, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -2151,7 +2151,7 @@
                             const vehicleId = this.getAttribute('data-id');
                             const deleteConfirm = confirm('Are you sure you want to delete this vehicle?');
                             if (deleteConfirm) {
-                                fetch(`/api/magari/${vehicleId}`, {
+                                fetch(`https://magarisoko-backend.onrender.com/api/magari/${vehicleId}`, {
                                     method: 'DELETE'
                                 })
                                 .then(response => {
@@ -2175,7 +2175,7 @@
             //Handle the showing of Client Vehicles and editing of the vehicle
             async function showClientVehicles() {
                 try{
-                    const response = await fetch('api/vehicles');
+                    const response = await fetch('https://magarisoko-backend.onrender.com/api/vehicles');
 
                     if(!response.ok) {
                         throw new Error('Failed to fetch vehicle data');
@@ -2257,7 +2257,7 @@
                 //Fetch vehicle details by Id
                 async function fetchVehicleById(vehicleId) {
                     try {
-                        const response = await fetch(`/api/vehicles/${vehicleId}`);
+                        const response = await fetch(`https://magarisoko-backend.onrender.com/api/vehicles/${vehicleId}`);
                         if (!response.ok) {
                             throw new Error('Failed to fetch vehicle details');
                         }
@@ -2343,7 +2343,7 @@
                     };
 
                     try {
-                        const response = await fetch(`/api/vehicles/${vehicleId}`, {
+                        const response = await fetch(`https://magarisoko-backend.onrender.com/api/vehicles/${vehicleId}`, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -2368,7 +2368,7 @@
                                 const vehicleId = this.getAttribute('data-id');
                                 const deleteConfirm = confirm('Are you sure you want to delete this vehicle?');
                                 if (deleteConfirm) {
-                                    fetch(`/api/vehicles/${vehicleId}`, {
+                                    fetch(`https://magarisoko-backend.onrender.com/api/vehicles/${vehicleId}`, {
                                         method: 'DELETE'
                                     })
                                     .then(response => {
@@ -2392,7 +2392,7 @@
             //Displaying and Editing the Dealer Vehicles
             async function showDealerVehicles() {
                 try{
-                    const response = await fetch('/api/dealerVehicles');
+                    const response = await fetch('https://magarisoko-backend.onrender.com/api/dealerVehicles');
 
                     if (!response.ok){
                         throw new Error('Failed to fetch vehicle data');
@@ -2597,7 +2597,7 @@
         <script>
             async function showHireVehicles() {
                 try{
-                    const response = await fetch('/api/magariHire');
+                    const response = await fetch('https://magarisoko-backend.onrender.com/api/magariHire');
 
                     if(!response.ok) {
                         throw new Error('Failed to fetch Vehicle data');
@@ -3185,7 +3185,7 @@
                     const checkboxes = document.querySelectorAll('.flash-sale-checkbox');
                     const flashSaleVehicleIds = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.getAttribute('data-id'));
 
-                    const response = await fetch('/api/flash-sale', {
+                    const response = await fetch('https://magarisoko-backend.onrender.com/api/flash-sale', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'

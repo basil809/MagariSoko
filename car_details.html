@@ -604,7 +604,7 @@
                 <div class="modal-content">  
                     <span class="close">&times;</span>  
                     <h2>Message Dealer</h2>  
-                    <form id="messageForm" action="/api/ClientMesso" method="POST" enctype="multipart/form-data">  
+                    <form id="messageForm" action="https://magarisoko-backend.onrender.com/api/ClientMesso" method="POST" enctype="multipart/form-data">  
                         <label for="vehicleID">Car ID:</label>  
                         <input type="text" id="vehicleID" name="vehicleID" value="${carId}" readonly><br><br>  
                         
@@ -722,7 +722,7 @@ document.getElementById('sendMessageButton').addEventListener('click', function 
     const vehicleId = document.getElementById('vehicleId').value;
     const receiverId = document.getElementById('dealerId').value;
 
-    fetch('/api/messages/send', {
+    fetch('https://magarisoko-backend.onrender.com/api/messages/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ senderId: userId, receiverId, vehicleId, messageText })
@@ -827,11 +827,11 @@ function shareOnInstagram(event) {
             try {
                 // Fetch data from all APIs concurrently
                 const apiResponses = await Promise.allSettled([
-                    fetch(`/api/magari/${vehicleId}`),
-                    fetch(`/api/dealerVehicles/${vehicleId}`),
-                    fetch(`/api/magariHire/${vehicleId}`),
-                    fetch(`/api/vehicles/${vehicleId}`),
-                    fetch(`/api/flash-sale-vehicles/${vehicleId}`)
+                    fetch(`https://magarisoko-backend.onrender.com/api/magari/${vehicleId}`),
+                    fetch(`https://magarisoko-backend.onrender.com/api/dealerVehicles/${vehicleId}`),
+                    fetch(`https://magarisoko-backend.onrender.com/api/magariHire/${vehicleId}`),
+                    fetch(`https://magarisoko-backend.onrender.com/api/vehicles/${vehicleId}`),
+                    fetch(`https://magarisoko-backend.onrender.com/api/flash-sale-vehicles/${vehicleId}`)
                 ]);
         
                 let vehicle = null;

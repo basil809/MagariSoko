@@ -270,7 +270,7 @@
     </div>
     <section class="content_section">
         <h1>Sell Your Car</h1>
-        <form id="sell-form" action="/api/vehicles" method="post" enctype="multipart/form-data">
+        <form id="sell-form" action="https://magarisoko-backend.onrender.com/api/vehicles" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-4">
                     <label for="vehiclePhotos">Upload Photos:</label>
@@ -542,7 +542,7 @@
             const formData = new FormData(form);
 
             try {
-                const response = await fetch('/api/vehicles', {
+                const response = await fetch('https://magarisoko-backend.onrender.com/api/vehicles', {
                     method: 'POST',
                     credentials: 'include',
                     body: formData
@@ -575,7 +575,7 @@
 
         // Check subscription
         async function checkSubscriptionStatus() {
-            const res = await fetch('/api/check-subscription', { credentials: 'include' });
+            const res = await fetch('https://magarisoko-backend.onrender.com/api/check-subscription', { credentials: 'include' });
 
             if (!res.ok){
                 console.error('Subscription check failed', res.status);
@@ -641,7 +641,7 @@
             formData.append('mpesaCode', manual.get('mpesaCode'));
 
             try {
-                const res = await fetch('/api/mpesa/manual', {
+                const res = await fetch('https://magarisoko-backend.onrender.com/api/mpesa/manual', {
                     method: 'POST',
                     credentials: 'include',
                     body: formData

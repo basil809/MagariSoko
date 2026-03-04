@@ -1074,7 +1074,7 @@
             formData.append('mpesaCode', manual.get('mpesaCode'));
 
             try {
-                const res = await fetch('/api/mpesa/manual', {
+                const res = await fetch('https://magarisoko-backend.onrender.com/api/mpesa/manual', {
                     method: 'POST',
                     credentials: 'include',
                     body: formData
@@ -1175,7 +1175,7 @@
         // Check if dealer has subscription
         async function checkDealerSubscription() {
             try {
-                const res = await fetch('/api/check-dealer-subscription', { credentials: 'include' });
+                const res = await fetch('https://magarisoko-backend.onrender.com/api/check-dealer-subscription', { credentials: 'include' });
                 if (!res.ok) {
                     console.error('Subscription check failed', res.status);
                     return false;
@@ -1260,7 +1260,7 @@
                     const vehicleId = this.getAttribute('data-id');
                     const confirmed = confirm('Are you sure you want to delete this vehicle?');
                     if (confirmed) {
-                        fetch(`/api/dealerVehicles/${vehicleId}`, {
+                        fetch(`https://magarisoko-backend.onrender.com/api/dealerVehicles/${vehicleId}`, {
                             method: 'DELETE'
                         })
                         .then(response => {
@@ -1351,7 +1351,7 @@
             formData.append('Interior',updatedVehicle.Interior);
 
             // Send the PUT request to update the vehicle details
-            fetch(`/api/editVehicle/${vehicleId}`, {
+            fetch(`https://magarisoko-backend.onrender.com/api/editVehicle/${vehicleId}`, {
                 method: 'PUT',
                 body: formData,
             })
