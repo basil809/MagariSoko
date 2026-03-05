@@ -260,9 +260,9 @@
 
         vehicles.forEach(vehicle => {
             const imageField = vehicle.images && vehicle.images.length > 0
-                ? vehicle.images[0]
+                ? 'https://magarisoko-backend.onrender.com/' + vehicle.images[0]
                 : (vehicle.vehicle_images && vehicle.vehicle_images.length > 0
-                    ? vehicle.vehicle_images[0]
+                    ? 'https://magarisoko-backend.onrender.com/' + vehicle.vehicle_images[0]
                     : 'placeholder.jpg'); // Fallback to placeholder
                     
             const vehicleCard = document.createElement('div');
