@@ -1448,14 +1448,16 @@
 
                     fetch('https://magarisoko-backend.onrender.com/api/magari', {
                         method: 'POST',
+                        credentials: 'include',
                         body: formData
                     })
-                    .then(response => {
-                        if (response.ok) {
+                    .then(response => response.json().then(data => ({ ok: response.ok, data })))
+                    .then(({ ok, data }) => {
+                        if (ok) {
                             alert('Vehicle has been posted successfully!');
-                            this.reset(); // Reset the form on success
+                            document.getElementById('Newvehicle-form').reset();
                         } else {
-                            throw new Error('Failed to post the vehicle');
+                            throw new Error(data.message || 'Failed to post the vehicle');
                         }
                     })
                     .catch(error => {
@@ -1594,14 +1596,16 @@
                     
                     fetch('https://magarisoko-backend.onrender.com/api/magariHire', {
                         method: 'POST',
+                        credentials: 'include',
                         body: formData
                     })
-                    .then(response => {
-                        if (response.ok) {
+                    .then(response => response.json().then(data => ({ ok: response.ok, data })))
+                    .then(({ ok, data }) => {
+                        if (ok) {
                             alert('Vehicle has been posted successfully!');
-                            this.reset();
+                            document.getElementById('Newvehicle-form').reset();
                         } else {
-                            throw new Error('Failed to post the vehicle');
+                            throw new Error(data.message || 'Failed to post the vehicle');
                         }
                     })
                     .catch(error => {
