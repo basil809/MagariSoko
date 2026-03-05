@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             };
 
             try {
-                const response = await fetch('/login', {
+                const response = await fetch('https://magarisoko-backend.onrender.com/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
@@ -297,9 +297,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
             try {
                 // Send POST request to the server
-                const response = await fetch('/signup', {
+                const response = await fetch('https://magarisoko-backend.onrender.com/signup', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
                     body: JSON.stringify(formData),
                 });
 
@@ -357,7 +358,7 @@ window.onclick = function (event) {
 // Check if the user is already logged in
 const checkUserStatus = async () => {
     try {
-        const response = await fetch('/check-login-status', { 
+        const response = await fetch('https://magarisoko-backend.onrender.com/check-login-status', { 
             method: 'GET',
             credentials: 'include'
          });
@@ -393,7 +394,7 @@ const checkUserStatus = async () => {
             logoutLink.addEventListener('click', async (e) => {
                 e.preventDefault();
                 try {
-                    await fetch('/logout', { method: 'POST' });
+                    await fetch('https://magarisoko-backend.onrender.com/logout', { method: 'POST', credentials: 'include' });
                     btn.innerHTML = 'Login | Register';
                     btn.style.backgroundColor = '';
                     btn.style.color = '';
