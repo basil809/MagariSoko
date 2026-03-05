@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     dropdownMenu.style.zIndex = '1000';
     dropdownMenu.style.padding = '10px';
     dropdownMenu.innerHTML = `
-        <a href="/dashboard" id="dashboardLink" style="display: block; color: black; text-decoration: none; margin-bottom: 10px;">Dashboard</a>
+        <a href="/dashboard.html" id="dashboardLink" style="display: block; color: black; text-decoration: none; margin-bottom: 10px;">Dashboard</a>
         <a href="#" id="logoutLink" style="display: block; color: black; text-decoration: none;">Logout</a>
     `;
     
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     localStorage.setItem('username', result.username);
                     updateLoginButton(result.username);
 
-                    setTimeout(() => window.location.href = '/dashboard', 3000);
+                    setTimeout(() => window.location.href = '/dashboard.html', 3000);
                 } else {
                     showToast(result.error || 'Login failed', 'error', 4000);
                 }
@@ -371,7 +371,7 @@ const checkUserStatus = async () => {
                     <img src="images/user_image_icon.png" alt="User Icon" class="user-icon">
                     <span class="user-name">${data.username}</span>
                     <div class="dropdown-menu">
-                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/dashboard.html">Dashboard</a></li>
                         <li><a href="#" id="logoutBtn">Logout</a></li>
                     </div>
                 </div>
