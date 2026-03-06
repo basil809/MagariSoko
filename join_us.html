@@ -497,6 +497,12 @@ var signupModal = document.getElementById("sign_modal");
 var dealerLoginBtn = document.getElementById("d_login_btn");
 var dealerLoginModal = document.getElementById("dealerLoginModal");
 
+// Event listener for the dealer login button
+dealerLoginBtn.onclick = function() {
+    // Always show the dealer login modal (no need to check user login status)
+    dealerLoginModal.style.display = "block";
+}
+
 // Event listener for the sign-up button
 signupBtn.onclick = async function() {
     const isLoggedIn = await checkLoginStatus();
