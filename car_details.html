@@ -909,10 +909,11 @@ function shareOnInstagram(event) {
                 document.getElementById('vehicleDescription').textContent = vehicle.description;
         
                 // Update image gallery
+                const BASE_URL = "https://magarisoko-backend.onrender.com/";
                 const mainImage = document.getElementById('mainImage');
                 const thumbnails = document.getElementById('thumbnails');
                 if (vehicle.images.length > 0) {
-                    mainImage.src = vehicle.images[0];
+                    mainImage.src = BASE_URL + vehicle.images[0];
                     let currentImageIndex = 0;
         
                     const fullscreenContainer = document.createElement('div');
@@ -934,7 +935,7 @@ function shareOnInstagram(event) {
         
                     const openFullscreen = (index) => {
                         currentImageIndex = index;
-                        fullscreenImage.src = vehicle.images[currentImageIndex];
+                        fullscreenImage.src = BASE_URL + vehicle.images[currentImageIndex];
                         fullscreenContainer.style.display = 'flex';
                     };
         
@@ -944,12 +945,12 @@ function shareOnInstagram(event) {
         
                     const showNextImage = () => {
                         currentImageIndex = (currentImageIndex + 1) % vehicle.images.length;
-                        fullscreenImage.src = vehicle.images[currentImageIndex];
+                        fullscreenImage.src = BASE_URL + vehicle.images[currentImageIndex];
                     };
         
                     const showPrevImage = () => {
                         currentImageIndex = (currentImageIndex - 1 + vehicle.images.length) % vehicle.images.length;
-                        fullscreenImage.src = vehicle.images[currentImageIndex];
+                        fullscreenImage.src = BASE_URL + vehicle.images[currentImageIndex];
                     };
         
                     closeFullscreen.addEventListener('click', closeFullscreenView);
@@ -958,7 +959,7 @@ function shareOnInstagram(event) {
         
                     vehicle.images.forEach((image, index) => {
                         const img = document.createElement('img');
-                        img.src = image;
+                        img.src = BASE_URL + image;
                         img.alt = `Vehicle Image ${index + 1}`;
                         img.classList.add('thumbnail');
                         img.addEventListener('click', () => {
