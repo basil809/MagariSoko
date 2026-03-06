@@ -394,11 +394,19 @@ const checkUserStatus = async () => {
             logoutLink.addEventListener('click', async (e) => {
                 e.preventDefault();
                 try {
-                    await fetch('https://magarisoko-backend.onrender.com/logout', { method: 'POST', credentials: 'include' });
-                    btn.innerHTML = 'Login | Register';
-                    btn.style.backgroundColor = '';
-                    btn.style.color = '';
-                    btn.dataset.loggedIn = "false";
+                    await fetch('https://magarisoko-backend.onrender.com/logout', {
+                        method: 'POST', 
+                        credentials: 'include' 
+                    });
+                    if (response.ok) {
+                        btn.innerHTML = 'Login | Register';
+                        btn.style.backgroundColor = '';
+                        btn.style.color = '';
+                        btn.dataset.loggedIn = "false";
+
+                        // Optionally, redirect to homepage
+                        window.location.href = '/index.html';
+                    }
                 } catch (error) {
                     console.error('Logout failed:', error);
                 }
