@@ -236,7 +236,7 @@
     // Fetch vehicles from the server
     async function fetchVehicles(type) {
         try {
-            const response = await fetch(`/vehicles/${type}`);
+            const response = await fetch(`https://magarisoko-backend.onrender.com/vehicles/${type}`);
             if (!response.ok) {
                 throw new Error(`Failed to fetch vehicles: ${response.status}`);
             }

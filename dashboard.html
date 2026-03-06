@@ -801,7 +801,7 @@
                     vehicleCards += `
                         <div class="col-md-3 mb-4">
                             <div class="card">
-                                <img src="https://magarisoko-backend.onrender.com/${vehicle.vehicle_images[0]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                <img src="${vehicle.vehicle_images[0]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
                                 <div class="card-body">
                                     <h5 class="card-title"><strong>${vehicle.vehicle_make} ${vehicle.vehicle_model}</strong></h5>
                                     <p class="card-text"><strong>Price:</strong> ${vehicle.vehicle_price}</p>
@@ -1232,7 +1232,7 @@
         // Fetch and display the logged-in user's username in the notification
         document.addEventListener('DOMContentLoaded', async () => {
           try {
-            const response = await fetch('/user-info');
+            const response = await fetch('https://magarisoko-backend.onrender.com/user-info');
             const result = await response.json();
 
             if (result.success && result.dealer) {
