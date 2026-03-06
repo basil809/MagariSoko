@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const response = await fetch('/dealer-info');
+        const response = await fetch('https://magarisoko-backend.onrender.com/dealer-info');
         const data = await response.json();
 
         if (data.success) {
@@ -50,7 +50,7 @@ function attachEventListeners() {
         // Confirm with the user before deletion
         if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
             try {
-                const response = await fetch(`/delete-dealer/${dealerId}`, {
+                const response = await fetch(`https://magarisoko-backend.onrender.com/delete-dealer/${dealerId}`, {
                     method: 'DELETE'
                 });
 
@@ -59,7 +59,7 @@ function attachEventListeners() {
                 if (result.success) {
                     alert('Your account has been successfully deleted.');
                     // Optionally, redirect to homepage or login page
-                    window.location.href = '/';
+                    window.location.href = '/index.html';
                 } else {
                     alert(result.message || 'Failed to delete account.');
                 }
@@ -143,7 +143,7 @@ document.getElementById('edit-dealer-form').addEventListener('submit', function(
         address: document.getElementById('user_address').value
     };
 
-    fetch(`/update-dealer/${dealerId}`, {
+    fetch(`https://magarisoko-backend.onrender.com/update-dealer/${dealerId}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
