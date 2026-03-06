@@ -789,6 +789,28 @@
                 });
             </script>
             <script>
+                // Logout functionality
+                document.getElementById('logoutBtn').addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    try {
+                        const response = await fetch('https://magarisoko-backend.onrender.com/logout', {
+                            method: 'GET',
+                            credentials: 'include'
+                        });
+                        if (response.ok) {
+                            // Hide user menu and show login button
+                            document.getElementById('userMenu').style.display = 'none';
+                            document.getElementById('loginBtn').style.display = 'block';
+                            // Reload the page to reset state
+                            window.location.reload();
+                        }
+                    } catch (error) {
+                        console.error('Logout error:', error);
+                        alert('Logout failed. Please try again.');
+                    }
+                });
+            </script>
+            <script>
                 document.addEventListener('DOMContentLoaded', function(){
                     fetch('https://magarisoko-backend.onrender.com/api/magari')
                     .then(response => response.json())
