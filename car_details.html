@@ -963,7 +963,7 @@ function shareOnInstagram(event) {
                         img.alt = `Vehicle Image ${index + 1}`;
                         img.classList.add('thumbnail');
                         img.addEventListener('click', () => {
-                            mainImage.src = image;
+                            mainImage.src = BASE_URL + image;
                             openFullscreen(index);
                         });
                         thumbnails.appendChild(img);
