@@ -1192,13 +1192,13 @@
         // Fetch and display the logged-in user's username in the notification
         document.addEventListener('DOMContentLoaded', async () => {
           try {
-            const response = await fetch('/user-info');
+            const response = await fetch('https://magarisoko-backend.onrender.com/api/user-info', { credentials: 'include' });
             const result = await response.json();
 
-            if (result.success && result.dealer) {
+            if (result.username) {
               const dealerNameEl = document.getElementById('dealerName');
               if (dealerNameEl) {
-                dealerNameEl.textContent = result.dealer.username;
+                dealerNameEl.textContent = result.username;
               }
             }
           } catch (error) {
