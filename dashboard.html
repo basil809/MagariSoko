@@ -926,7 +926,7 @@
       // Check login status
       async function checkLoginStatus() {
         try {
-          const res = await fetch('/check-login-status');
+          const res = await fetch('https://magarisoko-backend.onrender.com/check-login-status', { credentials: 'include' });
           if (!res.ok) return false;
           const data = await res.json();
           return data.loggedIn;
@@ -1158,7 +1158,7 @@
               dealer_name: document.getElementById('edit-dealer').value
             };
         
-            fetch(`/api/User-vehicles/${vehicleId}`, {
+            fetch(`https://magarisoko-backend.onrender.com/api/User-vehicles/${vehicleId}`, {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json'
