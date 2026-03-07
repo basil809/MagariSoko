@@ -284,9 +284,9 @@
                                     (vehicle) => `
                                     <div class="col-md-3 mb-4">
                                         <div class="card">
-                                            <img src="https://magarisoko-backend.onrender.com/${vehicle.vehicle_images[0] || 'placeholder.jpg'}" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                            <img src="${vehicle.vehicle_images[0] || 'placeholder.jpg'}" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
                                             <h3>${vehicle.vehicle_make} ${vehicle.vehicle_model}</h3>
-                                            <p>Price: ${vehicle.vehicle_price}</p>
+                                            <p>Price: ${vehicle.vehicle_price.toLocalString()}</p>
                                             <p>Fuel: ${vehicle.type_of_fuel}</p>
                                             <p>Engine: ${vehicle.engine_capacity}</p>
                                             <p>Description: ${vehicle.vehicle_description}</p>
@@ -327,7 +327,7 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            fetch('https://magarisoko-backend.onrender.com/api/magariHire')
+            fetch('https://magarisoko-backend.onrender.com/api/magariHire', {credentials:"include"})
             .then(response => response.json())
             .then(data => {
                 console.log(data);
