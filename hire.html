@@ -286,7 +286,7 @@
                                         <div class="card">
                                             <img src="${vehicle.vehicle_images[0] || 'placeholder.jpg'}" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
                                             <h3>${vehicle.vehicle_make} ${vehicle.vehicle_model}</h3>
-                                            <p>Price: ${vehicle.vehicle_price.toLocalString()}</p>
+                                            <p>Price: ${vehicle.vehicle_price.toLocaleString()}</p>
                                             <p>Fuel: ${vehicle.type_of_fuel}</p>
                                             <p>Engine: ${vehicle.engine_capacity}</p>
                                             <p>Description: ${vehicle.vehicle_description}</p>
@@ -341,7 +341,7 @@
                             <img src="${vehicle.vehicle_images[0]}" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
                             <div class="card-body">
                                 <h3>${vehicle.vehicle_make} ${vehicle.vehicle_model}</h3>
-                                <p>Price: Ksh.${vehicle.vehicle_price}</p>
+                                <p>Price: Ksh.${vehicle.vehicle_price.toLocaleString()}</p>
                                 <p>Fuel: ${vehicle.type_of_fuel}</p>
                                 <p>Engine: ${vehicle.engine_capacity} CC</p>
                                 <p>Dealer: ${vehicle.dealer_name}</p>
