@@ -403,9 +403,8 @@ const checkUserStatus = async () => {
                         btn.style.backgroundColor = '';
                         btn.style.color = '';
                         btn.dataset.loggedIn = "false";
-
-                        // Optionally, redirect to homepage
-                        window.location.href = '/index.html';
+                        localStorage.removeItem('username');
+                        showToast('Logged out successfully', 'success', 3000);
                     }
                 } catch (error) {
                     console.error('Logout failed:', error);
