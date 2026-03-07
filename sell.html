@@ -564,7 +564,7 @@
 
         // Check login
         async function checkLoginStatus() {
-            const res = await fetch('/check-login-status');
+            const res = await fetch('https://magarisoko-backend.onrender.com/check-login-status', { credentials: 'include'});
             if (!res.ok){
                 console.error('checking Login status failed', res.status);
                 return false;
