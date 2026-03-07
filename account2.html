@@ -419,18 +419,10 @@
                             console.log("User ID captured on edit click:", userId);
                             document.getElementById('editUserId').value = userId;
                         
-                            // Save ID to a hidden field or in JS for submission
-                            document.getElementById('editUserId').value = userId;
-
-                            // Fetch existing user data from server
-                            const res = await fetch(`https://magarisoko-backend.onrender.com/api/user-info?id=${userId}`, { credentials: 'include' });
-                            const data = await res.json();
-
-                            if (data.success) {
-                                document.getElementById('editUsername').value = data.dealer.username;
-                                document.getElementById('editEmail').value = data.dealer.email;
-                                // password field can be left blank
-                            }
+                            // Populate directly from existing user data
+                            document.getElementById('editUsername').value = user.username;
+                            document.getElementById('editEmail').value = user.email;
+                            // password field left blank
 
                             // Show the modal
                             document.getElementById('editUserModal').style.display = 'block';
@@ -448,9 +440,9 @@
                     // Handle deletion of user account
                     document.querySelector('.deleteUser').addEventListener('click', async () => {
                         if (confirm('Are you sure you want to delete your Account?')) {
-                            const res = await fetch (`/delete-user/${user._id}`, { method: 'DELETE' });
+                            const res = await fetch (`/api/users/${user._id}`, { method: 'DELETE' });
                             const result = await res.json();
-                            if (result.success) {
+                            if (result.message === 'User deleted successfully') {
                                 alert('User deleted successfully.');
                                 const card = document.querySelector('.card');
                                 card.classList.add('fade-out');
