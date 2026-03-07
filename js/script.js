@@ -395,7 +395,7 @@ const checkUserStatus = async () => {
                 e.preventDefault();
                 try {
                     await fetch('https://magarisoko-backend.onrender.com/logout', {
-                        method: 'POST', 
+                        method: 'GET', 
                         credentials: 'include' 
                     });
                     if (response.ok) {
