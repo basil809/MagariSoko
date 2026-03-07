@@ -1047,7 +1047,7 @@
         document.addEventListener("DOMContentLoaded", () => {
           const vehicleList = document.getElementById("vehicle-list");
         
-          fetch('https://magarisoko-backend.onrender.com/api/User-vehicles',{ credentials: 'include' })
+          fetch('https://magarisoko-backend.onrender.com/api/user-vehicles',{ credentials: 'include' })
             .then(res => res.json())
             .then(data => {
               if (data.success && data.vehicles.length > 0) {
