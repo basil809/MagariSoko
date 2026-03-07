@@ -2601,7 +2601,7 @@
         <script>
             async function showHireVehicles() {
                 try{
-                    const response = await fetch('https://magarisoko-backend.onrender.com/api/magariHire');
+                    const response = await fetch('https://magarisoko-backend.onrender.com/api/magariHire', {credentials:"include"});
 
                     if(!response.ok) {
                         throw new Error('Failed to fetch Vehicle data');
@@ -2796,7 +2796,7 @@
         <script>
             async function showFlashVehicle() {
                 try{
-                    const response = await fetch ('https://magarisoko-backend.onrender.com/api/magari');
+                    const response = await fetch ('https://magarisoko-backend.onrender.com/api/magari', {credentials: "include"});
 
                     if (!response.ok) {
                         throw new Error('Failed to fetch vehicle data');
@@ -2977,7 +2977,7 @@
             // Fetching the Flash Sale Vehicles and displaying them in the view vehicle section
             async function showFlashVehicles() {
                 try{
-                    const response = await fetch ('https://magarisoko-backend.onrender.com/api/flash-sale');
+                    const response = await fetch ('https://magarisoko-backend.onrender.com/api/flash-sale', {credentials:"include"});
 
                     if (!response.ok) {
                         throw new Error('Failed to fetch vehicle data');
