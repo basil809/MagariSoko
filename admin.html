@@ -2025,7 +2025,7 @@
                     //Fetch vehicle details by Id
                     async function fetchVehicleById(vehicleId) {
                         try {
-                            const response = await fetch(`/api/magari/${vehicleId}`);
+                            const response = await fetch(`https://magarisoko-backend.onrender.com/api/magari/${vehicleId}`);
                             if (!response.ok) {
                                 throw new Error('Failed to fetch vehicle details');
                             }
@@ -2202,7 +2202,7 @@
                         vehicleCards += `
                         <div class ="col-md-4">
                             <div class="card">
-                                <img src="https://magarisoko-backend.onrender.com/${vehicle.vehicle_images[1]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                <img src="${vehicle.vehicle_images[0]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
                                 <div class="card-body">
                                         <h5 class="card-title"><strong>${vehicle.vehicle_make} ${vehicle.vehicle_model}</strong></h5>
                                         <p class="card-text"><strong>Price:</strong> ${vehicle.vehicle_price.toLocaleString()}</p>
@@ -2419,7 +2419,7 @@
                         dealerVehicleCards += `
                             <div class ="col-md-4 mb-4">
                                 <div class="card">
-                                    <img src="https://magarisoko-backend.onrender.com/${vehicle.vehicle_images[1]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                    <img src="${vehicle.vehicle_images[1]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
                                     <div class="card-body">
                                         <h5 class="card-title"><strong>${vehicle.vehicle_make} ${vehicle.vehicle_model}</strong></h5>
                                         <p class="card-text"><strong>Price:</strong> ${vehicle.vehicle_price.toLocaleString()}</p>
@@ -2477,7 +2477,7 @@
                     //Fetch vehicle details by Id
                     async function fetchVehicleById(vehicleId) {
                         try {
-                            const response = await fetch(`/api/dealerVehicles/${vehicleId}`);
+                            const response = await fetch(`https://magarisoko-backend.onrender.com/api/dealerVehicles/${vehicleId}`);
                             if (!response.ok) {
                                 throw new Error('Failed to fetch vehicle by ID');
                             }
@@ -2551,7 +2551,7 @@
                         };
 
                         try {
-                            const response = await fetch(`/api/dealerVehicles/${vehicleId}`, {
+                            const response = await fetch(`https://magarisoko-backend.onrender.com/api/dealerVehicles/${vehicleId}`, {
                                 method: 'PUT',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -2577,7 +2577,7 @@
                             const vehicleId = this.getAttribute('data-id');
                             const deleteConfirm = confirm('Are you sure you want to delete this vehicle?');
                             if (deleteConfirm) {
-                                fetch(`/api/dealerVehicles/${vehicleId}`, {
+                                fetch(`https://magarisoko-backend.onrender.com/api/dealerVehicles/${vehicleId}`, {
                                     method: 'DELETE'
                                 })
                                 .then(response => {
@@ -2623,7 +2623,7 @@
                         magariHireCards+= `
                             <div class="col-md-4 mb-4">
                                 <div class="card">
-                                    <img src="https://magarisoko-backend.onrender.com/${vehicle.vehicle_images[0]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                    <img src="${vehicle.vehicle_images[0]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
                                     <div class="card-body">
                                         <h5 class="card-title"><strong>${vehicle.vehicle_make} ${vehicle.vehicle_model}</strong></h5>
                                         <p class="card-text"><strong>Price:</strong> ${vehicle.vehicle_price.toLocaleString()}</p>
@@ -2677,7 +2677,7 @@
 
                     async function fetchVehicleById(vehicleId) {
                             try {
-                                const response = await fetch(`/api/magariHire/${vehicleId}`);
+                                const response = await fetch(`https://magarisoko-backend.onrender.com/api/magariHire/${vehicleId}`);
                                 if (!response.ok){
                                     throw new Error('Failed to fetch vehicle details');
                                 }
@@ -2747,7 +2747,7 @@
                         };
 
                         try {
-                            const response = await fetch(`/api/magariHire/${vehicleId}`, {
+                            const response = await fetch(`https://magarisoko-backend.onrender.com/api/magariHire/${vehicleId}`, {
                                 method: 'PUT',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -2796,7 +2796,7 @@
         <script>
             async function showFlashVehicle() {
                 try{
-                    const response = await fetch ('/api/magari');
+                    const response = await fetch ('https://magarisoko-backend.onrender.com/api/magari');
 
                     if (!response.ok) {
                         throw new Error('Failed to fetch vehicle data');
@@ -2822,7 +2822,7 @@
                                         <input type="checkbox" data-id="${vehicle._id}" class="flash-sale-checkbox">
                                         Mark as Flash Sale
                                     </label>
-                                    <img src="https://magarisoko-backend.onrender.com/${vehicle.vehicle_images[0]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                    <img src="${vehicle.vehicle_images[0]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
                                     <div class="card-body">
                                         <h5 class="card-title"><strong>${vehicle.vehicle_make} ${vehicle.vehicle_model}</strong></h5>
                                         <p class="card-text"><strong>Price:</strong> ${vehicle.vehicle_price.toLocaleString()}</p>
@@ -2882,7 +2882,7 @@
                     //Fetch vehicle details by Id
                     async function fetchVehicleById(vehicleId) {
                         try {
-                            const response = await fetch(`/api/magari/${vehicleId}`);
+                            const response = await fetch(`https://magarisoko-backend.onrender.com/api/magari/${vehicleId}`);
                             if (!response.ok) {
                                 throw new Error('Failed to fetch vehicle details');
                             }
@@ -2952,7 +2952,7 @@
                             const vehicleId = this.getAttribute('data-id');
                             const deleteConfirm = confirm('Are you sure you want to Remove this vehicle from Queue?');
                             if (deleteConfirm) {
-                                fetch(`/api/flash-sale/${vehicleId}`, {
+                                fetch(`https://magarisoko-backend.onrender.com/api/flash-sale/${vehicleId}`, {
                                     method: 'DELETE'
                                 })
                                 .then(response => {
@@ -2977,7 +2977,7 @@
             // Fetching the Flash Sale Vehicles and displaying them in the view vehicle section
             async function showFlashVehicles() {
                 try{
-                    const response = await fetch ('/api/flash-sale');
+                    const response = await fetch ('https://magarisoko-backend.onrender.com/api/flash-sale');
 
                     if (!response.ok) {
                         throw new Error('Failed to fetch vehicle data');
@@ -2999,7 +2999,7 @@
                         FlashVehicleCards += `
                             <div class="col-md-4 mb-4">
                                 <div class="card">
-                                    <img src="https://magarisoko-backend.onrender.com/${vehicle.vehicle_images[0]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
+                                    <img src="${vehicle.vehicle_images[0]}" class="card-img-top" alt="${vehicle.vehicle_make} ${vehicle.vehicle_model}">
                                     <div class="card-body">
                                         <h5 class="card-title"><strong>${vehicle.vehicle_make} ${vehicle.vehicle_model}</strong></h5>
                                         <p class="card-text"><strong>Price:</strong> ${vehicle.vehicle_price.toLocaleString()}</p>
@@ -3057,7 +3057,7 @@
                     //Fetch vehicle details by Id
                     async function fetchVehicleById(vehicleId) {
                         try {
-                            const response = await fetch(`/api/flash-sale/${vehicleId}`);
+                            const response = await fetch(`https://magarisoko-backend.onrender.com/api/flash-sale/${vehicleId}`);
                             if (!response.ok) {
                                 throw new Error('Failed to fetch vehicle details');
                             }
@@ -3137,7 +3137,7 @@
                         };
 
                         try {
-                            const response = await fetch(`/api/flash-sale/${vehicleId}`, {
+                            const response = await fetch(`https://magarisoko-backend.onrender.com/api/flash-sale/${vehicleId}`, {
                                 method: 'PUT',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -3162,7 +3162,7 @@
                             const vehicleId = this.getAttribute('data-id');
                             const deleteConfirm = confirm('Are you sure you want to delete this vehicle?');
                             if (deleteConfirm) {
-                                fetch(`/api/flash-sale/${vehicleId}`, {
+                                fetch(`https://magarisoko-backend.onrender.com/api/flash-sale/${vehicleId}`, {
                                     method: 'DELETE'
                                 })
                                 .then(response => {

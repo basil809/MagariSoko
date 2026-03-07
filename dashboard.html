@@ -1056,7 +1056,7 @@
                   vehicleCard.className = 'col-md-4 vehicle-item';
                   vehicleCard.innerHTML = `
                     <div class="card mb-4">
-                      <img src="https://magarisoko-backend.onrender.com/${vehicle.vehicle_images[0]}" class="card-img-top" alt="Vehicle Image">
+                      <img src="${vehicle.vehicle_images[0]}" class="card-img-top" alt="Vehicle Image">
                       <div class="card-body">
                         <h5 class="card-title">${vehicle.vehicle_make} ${vehicle.vehicle_model}</h5>
                         <p class="card-text"><strong>Price: Ksh. </strong>${vehicle.vehicle_price.toLocaleString()}</p>
