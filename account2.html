@@ -514,6 +514,33 @@
             showNotification('Logout failed', 'error', 4000);
           }
         });
+
+        function showNotification(message, type, duration) {
+            // Create a notification element
+            const notification = document.createElement('div');
+            notification.innerText = message;
+            
+            // Basic styling
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.padding = '15px 25px';
+            notification.style.borderRadius = '5px';
+            notification.style.color = 'white';
+            notification.style.zIndex = '1000';
+            notification.style.transition = 'opacity 0.5s ease';
+            
+            // Set color based on type
+            notification.style.backgroundColor = type === 'success' ? '#4CAF50' : '#f44336';
+            
+            document.body.appendChild(notification);
+
+            // Remove it after the duration
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 500);
+            }, duration);
+        }
     </script>
   
 </body>
