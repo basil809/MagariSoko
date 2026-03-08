@@ -1085,7 +1085,11 @@
                 if (data.success) {
                     alert('Payment details recorded. Vehicle will be posted Automatically after admin approval.');
                     $('#dealerManualPaymentModal').modal('hide');
-                    $('#Dealermodal').modal('hide');
+                    //resit the Dealer Manual Payment Form
+                    document.getElementById('dealerManualPaymentForm').reset();
+                    // close both dealerModal and dealerSubscriptionModal in case they are still open
+                    $('#dealerSubscriptionModal').modal('hide');
+                    $('#dealerManualPaymentModal').modal('hide');
                     waitForDealerPayment();
                 } else {
                     alert(data.message || 'Failed to record payment details');

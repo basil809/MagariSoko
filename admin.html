@@ -1205,7 +1205,7 @@
 
                     let rows = '';
                     list.forEach((item, index) => {
-                        const name = item.userId?.username || '';
+                        const name = item.dealerName || item.userId?.username || '';
                         const phone = item.phone || item.userId?.phone_number || '';
                         const plan = item.plan;
                         //TOSER is a unique identifier for the Type of User whether is Dealer or Client, this is used to determine which collection to update when approving or denying a subscription
