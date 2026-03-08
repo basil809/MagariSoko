@@ -1076,15 +1076,16 @@
             formData.append('mpesaCode', manual.get('mpesaCode'));
 
             try {
-                const res = await fetch('https://magarisoko-backend.onrender.com/api/mpesa/manual', {
+                const res = await fetch('https://magarisoko-backend.onrender.com/api/dealer/mpesa/manual', {
                     method: 'POST',
                     credentials: 'include',
                     body: formData
                 });
                 const data = await res.json();
                 if (data.success) {
-                    alert('Payment details recorded. Please wait for admin approval.');
+                    alert('Payment details recorded. Vehicle will be posted Automatically after admin approval.');
                     $('#dealerManualPaymentModal').modal('hide');
+                    $('#Dealermodal').modal('hide');
                     waitForDealerPayment();
                 } else {
                     alert(data.message || 'Failed to record payment details');
