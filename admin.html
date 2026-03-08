@@ -1208,11 +1208,14 @@
                         const name = item.userId?.username || '';
                         const phone = item.phone || item.userId?.phone_number || '';
                         const plan = item.plan;
+                        //TOSER is a unique identifier for the Type of User whether is Dealer or Client, this is used to determine which collection to update when approving or denying a subscription
+                       const TOSER = item.isDealer ? "Dealer" : "Client";
                         const code = item.checkoutRequestID || '';
                         rows += `
                             <tr>
                                 <td>${index + 1}</td>
                                 <td>${name}</td>
+                                <td>${TOSER}</td>
                                 <td>${phone}</td>
                                 <td>${plan}</td>
                                 <td>${code}</td>
