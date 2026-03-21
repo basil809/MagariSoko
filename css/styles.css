@@ -380,12 +380,13 @@ th{
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
-    width: calc(33% - 20px);
+    width: calc(33.333% - 20px);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    min-width: 250px;
 }
 .trend-card_img img {
     width: 100%;
@@ -397,6 +398,33 @@ th{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+/* Tablet responsive styling (768px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .trend-card {
+        width: calc(50% - 20px);
+        min-width: 220px;
+    }
+    
+    .trending_sales .vehicle-card {
+        width: calc(50% - 20px);
+        margin: 10px;
+    }
+}
+
+/* Mobile responsive styling */
+@media (max-width: 768px) {
+    .trend-card {
+        width: calc(100% - 20px);
+        margin: 5px;
+        min-width: auto;
+    }
+    
+    .trending_sales .vehicle-card {
+        width: 100%;
+        margin: 5px 0;
+    }
 }
 .trend-card_content {
     padding: 10px;
@@ -433,6 +461,11 @@ th{
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     background-color: white;
+    width: calc(33.333% - 20px);
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 10px;
+    vertical-align: top;
 }
 
 .trending_sales .vehicle-card:hover{

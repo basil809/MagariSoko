@@ -279,7 +279,8 @@
 
         #dealer_posts .col-md-3{
             margin: 10px;
-            width: 100px;
+            width: auto;
+            flex: 0 1 calc(25% - 20px);
         }
 
         h2 {
@@ -293,7 +294,8 @@
             border: 1px solid #ccc;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 100%;
+            max-width: 300px;
             padding: 20px;
             margin: 10px;
             overflow: hidden;
@@ -330,6 +332,45 @@
 
         .card-body p {
             padding-left: 10px;
+        }
+
+        /* Tablet responsive styling (768px - 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            #dealer_posts .col-md-3 {
+                flex: 0 1 calc(50% - 20px);
+                margin: 10px 5px;
+            }
+            
+            .card {
+                max-width: 280px;
+                padding: 15px;
+                margin: 8px;
+            }
+            
+            .card img,
+            .card-image img {
+                height: 140px;
+            }
+        }
+
+        /* Mobile responsive styling */
+        @media (max-width: 768px) {
+            #dealer_posts .col-md-3 {
+                flex: 0 1 calc(100% - 20px);
+                margin: 5px;
+                width: 100%;
+            }
+            
+            .card {
+                max-width: 100%;
+                padding: 15px;
+                margin: 5px;
+            }
+            
+            .card img,
+            .card-image img {
+                height: 120px;
+            }
         }
 
         #userMenu{

@@ -176,7 +176,8 @@
             border: 1px solid #ccc;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 100%;
+            max-width: 300px;
             padding: 20px;
             margin: 10px;
             overflow: hidden;
@@ -274,6 +275,40 @@
         @media (max-width: 768px) {
             #vehicle-form .col-md-4 {
                 flex: 1 1 100%;
+            }
+        }
+
+        /* For tablet screens (768px to 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .card {
+                max-width: 280px;
+                padding: 15px;
+                margin: 8px;
+            }
+            
+            #vehicle-form .col-md-4 {
+                flex: 1 1 calc(50% - 10px);
+            }
+            
+            .trending_sales .vehicle-card {
+                margin-bottom: 20px;
+            }
+        }
+
+        /* For mobile screens */
+        @media (max-width: 768px) {
+            .card {
+                max-width: 100%;
+                padding: 15px;
+                margin: 5px;
+            }
+            
+            #vehicle-form .col-md-4 {
+                flex: 1 1 100%;
+            }
+            
+            .trending_sales .vehicle-card {
+                margin-bottom: 15px;
             }
         }
         /*style for the edit modal form*/
